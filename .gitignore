@@ -13,7 +13,7 @@
 /tmp
 
 #files
-/config
+database.yml
 
 # OS generated files #
 ######################
