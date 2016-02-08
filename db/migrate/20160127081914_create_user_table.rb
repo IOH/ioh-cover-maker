@@ -5,8 +5,10 @@ class CreateUserTable < ActiveRecord::Migration
   def change
     create_table :users do |t|
 
-    	t.string :account
-    	t.string :hashed_password
+    	t.string :account_name
+    	t.string :password_digest
+
+    	t.timestamps null: false
 
     end
   end

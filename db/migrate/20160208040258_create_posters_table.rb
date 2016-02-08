@@ -1,13 +1,11 @@
 #  @editor arfullight
-#  @date   2016/1/26
+#  @date   2016/2/8
 #  @info   create poster table
-class CreatePosterTable < ActiveRecord::Migration
+class CreatePostersTable < ActiveRecord::Migration
   def change
     create_table :posters do |t|
 
-    	t.integer :user_id
-    	t.string :backgroung_image_url
-    	t.string :avatar_url
+    	t.references :user, index: true, foreign_key: true
     	t.boolean :use_avatar
     	t.string :name
     	t.string :description
@@ -20,6 +18,9 @@ class CreatePosterTable < ActiveRecord::Migration
     	t.string :location
     	t.boolean :location_white
 
+    	t.timestamps null: false 
+
     end
   end
 end
+

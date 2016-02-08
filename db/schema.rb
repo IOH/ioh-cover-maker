@@ -11,28 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127081914) do
+ActiveRecord::Schema.define(version: 20160208040258) do
 
   create_table "posters", force: :cascade do |t|
-    t.integer "user_id",              limit: 4
-    t.string  "backgroung_image_url", limit: 255
-    t.string  "avatar_url",           limit: 255
-    t.boolean "use_avatar"
-    t.string  "name",                 limit: 255
-    t.string  "description",          limit: 255
-    t.string  "info_one",             limit: 255
-    t.boolean "info_one_red"
-    t.string  "info_two",             limit: 255
-    t.boolean "info_two_red"
-    t.string  "info_three",           limit: 255
-    t.boolean "info_three_red"
-    t.string  "location",             limit: 255
-    t.boolean "location_white"
+    t.integer  "user_id",        limit: 4
+    t.boolean  "use_avatar"
+    t.string   "name",           limit: 255
+    t.string   "description",    limit: 255
+    t.string   "info_one",       limit: 255
+    t.boolean  "info_one_red"
+    t.string   "info_two",       limit: 255
+    t.boolean  "info_two_red"
+    t.string   "info_three",     limit: 255
+    t.boolean  "info_three_red"
+    t.string   "location",       limit: 255
+    t.boolean  "location_white"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
+
+  add_index "posters", ["user_id"], name: "index_posters_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string "account",         limit: 255
-    t.string "hashed_password", limit: 255
+    t.string   "account_name",    limit: 255
+    t.string   "password_digest", limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
+  add_foreign_key "posters", "users"
 end
