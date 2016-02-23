@@ -1,0 +1,399 @@
+body {
+	background-color: #EEEEEE;
+}
+
+h1 {
+	font-size: 60px;
+}
+
+.header-message {
+	width: 100%;
+	height: 300px;
+	padding: 60px 60px 0px 60px;
+	background-color: black;
+	color: red;
+	margin-bottom: 40px;
+}
+
+.header-message li {
+	color: white;
+}
+
+#preview {
+	position: relative;
+	width: 960px;
+	height: 430px;
+	margin: 0 auto;
+}
+
+
+/*  selfie-area  */
+
+#selfie-area {
+    position: absolute;
+    top: 233px;
+    left: 770px;
+    background-color: white;
+    text-align: center;	
+    text-decoration: none;
+    display: inline-block;
+    border: #FFFFFF 5px solid; 
+}
+
+#selfie-area:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+#selfie {
+    width: 160px;
+    height: 160px;
+}
+
+#selfie-button-area {
+    position: absolute;
+    top: 365px;
+    left: 775px;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    overflow: hidden;
+    height: 34px;
+    width: 160px;
+    text-align: center;	
+    line-height: 32px;
+    text-decoration: none;
+}
+
+#selfie-button-area:hover {
+    cursor: pointer;
+}
+
+#selfie-button-word {
+    color: white;
+    opacity: 0;
+}
+
+#selfie-button-icon {
+    position: absolute;
+    top: 365px;
+    left: 885px;
+    cursor: pointer;
+    z-index: 99;
+}
+
+#selfie-detector {
+	position: absolute;
+  top: 238px;
+  left: 775px;
+	display: block;
+	width: 160px;
+	height: 160px;
+	background-color: black;
+	opacity: 0;
+	z-index: 100;
+	text-decoration: none;
+}
+
+#selfie-detector:hover {
+	cursor: pointer;
+}
+
+/*  poster-area  */
+
+#poster-content {
+	position: absolute;
+}
+
+#poster-area {
+    z-index: -1;
+}
+
+#poster-button-area {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index:98;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    overflow: hidden;
+    height: 34px;
+    width: 158px;
+    text-align: center;	
+    line-height: 32px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#poster-button-area:hover {
+    cursor: pointer;
+}
+
+#poster-button-icon {
+    position: absolute;
+    top: 32px;
+    left: 140px;
+    cursor: pointer;
+    z-index: 99;
+}
+
+
+#poster-button-word {
+    color: white;
+    opacity: 0;
+}
+
+#poster-button-detector {
+	position: absolute;
+  top: 30px;
+  left: 30px;
+	display: block;
+	width: 158px;
+	height: 34px;
+	background-color: black;
+	opacity: 0;
+	z-index: 100;
+	text-decoration: none;
+}
+
+#poster-button-detector:hover {
+	cursor: pointer;
+}
+
+/*  banner  */
+
+#ioh-banner {
+	position: absolute;
+	top: 430px;
+}
+
+/*  edit-area  */
+
+#poster-form {
+  position: absolute;
+	border: #000000 2px solid;
+	top: 900px;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+#download {
+	margin: 0 auto;
+}
+
+/*  poster-other-area  */
+
+textarea:hover {
+	background-color: #CCFF66;
+}
+
+#location-textarea:hover {
+	background-color: #CCFF66;
+}
+
+#poster-content-textarea:hover {
+	background-color: #CCFF66;
+}
+
+#name-textarea:hover {
+	background-color: #CCFF66;
+}
+
+#poster-content-area {
+    position: absolute;
+    bottom: 27px;
+    left: 455px;
+    width: 290px;
+    height: 300px;
+}
+
+#poster-content-textarea {
+    position: absolute;
+    bottom: 0px;
+    width: 290px;
+    max-width: 290px;
+    max-height: 300px; 
+    border: none;
+    background-color: rgba(255, 255, 255, 0.56);
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 17px;
+    resize: none;
+    font-family: "微軟正黑體";
+}
+
+#location-area {
+    position: absolute;
+    bottom: 5px;
+    left: auto;
+    right: 0px;
+    width: 505px;
+    height: 17px;
+}
+
+#location-textarea {
+    position: absolute;
+    bottom: 0px;
+    width: 485px;
+    max-width: 485px;
+    max-height: 17px; 
+    border: none;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: 700;
+    resize: none;
+    text-align: right;
+    color: white;
+    font-family: "微軟正黑體";
+}
+
+#name-experience-area {
+    position: absolute;
+    bottom: -100px;
+    left: auto;
+    right: 0px;
+    width: 605px;
+    height: 90px;
+}
+
+#name-textarea {
+    position: absolute;
+    width: 585px;
+    max-width: 585px;
+    max-height: 18px; 
+    border: none;
+    background-color: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 700;
+    resize: none;
+    text-align: right;
+    color: black;
+    font-family: "微軟正黑體";
+}
+
+.experience-textarea {
+    position: relative;
+    top: 20px;
+    width: 585px;
+    max-width: 585px;
+    max-height: 18px; 
+    border: none;
+    background-color: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 700;
+    resize: none;
+    text-align: right;
+    color: black;
+    font-family: "微軟正黑體";
+}
+
+/*  cropit-area  */
+
+#add-icon {
+    padding-left: 5px;
+}
+
+#range-bar {
+    padding-top: 12px;
+}
+
+.range-bar-container {
+    padding-top: 30px;
+}
+
+.cropit-image-input {
+    padding-bottom: 50px;
+}
+
+.icon-size {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+#selfie-cropit-image-preview {
+		background-color: #f8f8f8;
+    background-size: cover;
+    border: 0px solid #ccc;
+    border-radius: 3px;
+		margin: auto;
+    width: 320px;
+    height: 320px;
+    cursor: move;
+}
+
+
+#poster-cropit-image-preview {
+		background-color: #f8f8f8;
+    background-size: cover;
+    border: 0px solid #ccc;
+    border-radius: 3px;
+		margin: auto;
+    width: 480px;
+    height: 215px;
+    cursor: move;
+}
+
+
+#poster-modal-dialog {
+    width: 900px;
+}
+
+
+#poster-range-bar-container {
+    margin-left: 250px;
+}
+
+#range-bar {
+	width: 150px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input.cropit-image-zoom-input {
+		display: inline;
+    width: 110px;
+		margin: 0px;
+		position: relative;
+}
+
+.modal-body {
+    margin: 0 auto;
+}
+
+.cropit-image-background {
+		margin-left: auto;
+		margin-right: auto;
+    opacity: .2;
+    cursor: auto;
+}
+
+.image-size-label {
+    margin-top: 10px;
+}
+
+input {
+    /* Use relative position to prevent from being covered by image background */
+    position: relative;
+    z-index: 10;
+}
+
+.content {
+	height: 600px;
+	margin-bottom: -50px;
+}
+
+.footer {
+	height: 50px;
+	width: 100%;
+}
+
+#experience-1 {
+	color: red;
+}

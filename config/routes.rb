@@ -15,9 +15,17 @@ Rails.application.routes.draw do
 
   get 'users/edit'
 
-  get 'posters/index'
+  #get 'posters/index'
+  #
+  #get 'posters/show'
 
-  get 'posters/show'
+  # @editor arfullight
+  # @date   2016/2/15
+  # @info   Add posters routes using resources
+
+  root 'posters#index'
+
+  resources :posters
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
