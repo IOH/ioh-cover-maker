@@ -362,7 +362,7 @@ $(function(){
       	drawCanvas();
   	};
     
-    posterIOH.src = "img/testIOH.png";
+    posterIOH.src = "<%= asset_path('IOH-banner.png') %>";
 
   }
 
@@ -414,9 +414,9 @@ $(function(){
   			info_two       = $('#experience-2').val(),
   			info_two_red   = $('#experience-toggle-2').prop('checked'),
   			info_three     = $('#experience-3').val(),
-  			info_three_red = $('#experience-toggle-3').prop('checked');
-
-
+  			info_three_red = $('#experience-toggle-3').prop('checked'),
+  			location       = $('#location-textarea').val(),
+  			location_white = $('.location-radio:checked').val();
 
   }
 
