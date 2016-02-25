@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208040258) do
+ActiveRecord::Schema.define(version: 20160225115137) do
 
   create_table "posters", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160208040258) do
     t.string   "password_digest", limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "user_type",       limit: 255
   end
 
   add_foreign_key "posters", "users"

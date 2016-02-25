@@ -405,18 +405,30 @@ $(function(){
    */
   function postToPoster()
   {
+  	var data = {};
 
-  	var use_avatar     = $('#selfie-toggle').prop('checked'),
-  			name           = $('#name-textarea').val(),
-  			description    = $('#poster-content-textarea').val(),
-  			info_one       = $('#experience-1').val(),
-  			info_one_red   = $('#experience-toggle-1').prop('checked'),
-  			info_two       = $('#experience-2').val(),
-  			info_two_red   = $('#experience-toggle-2').prop('checked'),
-  			info_three     = $('#experience-3').val(),
-  			info_three_red = $('#experience-toggle-3').prop('checked'),
-  			location       = $('#location-textarea').val(),
-  			location_white = $('.location-radio:checked').val();
+  	data['use_avatar']     = $('#selfie-toggle').prop('checked'),
+		data['name']           = $('#name-textarea').val(),
+		data['description']    = $('#poster-content-textarea').val(),
+		data['info_one']       = $('#experience-1').val(),
+		data['info_one_red']   = $('#experience-toggle-1').prop('checked'),
+		data['info_two']       = $('#experience-2').val(),
+		data['info_two_red']   = $('#experience-toggle-2').prop('checked'),
+		data['info_three']     = $('#experience-3').val(),
+		data['info_three_red'] = $('#experience-toggle-3').prop('checked'),
+		data['location']       = $('#location-textarea').val(),
+		data['location_white'] = $('.location-radio:checked').val();
+
+		mydata = {};
+
+		mydata['data'] = data;
+
+		$.ajax({
+			type: "POST",
+			url : "/posters",
+			data: mydata,
+			success: function(resp){ console.log(resp); }
+		});
 
   }
 
@@ -425,6 +437,7 @@ $(function(){
    *
    *  @use fileName, canvasFinish
    */
+  $('#save').off('click');
   $('#save').click(function(){
 
   	//check if img is uploaded
@@ -441,12 +454,12 @@ $(function(){
 
 	 				$('#download').attr('disabled', false);
 
+	 				postToPoster();
+
 	  			stopRepeat();
 	  		}
 	  		else
 	  			console.log('waiting for export');
-
-	  		postToPoster();
 
 	  	};
 
@@ -471,7 +484,6 @@ $(function(){
 
   		$('.error-modal').modal();
   	}
-
   });
 
 });
