@@ -14,12 +14,19 @@ class PostersController < ApplicationController
 
   def new 
 
-  	@poster = Poster.new
+  	@poster = Poster.new()
+  	@poster.save
+
+  	redirect_to action: "edit", id: @poster.id 
 
   end
 
-  def create
-  	
+  def edit
+  	@poster = Poster.find(params[:id])
+  end
+
+  def update
+
   	data = params['data']
   	
   	data.each do |key, item|
@@ -33,7 +40,7 @@ class PostersController < ApplicationController
   	end
   	
   	
-  	@poster = Poster.new()
+  	@poster = Poster.find(params[:id])
   	@poster.use_avatar = data['use_avatar']
   	@poster.name = data['name']
   	@poster.description = data['description'] 	
@@ -45,12 +52,15 @@ class PostersController < ApplicationController
   	@poster.info_three_red = data['info_three_red']
   	@poster.location = data['location']
   	@poster.location_white = data['location_white']
+  	#@poster.avatar_dataUrl = data['avatar_dataUrl']
+  	#@poster.background_dataUrl = data['background_dataUrl']
+  	#@poster.poster_dataUrl = data['poster_dataUrl']
 
 
   	@poster.save
 
 
-  	render :json => { success: true }
+  	render :json => { "data" => data['background_dataUrl'] }
 
   end
 

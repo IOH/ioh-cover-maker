@@ -9,8 +9,11 @@ $(function(){
 
 	//----var definition----
 
+	var posterId = window.location.pathname.split("/")[2];
+
 	var selfieImageData, 
 			posterImageData,
+			posterFinishData,
 			fileName = "cover.jpg",
 			errorArray = [];
 
@@ -403,7 +406,7 @@ $(function(){
   /**
    *  post data to /posters/index to create new poster
    */
-  function postToPoster()
+  function patchToPoster()
   {
   	var data = {};
 
@@ -417,15 +420,18 @@ $(function(){
 		data['info_three']     = $('#experience-3').val(),
 		data['info_three_red'] = $('#experience-toggle-3').prop('checked'),
 		data['location']       = $('#location-textarea').val(),
-		data['location_white'] = $('.location-radio:checked').val();
+		data['location_white'] = $('.location-radio:checked').val(),
+		data['avatar_dataUrl'] = selfieImageData,
+		data['background_dataUrl'] = posterImageData,
+		data['poster_dataUrl'] = posterFinishData;
 
 		mydata = {};
 
 		mydata['data'] = data;
 
 		$.ajax({
-			type: "POST",
-			url : "/posters",
+			type: "PATCH",
+			url : "/posters/" + posterId,
 			data: mydata,
 			success: function(resp){ console.log(resp); }
 		});
@@ -439,22 +445,23 @@ $(function(){
    */
   $('#save').off('click');
   $('#save').click(function(){
-
+  	patchToPoster();
   	//check if img is uploaded
   	if (readyForExport()) {
-
+  		
 	  	doCanvas();
 
 	  	var appendCanvas = function(){
 	  		if (typeof(canvasFinish) != 'undefined'){
 
 	  			var self = $('#download')[0];
-	  			self.href = canvasFinish.toDataURL("image/jpeg");
+	  			posterFinishData = canvasFinish.toDataURL("image/jpeg");
+	  			self.href = posterFinishData;
 	  			self.download = fileName;
 
 	 				$('#download').attr('disabled', false);
 
-	 				postToPoster();
+	 				//patchToPoster();
 
 	  			stopRepeat();
 	  		}
