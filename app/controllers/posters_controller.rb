@@ -50,9 +50,6 @@ class PostersController < ApplicationController
   	@poster.save
 
 
-
-  	#@poster.save
-
   	render :json => { success: true }
 
   end
