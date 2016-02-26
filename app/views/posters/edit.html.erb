@@ -62,20 +62,20 @@
 
 	     <!-- description -->
 	    <div id="poster-content-area">
-	        <textarea id="poster-content-textarea" placeholder="（簡介）"></textarea>
+	        <textarea id="poster-content-textarea" placeholder="（簡介）"><%= @poster.description %></textarea>
 	    </div>
 			
 			<!-- location -->
 	    <div id="location-area">
-	        <textarea id="location-textarea">地點：</textarea>
+	        <textarea id="location-textarea"><% if @poster.location %><%= @poster.location %><% else %><%= "地點：" %><% end %></textarea>
 	    </div>
 			
 			<!-- experience -->
 	    <div id="name-experience-area">
-	        <textarea id="name-textarea" placeholder="（姓名）"></textarea>
-	        <textarea class="experience-textarea" id="experience-1" placeholder="（經歷1）"></textarea>
-	        <textarea class="experience-textarea" id="experience-2" placeholder="（經歷2）"></textarea>
-	        <textarea class="experience-textarea" id="experience-3" placeholder="（經歷3）"></textarea>
+	        <textarea id="name-textarea" placeholder="（姓名）"><%= @poster.name %></textarea>
+	        <textarea class="experience-textarea" id="experience-1" placeholder="（經歷1）"><%= @poster.info_one %></textarea>
+	        <textarea class="experience-textarea" id="experience-2" placeholder="（經歷2）"><%= @poster.info_two %></textarea>
+	        <textarea class="experience-textarea" id="experience-3" placeholder="（經歷3）"><%= @poster.info_three %></textarea>
 	    </div>
 	</div>
 
