@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 20160226063911) do
     t.boolean  "info_three_red"
     t.string   "location",           limit: 255
     t.boolean  "location_white"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "avatar_dataUrl",     limit: 255
-    t.string   "background_dataUrl", limit: 255
-    t.string   "poster_dataUrl",     limit: 255
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.text     "avatar_dataUrl",     limit: 4294967295
+    t.text     "background_dataUrl", limit: 4294967295
+    t.text     "poster_dataUrl",     limit: 4294967295
   end
 
   add_index "posters", ["user_id"], name: "index_posters_on_user_id", using: :btree
