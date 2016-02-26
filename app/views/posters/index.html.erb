@@ -1,6 +1,6 @@
 <h1>IOH Cover Maker</h1>
 
-<a href="/posters/new">Create New Poster</a>
+<%= link_to 'Create New Poster', controller: "posters", action: 'new'  %>
 
 <% @posters.each do |poster| %>
 
