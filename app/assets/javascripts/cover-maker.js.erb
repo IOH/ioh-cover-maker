@@ -17,10 +17,18 @@ $(function(){
 			fileName = "cover.jpg",
 			errorArray = [];
 
+	//get dataURL if exist
+	if ($('.image-editor:eq(0)').attr('origin-image') != "")
+		selfieImageData = $('.image-editor:eq(0)').attr('origin-image');
+	if ($('.image-editor:eq(1)').attr('origin-image') != "")
+		posterImageData = $('.image-editor:eq(1)').attr('origin-image');
+
 	/**
 	 *  @info start cropit
 	 */
+	var avatar_dataUrl = $('.image-editor:eq(0)').attr('origin-image');
 	$('.image-editor:eq(0)').cropit({
+		imageState: { src: avatar_dataUrl },
     imageBackground: true,
     imageBackgroundBorderWidth: 50,
     onImageError: function(error){
@@ -31,7 +39,9 @@ $(function(){
     },
   });
 
+	var background_dataUrl = $('.image-editor:eq(1)').attr('origin-image');
   $('.image-editor:eq(1)').cropit({
+  	imageState: { src: background_dataUrl },
   	exportZoom: 2,
     imageBackground: true,
     imageBackgroundBorderWidth: 50,
@@ -143,6 +153,10 @@ $(function(){
   	$('#download').removeAttr('download');
   });
 
+  //change if default is false
+  if($('#selfie-toggle').prop('checked') == false) 
+      $('#selfie-all').hide();
+
   //selfie
   $('#selfie-toggle').change(function() {
     if($(this).prop('checked') == false) 
@@ -150,6 +164,14 @@ $(function(){
     else 
       $('#selfie-all').show();
   });
+
+  //change to the default
+  if($('.location-radio:checked').val() == "黑色") {
+    $('#location-textarea').css("color", "black");
+  }
+  else {
+    $('#location-textarea').css("color", "white");
+  }
 
   //location color
   $('.location-radio').change(function() {
@@ -160,6 +182,28 @@ $(function(){
       $('#location-textarea').css("color", "white");
     }
   });
+
+  //change to the default
+  if($('#experience-toggle-1').prop('checked') == true) { 
+    $('#experience-1').css("color", "red");
+  }
+  else {
+    $('#experience-1').css("color", "black");
+  }
+
+  if($('#experience-toggle-2').prop('checked') == true) { 
+    $('#experience-2').css("color", "red");
+  }
+  else {
+    $('#experience-2').css("color", "black");
+  }
+
+  if($('#experience-toggle-3').prop('checked') == true) { 
+    $('#experience-3').css("color", "red");
+  }
+  else {
+    $('#experience-3').css("color", "black");
+  }
 
   //experience color (all three)
 	$('#experience-toggle-1').change(function() {
@@ -388,10 +432,10 @@ $(function(){
   	if (document.getElementById('poster-content-textarea').value == "")
   		errorArray.push("文字框尚未填寫");
 
-  	if (typeof(selfieImageData) == 'undefined' && $('#selfie-toggle').prop('checked'))
+  	if ($('#selfie-image').attr('src') == "<%= image_path("place-holder-320x320.png") %>" && $('#selfie-toggle').prop('checked'))
   		errorArray.push("大頭貼尚未上傳");
 
-  	if (typeof(posterImageData) == 'undefined')
+  	if ($('#poster-image').attr('src') == "<%= image_path("place-holder-1920x860.png") %>")
   		errorArray.push("背景照尚未上傳");
 
   	if ($('.experience-checkbox').find('input:checked').length == 0)
@@ -410,20 +454,22 @@ $(function(){
   {
   	var data = {};
 
-  	data['use_avatar']     = $('#selfie-toggle').prop('checked'),
-		data['name']           = $('#name-textarea').val(),
-		data['description']    = $('#poster-content-textarea').val(),
-		data['info_one']       = $('#experience-1').val(),
-		data['info_one_red']   = $('#experience-toggle-1').prop('checked'),
-		data['info_two']       = $('#experience-2').val(),
-		data['info_two_red']   = $('#experience-toggle-2').prop('checked'),
-		data['info_three']     = $('#experience-3').val(),
-		data['info_three_red'] = $('#experience-toggle-3').prop('checked'),
-		data['location']       = $('#location-textarea').val(),
-		data['location_white'] = $('.location-radio:checked').val(),
-		data['avatar_dataUrl'] = selfieImageData,
-		data['background_dataUrl'] = posterImageData,
+  	data['use_avatar']     = $('#selfie-toggle').prop('checked');
+		data['name']           = $('#name-textarea').val();
+		data['description']    = $('#poster-content-textarea').val();
+		data['info_one']       = $('#experience-1').val();
+		data['info_one_red']   = $('#experience-toggle-1').prop('checked');
+		data['info_two']       = $('#experience-2').val();
+		data['info_two_red']   = $('#experience-toggle-2').prop('checked');
+		data['info_three']     = $('#experience-3').val();
+		data['info_three_red'] = $('#experience-toggle-3').prop('checked');
+		data['location']       = $('#location-textarea').val();
+		data['location_white'] = $('.location-radio:checked').val();
+		data['avatar_dataUrl'] = selfieImageData;
+		data['background_dataUrl'] = posterImageData;
 		data['poster_dataUrl'] = posterFinishData;
+
+		console.log(data);
 
 		mydata = {};
 
@@ -445,10 +491,10 @@ $(function(){
    */
   $('#save').off('click');
   $('#save').click(function(){
-  	patchToPoster();
+  	
   	//check if img is uploaded
   	if (readyForExport()) {
-  		
+
 	  	doCanvas();
 
 	  	var appendCanvas = function(){
@@ -460,6 +506,8 @@ $(function(){
 	  			self.download = fileName;
 
 	 				$('#download').attr('disabled', false);
+
+	 				patchToPoster();
 
 	 				//patchToPoster();
 

@@ -10,8 +10,11 @@
     	<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
     </a>
     <a class="btn btn-warning btn-lg" id="save">Save</a>
-		<a type="button" class="btn btn-success btn-lg" id="download" disabled>
-			Download
+		<a type="button" class="btn btn-success btn-lg" id="download" href="<%= @poster.poster_dataUrl %>" download="cover.jpg" 
+		<% if @poster.updated_at == @poster.created_at %>
+		<%= "disabled" %>
+		<% end %>
+		> Download
 			<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
 		</a>
 	</h1>
@@ -34,7 +37,11 @@
 			<!-- background picture -->
 	    <div id="poster-content">
 	        <div id="poster-area">
-	          <%= image_tag("place-holder-1920x860.png", id: "poster-image", width: "960", height: "430") %>
+	        	<% unless @poster.background_dataUrl %>
+	          	<%= image_tag("place-holder-1920x860.png", id: "poster-image", width: "960", height: "430") %>
+	          <% else %>
+	          	<img src="<%= @poster.background_dataUrl %>" id="poster-image" width="960" height="430">
+	          <% end %>
 	        </div>
 	        <%= image_tag("camera3.png", { id: "poster-button-icon", width: "30", height: "30", data: { toggle: "modal" }, data: { target: "#poster-modal" } }) %>
 	        <a id="poster-button-area">
@@ -51,7 +58,11 @@
 			<!-- selfie -->
 	    <div id="selfie-all">
 		    <a id="selfie-area">
-	        <%= image_tag("place-holder-320x320.png", id: "selfie-image", width: "160", height: "160") %>
+		    	<% unless @poster.avatar_dataUrl %>
+	        	<%= image_tag("place-holder-320x320.png", id: "selfie-image", width: "160", height: "160") %>
+	        <% else %>
+	          <img src="<%= @poster.avatar_dataUrl %>" id="selfie-image" width="160" height="160">
+	        <% end %>
 		    </a>
 		    <%= image_tag("camera3.png", { id: "selfie-button-icon", width: "30", height: "30", data: { toggle: "modal" }, data: { target: "#selfie-modal" } }) %>
 		    <a id="selfie-button-area" data-toggle="modal" data-target="#selfie-modal">
@@ -100,7 +111,11 @@
 					  
 						<div class="checkbox">
 					    <label>
-					      <input id="selfie-toggle" type="checkbox" checked> 使用
+					      <input id="selfie-toggle" type="checkbox" 
+					      	<% if @poster.use_avatar %>
+									<%= "checked" %>
+									<% end %>
+									> 使用
 					    </label>
 					  </div>
 
@@ -108,10 +123,18 @@
 					  
 						<div class="radio">
 						  <label>
-						    <input type="radio" name="location-color" class="location-radio" value="白色" checked> 白色
+						    <input type="radio" name="location-color" class="location-radio" value="白色" 
+								<% if @poster.location_white %>
+								<%= "checked" %>
+								<% end %>
+						    > 白色
 						  </label>
 						  <label>
-						  <input type="radio" name="location-color" class="location-radio" value="黑色"> 黑色
+						  <input type="radio" name="location-color" class="location-radio" value="黑色"
+								<% unless @poster.location_white %>
+								<%= "checked" %>
+								<% end %>
+						  	> 黑色
 						  </label>
 						</div>
 
@@ -119,13 +142,25 @@
 					  
 						<div class="checkbox experience-checkbox">
 					    <label>
-					      <input id="experience-toggle-1" type="checkbox" checked> 經歷一
+					      <input id="experience-toggle-1" type="checkbox" 
+								<% if @poster.info_one_red %>
+								<%= "checked" %>
+								<% end %>
+					      > 經歷一
 					    </label>
 					    <label>
-					      <input id="experience-toggle-2" type="checkbox"> 經歷二
+					      <input id="experience-toggle-2" type="checkbox"
+					      <% if @poster.info_two_red %>
+								<%= "checked" %>
+								<% end %>
+					      > 經歷二
 					    </label>
 					    <label>
-					      <input id="experience-toggle-3" type="checkbox"> 經歷三
+					      <input id="experience-toggle-3" type="checkbox"
+					      <% if @poster.info_three_red %>
+								<%= "checked" %>
+								<% end %>
+					      > 經歷三
 					    </label>
 					  </div>
 					  
@@ -159,7 +194,7 @@
         	<div class="collapse" id="selfie-error-message">
 				  	<div class="alert alert-danger"></div>
 					</div>
-          <div class="image-editor">
+          <div class="image-editor" origin-image="<%= @poster.avatar_dataUrl %>">
             <input type="file" class="cropit-image-input">
             <!-- .cropit-image-preview-container is needed for background image to work -->
             <div class="cropit-image-preview-container">
@@ -204,7 +239,7 @@
 				  	<div class="alert alert-danger"></div>
 					</div>
 
-          <div class="image-editor" id="poster-image-editor">
+          <div class="image-editor" id="poster-image-editor" origin-image="<%= @poster.background_dataUrl %>">
             <input type="file" class="cropit-image-input">
             <!-- .cropit-image-preview-container is needed for background image to work -->
             <div class="cropit-image-preview-container">

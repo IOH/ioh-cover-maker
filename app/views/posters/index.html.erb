@@ -1,9 +1,14 @@
-<h1>IOH Cover Maker</h1>
 
-<%= link_to 'Create New Poster', new_poster_path  %>
+<div class="container">
+	<h1>IOH Cover Maker</h1>
 
-<% @posters.each do |poster| %>
+	<%= link_to 'Create New Poster', new_poster_path  %>
 
-	<h2><%= poster.name %></h2>
+	<% @posters.each do |poster| %>
 
-<% end %>
+		<h2><%= poster.name %></h2>
+
+		<%= link_to 'Edit', edit_poster_path(poster) %>
+
+	<% end %>
+</div>
