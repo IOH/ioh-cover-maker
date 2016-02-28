@@ -15,9 +15,14 @@ class PostersController < ApplicationController
   def new 
 
   	@poster = Poster.new()
+  	@poster.use_avatar = true
+  	@poster.location_white = true
+  	@poster.info_one_red = true
+  	@poster.info_two_red = false
+  	@poster.info_three_red = false
   	@poster.save
 
-  	redirect_to action: "edit", id: @poster.id 
+  	redirect_to edit_poster_path(@poster)
 
   end
 
