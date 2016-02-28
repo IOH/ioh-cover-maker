@@ -15,7 +15,9 @@ $(function(){
 			posterImageData,
 			posterFinishData,
 			fileName = "cover.jpg",
-			errorArray = [];
+			errorArray = [],
+      originalSelfieImageDataUrl,
+      originalPosterImageDataUrl;
 
 	//get dataURL if exist
 	if ($('.image-editor:eq(0)').attr('origin-image') != "")
@@ -469,6 +471,9 @@ $(function(){
 		data['background_dataUrl'] = posterImageData;
 		data['poster_dataUrl'] = posterFinishData;
 
+    data['original_avatar_dataUrl'] = originalSelfieImageDataUrl;
+    data['original_background_dataUrl'] = originalPosterImageDataUrl;
+
 		console.log(data);
 
 		mydata = {};
@@ -539,6 +544,32 @@ $(function(){
 
   		$('.error-modal').modal();
   	}
+  });
+
+  function readURL(input, num) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          if(num == 1)
+            originalSelfieImageDataUrl = e.target.result;
+          else 
+            originalPosterImageDataUrl = e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  var originalSelfieInput = $('#selfie-modal').find('.cropit-image-input');
+  originalSelfieInput.change(function(){
+    readURL(this, 1);
+  });
+
+  var originalPosterInput = $('#poster-modal').find('.cropit-image-input');
+  originalPosterInput.change(function(){
+    readURL(this, 2);
   });
 
 });

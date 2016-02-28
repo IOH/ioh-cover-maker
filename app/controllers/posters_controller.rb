@@ -56,6 +56,9 @@ class PostersController < ApplicationController
   	@poster.background_dataUrl = data['background_dataUrl']
   	@poster.poster_dataUrl = data['poster_dataUrl']
 
+    @poster.original_avatar_dataUrl = data['original_avatar_dataUrl']
+    @poster.original_background_dataUrl = data['original_background_dataUrl']
+
 
   	@poster.save
 
