@@ -14,10 +14,6 @@ Rails.application.routes.draw do
 
   delete "logout" => "users#logout", :as => "logout"
 
-  #get 'posters/index'
-  #
-  #get 'posters/show'
-
   # @editor arfullight
   # @date   2016/2/15
   # @info   Add posters routes using resources
