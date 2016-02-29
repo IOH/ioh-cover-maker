@@ -1,0 +1,19 @@
+.signup-form-container, .login-form-container{
+  width: 670px;
+  margin: 50px auto;
+  border:1px solid #ddd;
+  padding: 2em;
+  .signup-form, .login-form {
+    width: 100%;
+  }
+  .signup-button, .login-button {
+    padding: 13px;
+    margin-top: 15px;
+    width: 100%;
+  }
+}
+
+.error {
+  margin: 5px 0 9px 0;
+  color: #ff0000;
+}

@@ -1,8 +1,21 @@
 
 <div class="container">
-	<h1>IOH Cover Maker</h1>
 
-	<%= link_to 'Create New Poster', new_poster_path  %>
+	<% if current_user %>
+	  <li><%= link_to current_user.account_name, "#" %></li>
+	  <li><%= link_to "logout", logout_path, method: "delete" %></li>
+	<% else %>
+	  <li><%= link_to "login", login_path %></li>
+	  <li> <%= link_to "signup", signup_path %></li>
+	<% end %>
+
+	<br>
+
+	<h1>IOH Cover Maker</h1>
+      
+             <% if current_user %>
+	  <%= link_to 'Create New Poster', new_poster_path  %>
+	<% end %>
 
 	<% @posters.each do |poster| %>
 

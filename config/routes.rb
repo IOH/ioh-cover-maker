@@ -4,16 +4,15 @@ Rails.application.routes.draw do
   # @date 2016/1/27
   # @info Add sessions, users, and posters routes
 
-  get 'sessions/new'
-  post 'sessions/create'
+  get "signup" => "users#signup", :as => "signup"
 
-  get 'users/index'
+  resources :users, only: [:create]
 
-  get 'users/show'
+  get "login" => "users#login", :as => "login"
 
-  get 'users/new'
+  post "create_login_session" => "users#create_login_session"
 
-  get 'users/edit'
+  delete "logout" => "users#logout", :as => "logout"
 
   #get 'posters/index'
   #

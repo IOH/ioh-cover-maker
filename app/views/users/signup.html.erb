@@ -1,0 +1,28 @@
+<div class="signup-form-container clearfix">
+  <div class="signup-form">
+    <%= form_for @user do |f| %>
+        <dl class="form">
+          <dt><%= f.label :account_name, "Your name" %></dt>
+          <dd><%= f.text_field :account_name %></dd>
+          <% if @user.errors[:account_name].any? %>
+            <dd class="error"><%= @user.errors[:account_name][0] %></dd>
+          <% end %>
+        </dl>
+        <dl class="form">
+          <dt><%= f.label :password, "Your password" %></dt>
+          <dd><%= f.password_field :password %></dd>
+          <% if @user.errors[:password].any? %>
+            <dd class="error"><%= @user.errors[:password][0] %></dd>
+          <% end %>
+        </dl>
+        <dl class="form">
+          <dt><%= f.label :password_confirmation, "Please input your password again" %></dt>
+          <dd><%= f.password_field :password_confirmation %></dd>
+          <% if @user.errors[:password_confirmation].any? %>
+            <dd class="error"><%= @user.errors[:password_confirmation][0] %></dd>
+          <% end %>
+        </dl>
+        <p><%= f.submit "Register", :class => "signup-button btn btn-primary" %></p>
+    <% end %>
+  </div>
+</div>
