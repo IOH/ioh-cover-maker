@@ -3,6 +3,9 @@
 # @info Add PostersController
 
 class PostersController < ApplicationController
+  
+  before_action :checkLogIn, :except => :index
+
   def index
 
   	@posters = Poster.all
@@ -81,6 +84,12 @@ class PostersController < ApplicationController
   		return false
   	else
   		return str
+  	end
+  end
+
+  def checkLogIn
+  	unless current_user
+  		redirect_to :root
   	end
   end
 
