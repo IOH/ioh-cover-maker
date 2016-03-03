@@ -23,6 +23,9 @@ class PostersController < ApplicationController
   	@poster.info_one_red = true
   	@poster.info_two_red = false
   	@poster.info_three_red = false
+
+  	@poster.user_id = current_user.id
+
   	@poster.save
 
   	redirect_to edit_poster_path(@poster)
@@ -75,6 +78,13 @@ class PostersController < ApplicationController
 
   end
 
+  def destroy
+  	@poster = Poster.find(params[:id])
+  	@poster.destroy
+
+  	redirect_to :root
+  end
+
   private
 
   def to_b str
@@ -89,7 +99,7 @@ class PostersController < ApplicationController
 
   def checkLogIn
   	unless current_user
-  		redirect_to :root
+  		redirect_to login_path
   	end
   end
 
