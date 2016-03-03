@@ -13,17 +13,30 @@
 
 	<h1>IOH Cover Maker</h1>
       
-             <% if current_user %>
-	  <%= link_to 'Create New Poster', new_poster_path  %>
+    <% if current_user %>
+			<%= link_to 'Create New Poster', new_poster_path  %>
 
-	  <% @posters.each do |poster| %>
+			<%= form_tag search_path, id: 'search-form', remote: true do %>
+				
+				<%= text_field_tag 'query', nil, placeholder: 'Search', id: 'search-text_field' %>
 
-		<h2><%= poster.name %></h2>
+				<%= submit_tag 'Go', id: 'search-submit' %>
 
-		<%= link_to 'Edit', edit_poster_path(poster) %>
-		<%= link_to "Delete", poster_path(poster), method: "DELETE" %>
+			<% end %>
 
-	  <% end %>
+			<div class="posters">
+
+			  <% @posters.each do |poster| %>
+
+				<h2><%= poster.name %></h2>
+
+				<%= link_to 'Edit', edit_poster_path(poster) %>
+				<%= link_to "Delete", poster_path(poster), method: "DELETE" %>
+			
+	  		<% end %>
+	  	</div>
 
 	<% end %>
 </div>
+
+<%= javascript_include_tag 'posterIndex', 'data-turbolinks-track' => true %>

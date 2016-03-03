@@ -1,0 +1,31 @@
+/**
+ *  @editor arfullight
+ *  @date   2016/3/3
+ *  @info   get data via ajax
+ */
+
+$(function(){
+
+
+	$('#search-form').on('ajax:success', function(e, data, status, xhr){
+
+		var posters  = $.parseJSON(xhr.responseText),
+				htmlText = "";
+
+		for (var i = 0; i < posters.length; i ++){
+			htmlText += "<h2>" + posters[i]['name'] + "</h2>";
+			htmlText += "<a href='/posters/" + posters[i]['id'] + "/edit'>Edit</a>";
+			htmlText += "<a rel='nofollow' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
+		}
+
+		$('.posters').html(htmlText);
+
+	});
+
+
+	$('#search-text_field').on('keyup', function(){
+		$('#search-submit').trigger('click');
+	});
+
+
+});

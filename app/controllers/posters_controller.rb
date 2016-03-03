@@ -8,7 +8,7 @@ class PostersController < ApplicationController
 
   def index
 
-  	@posters = Poster.all
+  	@posters = Poster.order(updated_at: :desc).limit(10)
 
   end
 
@@ -83,6 +83,14 @@ class PostersController < ApplicationController
   	@poster.destroy
 
   	redirect_to :root
+  end
+
+  def search
+
+  	@posters = Poster.where("name LIKE ? ", "%#{params[:query]}%")
+
+  	render :json => @posters
+
   end
 
   private

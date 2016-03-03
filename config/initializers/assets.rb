@@ -12,9 +12,12 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( jquery.cropit.js )
 
-Rails.application.config.assets.precompile += %w( cover-maker.js )
+Rails.application.config.assets.precompile += %w( cover-maker.js.erb )
 
 Rails.application.config.assets.precompile += %w( cover-maker.css )
+
+Rails.application.config.assets.precompile += %w( posterIndex.js.erb )
+
 
 
 #images
