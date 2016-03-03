@@ -16,8 +16,8 @@ $(function(){
 			posterFinishData,
 			fileName = "cover.jpg",
 			errorArray = [],
-      originalSelfieImageDataUrl,
-      originalPosterImageDataUrl;
+      originalSelfieImageDataUrl = $('#selfie-modal').find('.cropit-image-input').attr('src'),
+      originalPosterImageDataUrl = $('#poster-modal').find('.cropit-image-input').attr('src');
 
 	//get dataURL if exist
 	if ($('.image-editor:eq(0)').attr('origin-image') != "")

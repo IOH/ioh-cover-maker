@@ -197,7 +197,7 @@
 				  	<div class="alert alert-danger"></div>
 					</div>
           <div class="image-editor" origin-image="<%= @poster.original_avatar_dataUrl %>">
-            <input type="file" class="cropit-image-input" >
+            <input type="file" class="cropit-image-input" src=" <%= @poster.original_avatar_dataUrl %>" >
             <!-- .cropit-image-preview-container is needed for background image to work -->
             <div class="cropit-image-preview-container">
               <div class="cropit-image-preview" id="selfie-cropit-image-preview"></div>
@@ -205,7 +205,7 @@
             
             <div id="range-bar">
 							<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-							<input type="range" class="cropit-image-zoom-input">
+							<input type="range" class="cropit-image-zoom-input" >
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 						</div>
               
@@ -242,7 +242,7 @@
 					</div>
 
           <div class="image-editor" id="poster-image-editor" origin-image="<%= @poster.original_background_dataUrl %>">
-            <input type="file" class="cropit-image-input">
+            <input type="file" class="cropit-image-input" src=" <%= @poster.original_background_dataUrl %>">
             <!-- .cropit-image-preview-container is needed for background image to work -->
             <div class="cropit-image-preview-container">
               <div class="cropit-image-preview" id="poster-cropit-image-preview"></div>

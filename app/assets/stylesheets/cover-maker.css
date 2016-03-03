@@ -356,7 +356,7 @@ textarea:hover {
 	margin-right: auto;
 }
 
-input.cropit-image-zoom-input {
+input[type="range"].cropit-image-zoom-input {
 		display: inline;
     width: 110px;
 		margin: 0px;
