@@ -4,7 +4,7 @@
 
 class PostersController < ApplicationController
   
-  before_action :checkLogIn, :except => :index
+  before_action :checkLogIn
 
   def index
 
@@ -87,7 +87,7 @@ class PostersController < ApplicationController
 
   def search
 
-  	@posters = Poster.where("name LIKE ? ", "%#{params[:query]}%").order(updated_at: :desc)
+  	@posters = Poster.select("id, name").where("name LIKE ? ", "%#{params[:query]}%").order(updated_at: :desc)
 
   	render :json => @posters
 
