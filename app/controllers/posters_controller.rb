@@ -87,7 +87,7 @@ class PostersController < ApplicationController
 
   def search
 
-  	@posters = Poster.where("name LIKE ? ", "%#{params[:query]}%")
+  	@posters = Poster.where("name LIKE ? ", "%#{params[:query]}%").order(updated_at: :desc)
 
   	render :json => @posters
 
