@@ -3,9 +3,12 @@
  *	@date   2016/2/8
  *  @info   refactory
  */
+jQuery(document).ready(function($) {
 
 
+});
 $(function(){
+
 	
 	//----var definition----
 
@@ -571,5 +574,28 @@ $(function(){
   originalPosterInput.change(function(){
     readURL(this, 2);
   });
+
+  /**
+   *  @editor  xxhomey
+   *  @info    以防有人不小心按到上一頁
+   */
+
+  if (window.history && window.history.pushState) {
+    window.history.pushState('forward', null, '');
+    window.history.pushState('forward', null, '');
+
+    $(window).on('popstate', function() {
+      //readyForExport();
+      if(confirm("你確定要回前一頁嗎！"))
+        window.location.href="/";
+      else {
+        $('#save').trigger('click');
+      }
+        
+      //location.reload();
+      window.history.pushState('forward', null, '');
+    });
+
+  }
 
 });

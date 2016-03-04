@@ -23,9 +23,9 @@
 		  <% @posters.each do |poster| %>
 
 				<h2><%= poster.name %></h2>
-
+				<%=  %>
 				<%= link_to 'Edit', edit_poster_path(poster) %>
-				<%= link_to "Delete", poster_path(poster), method: "DELETE" %>
+				<%= link_to "Delete", poster_path(poster), method: "DELETE", data: { confirm: "確定要刪除 #{poster.name} 嗎？" } %>
 			
   		<% end %>
   	</div>
