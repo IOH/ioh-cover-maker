@@ -547,6 +547,7 @@ $(function(){
 
   		$('.error-modal').modal();
   	}
+
   });
 
   function readURL(input, num) {
@@ -597,5 +598,10 @@ $(function(){
     });
 
   }
+
+  $('#download').click(function(){
+
+    $('#save').trigger('click');
+  });
 
 });

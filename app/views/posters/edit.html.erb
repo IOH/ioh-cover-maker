@@ -12,7 +12,7 @@
 			<span id="back_button" class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
     <% end %>
     <a class="btn btn-warning btn-lg" id="save">Save</a>
-		<a type="button" class="btn btn-success btn-lg" id="download" href="<%= @poster.poster_dataUrl %>" download="cover.jpg" 
+		<a type="button" class="btn btn-success btn-lg" id="download"  download="cover.jpg" 
 		<% if @poster.updated_at == @poster.created_at %>
 		<%= "disabled" %>
 		<% end %>
