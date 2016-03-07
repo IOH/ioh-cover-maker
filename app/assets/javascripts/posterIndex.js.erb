@@ -16,6 +16,7 @@ $(function(){
 			htmlText += "<h2>" + posters[i]['name'] + "</h2>";
 			htmlText += "<a href='/posters/" + posters[i]['id'] + "/edit'>Edit</a>";
 			htmlText += "<a rel='nofollow' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
+			htmlText += "<hr>"
 		}
 
 		$('.posters').html(htmlText);
