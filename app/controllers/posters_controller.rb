@@ -8,7 +8,7 @@ class PostersController < ApplicationController
 
   def index
 
-  	@posters = Poster.order(updated_at: :desc).limit(10)
+  	@posters = Poster.order(updated_at: :desc)
 
   end
 
@@ -87,7 +87,11 @@ class PostersController < ApplicationController
 
   def search
 
-  	@posters = Poster.select("id, name").where("name LIKE ? ", "%#{params[:query]}%").order(updated_at: :desc)
+  	if params[:query] == ""
+  		@posters = Poster.order(updated_at: :desc)
+  	else
+  		@posters = Poster.select("id, name").where("name LIKE ? ", "%#{params[:query]}%").order(updated_at: :desc)
+  	end
 
   	render :json => @posters
 

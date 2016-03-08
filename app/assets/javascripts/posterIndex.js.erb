@@ -6,13 +6,19 @@
 
 $(function(){
 
+	
 
+	//ajax searchbar
 	$('#search-form').on('ajax:success', function(e, data, status, xhr){
 
 		var posters  = $.parseJSON(xhr.responseText),
 				htmlText = "";
 
 		for (var i = 0; i < posters.length; i ++){
+
+			if (posters[i]['name'] == null)
+				posters[i]['name'] = "";
+
 			htmlText += "<h2><a href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a></h2>";
 			htmlText += "<a href='/posters/" + posters[i]['id'] + "/edit'>Edit </a>";
 			htmlText += "<a rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
