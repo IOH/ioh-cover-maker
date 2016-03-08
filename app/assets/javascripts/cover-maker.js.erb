@@ -152,12 +152,21 @@ $(function(){
   //----edit area----
 
   //auto save when change
+  var typingTimer;                //timer identifier
+  
   $('#selfie-toggle, .location-radio, #experience-toggle-1, #experience-toggle-2, #experience-toggle-3').change(function(){
   	patchToPoster();
   });
 
   $('#poster-content-textarea, #location-textarea, #name-textarea, .experience-textarea').on('keyup', function(){
-  	patchToPoster();
+  	changeSaveText();
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(patchToPoster, 1500);
+    //patchToPoster();
+  });
+
+  $('#poster-content-textarea, #location-textarea, #name-textarea, .experience-textarea').on('keydown', function(){
+    clearTimeout(typingTimer);
   });
 
   //change if default is false
@@ -489,7 +498,10 @@ $(function(){
 			type: "PATCH",
 			url : "/posters/" + posterId,
 			data: mydata,
-			success: function(resp){ console.log(resp); }
+			success: function(resp){ 
+        console.log(resp); 
+        $('#save-text').replaceWith("<span id='save-text'>所有變更已儲存</span>");
+      }
 		});
 
   }
@@ -603,13 +615,17 @@ $(function(){
       if(confirm("你確定要回前一頁嗎！"))
         window.location.href="/";
       else {
-        $('#save').trigger('click');
+        patchToPoster();
       }
         
       //location.reload();
       window.history.pushState('forward', null, '');
     });
 
+  }
+
+  function changeSaveText() {
+    $('#save-text').replaceWith("<span id='save-text'><img width='20px' src='<%= asset_path('processing.gif') %>'>儲存中...</span>");
   }
 
 });
