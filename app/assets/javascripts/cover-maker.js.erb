@@ -3,10 +3,6 @@
  *	@date   2016/2/8
  *  @info   refactory
  */
-jQuery(document).ready(function($) {
-
-
-});
 $(function(){
 
 	
@@ -80,6 +76,8 @@ $(function(){
     
     $('#selfie-modal').modal('hide');
 
+    patchToPoster();
+
   });
   
   $('.poster-export').click(function() {
@@ -92,6 +90,8 @@ $(function(){
     $('#poster-image').attr("src", posterImageData);
     
     $('#poster-modal').modal('hide');
+
+    patchToPoster();
 
   });
 
@@ -151,11 +151,13 @@ $(function(){
 
   //----edit area----
 
-  //need reexport if setting change
-  $('.edit-area').find('input').change(function(){
-  	$('#download').attr('disabled', true);
-  	$('#download').removeAttr('href');
-  	$('#download').removeAttr('download');
+  //auto save when change
+  $('#selfie-toggle, .location-radio, #experience-toggle-1, #experience-toggle-2, #experience-toggle-3').change(function(){
+  	patchToPoster();
+  });
+
+  $('#poster-content-textarea, #location-textarea, #name-textarea, .experience-textarea').on('keyup', function(){
+  	patchToPoster();
   });
 
   //change if default is false
@@ -385,7 +387,8 @@ $(function(){
         if (readyToDraw())
         	drawCanvas();
     	};
-    
+    	
+    	selfieImageData = selfieImageData || $('#selfie-image').attr("src");
       posterSelfie.src = selfieImageData;
 
     }
@@ -400,7 +403,8 @@ $(function(){
       if (readyToDraw())
       	drawCanvas();
   	};
-        
+    
+    posterImageData = posterImageData || $('#poster-image').attr("src"); 
     posterBGI.src = posterImageData;
         
 
@@ -477,8 +481,6 @@ $(function(){
     data['original_avatar_dataUrl'] = originalSelfieImageDataUrl;
     data['original_background_dataUrl'] = originalPosterImageDataUrl;
 
-		console.log(data);
-
 		mydata = {};
 
 		mydata['data'] = data;
@@ -497,8 +499,8 @@ $(function(){
    *
    *  @use fileName, canvasFinish
    */
-  $('#save').off('click');
-  $('#save').click(function(){
+  $('#download').off('click');
+  $('#download').click(function(){
   	
   	//check if img is uploaded
   	if (readyForExport()) {
@@ -508,16 +510,21 @@ $(function(){
 	  	var appendCanvas = function(){
 	  		if (typeof(canvasFinish) != 'undefined'){
 
+	  			/*
 	  			var self = $('#download')[0];
 	  			posterFinishData = canvasFinish.toDataURL("image/jpeg");
 	  			self.href = posterFinishData;
 	  			self.download = fileName;
+	  			*/
+
+	  			var download = document.createElement("a");
+  				posterFinishData = canvasFinish.toDataURL("image/jpeg");
+  				download.href = posterFinishData;
+  				download.download = fileName;
+
+  				download.click();
 
 	 				$('#download').attr('disabled', false);
-
-	 				patchToPoster();
-
-	 				//patchToPoster();
 
 	  			stopRepeat();
 	  		}
@@ -534,6 +541,8 @@ $(function(){
 
   	}
   	else{
+
+  		//validation
   		var htmlText = "<ul>";
 
   		for (var i = 0; i < errorArray.length; i ++){
@@ -550,6 +559,10 @@ $(function(){
 
   });
 
+
+  /**
+   *  read dataURL in input
+   */
   function readURL(input, num) {
 
     if (input.files && input.files[0]) {
@@ -598,10 +611,5 @@ $(function(){
     });
 
   }
-
-  $('#download').click(function(){
-
-    $('#save').trigger('click');
-  });
 
 });
