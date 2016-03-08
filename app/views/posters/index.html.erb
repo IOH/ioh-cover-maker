@@ -43,10 +43,8 @@
 	<div class="posters">
 		<% @posters.each do |poster| %>
 
-			<h2><%= poster.name %></h2>
-			<%=  %>
-			<%= link_to 'Edit', edit_poster_path(poster) %>
-			<%= link_to "Delete", poster_path(poster), method: "DELETE", data: { confirm: "確定要刪除 #{poster.name} 嗎？" } %>
+			<h2><%= link_to "#{poster.name}", edit_poster_path(poster) %></h2>
+			<%= link_to "Delete", poster_path(poster), method: "DELETE", data: { confirm: "確定要刪除嗎？" } %>
 			<hr>
   	<% end %>
   </div>

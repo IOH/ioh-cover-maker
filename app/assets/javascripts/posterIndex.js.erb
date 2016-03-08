@@ -13,9 +13,8 @@ $(function(){
 				htmlText = "";
 
 		for (var i = 0; i < posters.length; i ++){
-			htmlText += "<h2>" + posters[i]['name'] + "</h2>";
-			htmlText += "<a href='/posters/" + posters[i]['id'] + "/edit'>Edit </a>";
-			htmlText += "<a rel='nofollow' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
+			htmlText += "<h2><a href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a></h2>";
+			htmlText += "<a rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
 			htmlText += "<hr>"
 		}
 
