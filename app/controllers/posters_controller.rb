@@ -7,9 +7,6 @@ class PostersController < ApplicationController
   before_action :checkLogIn
 
   def index
-
-  	@posters = Poster.order(updated_at: :desc)
-
   end
 
   def show
@@ -88,9 +85,9 @@ class PostersController < ApplicationController
   def search
 
   	if params[:query] == ""
-  		@posters = Poster.order(updated_at: :desc)
+  		@posters = Poster.order(updated_at: :desc).limit(params[:limit])
   	else
-  		@posters = Poster.select("id, name").where("name LIKE ? ", "%#{params[:query]}%").order(updated_at: :desc)
+  		@posters = Poster.select("id, name").where("name LIKE ? ", "%#{params[:query]}%").order(updated_at: :desc).limit(params[:limit])
   	end
 
   	render :json => @posters

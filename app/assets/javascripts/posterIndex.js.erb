@@ -6,33 +6,57 @@
 
 $(function(){
 
-	
+	var limit = 10;
 
-	//ajax searchbar
-	$('#search-form').on('ajax:success', function(e, data, status, xhr){
+	var search = function()
+	{
 
-		var posters  = $.parseJSON(xhr.responseText),
-				htmlText = "";
+		var query = $('#search-text_field').val();
 
-		for (var i = 0; i < posters.length; i ++){
+		$.ajax({
+			type: "POST",
+			url : "/search",
+			data: {"query": query, "limit": limit},
+			success: function(posters){
+				var htmlText = "";
 
-			if (posters[i]['name'] == null)
-				posters[i]['name'] = "";
+				for (var i = 0; i < posters.length; i ++){
 
-			htmlText += "<h2><a href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a></h2>";
-			htmlText += "<a href='/posters/" + posters[i]['id'] + "/edit'>Edit </a>";
-			htmlText += "<a rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
-			htmlText += "<hr>"
-		}
+					if (posters[i]['name'] == null)
+						posters[i]['name'] = "";
 
-		$('.posters').html(htmlText);
+					htmlText += "<h2><a href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a></h2>";
+					htmlText += "<a href='/posters/" + posters[i]['id'] + "/edit'>Edit </a>";
+					htmlText += "<a rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
+					htmlText += "<hr>"
+				}
 
-	});
+				$('.posters').html(htmlText);
+			}
+		});
+	}
 
+	//init status
+	search();
 
+	//dynamic change when typing
 	$('#search-text_field').on('keyup', function(){
-		$('#search-submit').trigger('click');
+		search();
 	});
+
+	//detect scroll
+	$( window ).scroll(function() {
+		//console.log(window.scrollY);
+		//console.log($(document).height() - $(window).height());
+	  if (window.scrollY == $(document).height() - $(window).height())
+	  {
+	  	limit += 10;
+	  	setTimeout(search, 100);
+	  	
+	  }
+	});
+
+
 
 
 });

@@ -24,7 +24,6 @@
 				<div class="form-group ">
 					<%= text_field_tag 'query', nil, placeholder: 'Search', id: 'search-text_field', autocomplete: 'off', class: 'form-control'%>
 				</div>
-				<%= submit_tag 'Go', id: 'search-submit', class: 'btn btn-default' %>
 			</form>
 		  <% end %>
 	      <ul class="nav navbar-nav navbar-right">
@@ -41,13 +40,6 @@
 	<%= link_to 'Create New Poster', new_poster_path, class: 'btn btn-default' %>
 
 	<div class="posters">
-		<% @posters.each do |poster| %>
-
-			<h2><%= link_to "#{poster.name}", edit_poster_path(poster) %></h2>
-			<%= link_to "Edit", edit_poster_path(poster) %>
-			<%= link_to "Delete", poster_path(poster), method: "DELETE", data: { confirm: "確定要刪除嗎？" } %>
-			<hr>
-  	<% end %>
   </div>
 
 	<% end %>
