@@ -11,11 +11,7 @@
     <%= link_to root_path, class: "btn btn-warning btn-lg" do %>
 			<span id="back_button" class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
     <% end %>
-		<a type="button" class="btn btn-success btn-lg" id="download"
-		<% if @poster.updated_at == @poster.created_at %>
-		<%= "disabled" %>
-		<% end %>
-		> Download
+		<a type="button" class="btn btn-success btn-lg" id="download"> Download
 			<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
 		</a>
 
