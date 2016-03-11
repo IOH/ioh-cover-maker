@@ -373,8 +373,8 @@ input[type="range"].cropit-image-zoom-input {
 }
 
 .cropit-image-background {
-		margin-left: auto;
-		margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
     opacity: .2;
     cursor: auto;
 }
@@ -401,4 +401,28 @@ input {
 
 #experience-1 {
 	color: red;
+}
+
+nav.navbar.navbar-default {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+}
+
+div.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#lowestContainer {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+ul.nav.navbar-nav.navbar-right {
+    padding-top: 100px;
 }
