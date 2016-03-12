@@ -33,7 +33,7 @@ $(function(){
 					if (posters[i]['name'] == null)
 						posters[i]['name'] = "";
 
-					if(i % 2 == 1)
+					if(i % 2 !== 1)
 						htmlText += "<div class='row'>"
 
 					htmlText += "<div class='col-xs-6' style='padding-left: 0;'>";
@@ -55,8 +55,13 @@ $(function(){
 					htmlText += "</table>";
 					htmlText += "</div>";
 
-					if(i % 2 == 1)
-						htmlText += "</div>"
+					if(i % 2 == 1) {
+						htmlText += "<div class='col-xs-6' style='padding-left: 0;'></div>";
+						htmlText += "</div>";
+					}
+
+
+
 				}
 
 				$('.posters').html(htmlText);

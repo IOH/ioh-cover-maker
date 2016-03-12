@@ -1,4 +1,4 @@
-/**
+ /**
  *	@editor arfullight
  *	@date   2016/2/8
  *  @info   refactory
@@ -627,5 +627,10 @@ $(function(){
   function changeSaveText() {
     $('#save-text').replaceWith("<span id='save-text'><img width='20px' src='<%= asset_path('processing.gif') %>'>儲存中...</span>");
   }
+
+  $('#arrowsPng').click(function(){
+    console.log("GG");
+    //$(this).css("background-image", "url('arrows_hover.png')");
+  });
 
 });

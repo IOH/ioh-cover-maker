@@ -505,11 +505,34 @@ input#search-text_field.form-control:-ms-input-placeholder {
     color: black;
     font-size: 14pt;
     font-weight: bold;
-
 }
 
 #thirdTd {
     color: gray;
     font-size: 10pt;
+}
 
+#arrowsPng {
+    float: right;
+    width: 15px;
+    height: 17px;
+    background-image: url('arrows.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    transition-property: background-image;
+    transition-duration: 0.3s;
+    transition-timing-function: linear;
+}
+
+#arrowsPng:hover {
+    background-image: url('arrows_hover.png');
+}
+
+li.dropdown.open > a.dropdown-toggle > p#arrowsPng {
+    background-image: url('arrows_hover.png');
+}
+
+a.dropdown-toggle {
+    background-color: white !important;
 }
