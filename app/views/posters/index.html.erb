@@ -14,12 +14,19 @@
 		</div>
 	<% end %>
 
-	<p class="postersCatagoryText"><b>Latest Posters｜最新海報</b><p>
+	<p class="postersCatagoryText"><b>Latest Posters｜最新海報</b></p>
 
-	<div class="posters">
+	<div class="latest">
+		
+		<% @posters.each do |poster| %>
+		
+		<% end %>	
+
 	</div>
 
-	<p class="postersCatagoryText"><b>All Posters｜全部海報</b><p>
+	<p class="postersCatagoryText"><b>All Posters｜全部海報</b></p>
+
+	<div class="posters"></div>
 
 	<% end %>
 </div>

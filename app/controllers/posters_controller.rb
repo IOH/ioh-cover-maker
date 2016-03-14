@@ -7,6 +7,7 @@ class PostersController < ApplicationController
   before_action :checkLogIn
 
   def index
+  	@posters = Poster.where('updated_at < ?', 7.days.ago).order(updated_at: :desc)
   end
 
   def show
@@ -88,7 +89,15 @@ class PostersController < ApplicationController
   	if params[:query] == ""
   		@posters = Poster.order(updated_at: :desc).limit(params[:limit])
   	else
-  		@posters = Poster.select("id, name").where("name LIKE ? ", "%#{params[:query]}%").order(updated_at: :desc).limit(params[:limit])
+  		whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
+  		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
+  		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"
+  		whereSearchTerm += "OR info_two LIKE '%#{params[:query]}%'"
+  		whereSearchTerm += "OR info_three LIKE '%#{params[:query]}%'"
+
+  		selectTerm = "id, name, avatar_dataUrl, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at";
+  		@posters = Poster.select(selectTerm).where(whereSearchTerm).order(updated_at: :desc).limit(params[:limit])
+  		
   	end
 
   	render :json => @posters
