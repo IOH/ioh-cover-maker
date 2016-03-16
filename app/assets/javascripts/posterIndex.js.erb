@@ -6,7 +6,8 @@
 
 $(function(){
 
-	var limit = 10;
+	var limit = 10,
+			state = "posters";
 
 	var search = function(state = "posters")
 	{ 
@@ -83,12 +84,42 @@ $(function(){
 	  if (window.scrollY == $(document).height() - $(window).height())
 	  {
 	  	limit += 10;
-	  	setTimeout(search, 100);
+	  	setTimeout(search(state), 100);
 	  	
 	  }
 	});
 
+	var myPosterBtnClicked = false;
 
+	$('#my-posters').click(function(){
+
+		myPosterBtnClicked = !myPosterBtnClicked;
+		limit = 10;
+
+		$(this).toggleClass("btn-clicked");
+
+		var htmlText = "";
+
+		if (myPosterBtnClicked)
+		{
+			htmlText += "<p class='postersCatagoryText'><b>My Posters｜我的海報</b></p>";
+			htmlText += "<div class='my-posters'></div>";
+			
+			$('.poster-area').html(htmlText);
+			search("my-posters");
+		}
+		else
+		{
+			htmlText += "<p class='postersCatagoryText'><b>Latest Posters｜最新海報</b></p>";
+			htmlText += "<div class='latest'></div>";
+		  htmlText += "<p class='postersCatagoryText'><b>All Posters｜全部海報</b></p>";
+		  htmlText += "<div class='posters'></div>";
+
+		  $('.poster-area').html(htmlText);
+		  search();
+			search("latest");
+		}
+	});
 
 
 });

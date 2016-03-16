@@ -446,6 +446,12 @@ a.btn.btn-default {
     margin-right: 10px;
 }
 
+a.btn.btn-clicked {
+	color: white;
+  font-weight: bold;
+  background-color: red;
+}
+
 a.btn.btn-default:hover {
     color: white;
     font-weight: bold;
