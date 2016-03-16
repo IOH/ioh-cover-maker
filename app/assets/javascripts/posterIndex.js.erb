@@ -8,15 +8,15 @@ $(function(){
 
 	var limit = 10;
 
-	var search = function()
-	{
+	var search = function(state = "posters")
+	{ 
 
 		var query = $('#search-text_field').val();
 
 		$.ajax({
 			type: "POST",
 			url : "/search",
-			data: {"query": query, "limit": limit},
+			data: {"query": query, "limit": limit, state: state},
 			success: function(posters){
 				var htmlText = "";
 				var secondTdText = "";
@@ -62,13 +62,14 @@ $(function(){
 
 				}
 
-				$('.posters').html(htmlText);
+				$('.' + state).html(htmlText);
 			}
 		});
 	}
 
 	//init status
 	search();
+	search("latest");
 
 	//dynamic change when typing
 	$('#search-text_field').on('keyup', function(){

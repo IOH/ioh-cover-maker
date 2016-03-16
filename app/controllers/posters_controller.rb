@@ -7,7 +7,6 @@ class PostersController < ApplicationController
   before_action :checkLogIn
 
   def index
-  	@posters = Poster.where('updated_at < ?', 7.days.ago).order(updated_at: :desc)
   end
 
   def show
@@ -23,6 +22,8 @@ class PostersController < ApplicationController
   	@poster.info_three_red = false
 
   	@poster.user_id = current_user.id
+  	@poster.last_edit_id = current_user.id
+  	@poster.last_user = current_user.account_name
 
   	@poster.save
 
@@ -69,6 +70,7 @@ class PostersController < ApplicationController
     @poster.original_background_dataUrl = data['original_background_dataUrl']
 
     @poster.last_edit_id = current_user.id
+    @poster.last_user = current_user.account_name
 
   	@poster.save
 
@@ -86,19 +88,22 @@ class PostersController < ApplicationController
 
   def search
 
-  	if params[:query] == ""
-  		@posters = Poster.order(updated_at: :desc).limit(params[:limit])
-  	else
-  		whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
-  		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
-  		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"
-  		whereSearchTerm += "OR info_two LIKE '%#{params[:query]}%'"
-  		whereSearchTerm += "OR info_three LIKE '%#{params[:query]}%'"
+  	if params[:state] == "posters"
+	  	if params[:query] == ""
+	  		@posters = Poster.where('updated_at < ?', 7.days.ago).order(updated_at: :desc).limit(params[:limit])
+	  	else
+	  		whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
+	  		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
+	  		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"
+	  		whereSearchTerm += "OR info_two LIKE '%#{params[:query]}%'"
+	  		whereSearchTerm += "OR info_three LIKE '%#{params[:query]}%'"
 
-  		selectTerm = "id, name, avatar_dataUrl, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at";
-  		@posters = Poster.select(selectTerm).where(whereSearchTerm).order(updated_at: :desc).limit(params[:limit])
-  		
-  	end
+	  		selectTerm = "id, name, avatar_dataUrl, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at";
+	  		@posters = Poster.select(selectTerm).where('updated_at < ?', 7.days.ago).where(whereSearchTerm).order(updated_at: :desc).limit(params[:limit])
+	  	end
+	  elsif params[:state] == "latest"
+	  	@posters = Poster.where('updated_at >= ?', 7.days.ago).order(updated_at: :desc)
+	  end
 
   	render :json => @posters
 
