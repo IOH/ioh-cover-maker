@@ -6,13 +6,13 @@
 		<div class="row">
 				<%= link_to 'Create New Poster', new_poster_path, class: 'btn btn-default' %>
 			
-				<a class="btn btn-default">My Posters</a>
+				<a class="btn btn-default" id="my-posters">My Posters</a>
 			
 				<%= form_tag search_path, id: 'search-form', remote: true do %>
 					<%= text_field_tag 'query', nil, placeholder: 'Search...', id: 'search-text_field', autocomplete: 'off', class: 'form-control'%>
-				</form>
-		</div>
-	<% end %>
+							</form>
+					</div>
+				<% end %>
 
 	<p class="postersCatagoryText"><b>Latest Posters｜最新海報</b></p>
 
