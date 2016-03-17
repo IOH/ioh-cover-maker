@@ -87,11 +87,11 @@ class PostersController < ApplicationController
 
   	@poster.save
 
-  	saveImg(@poster.id.to_s, @poster.avatar_dataUrl, "avatar")
-  	saveImg(@poster.id.to_s, @poster.background_dataUrl, "background")
-  	saveImg(@poster.id.to_s, @poster.poster_dataUrl, "poster")
-  	saveImg(@poster.id.to_s, @poster.original_background_dataUrl, "original_background")
-  	saveImg(@poster.id.to_s, @poster.original_avatar_dataUrl, "original_avatar")
+  	saveImg(@poster.id.to_s, data['avatar_dataUrl'], "avatar")
+  	saveImg(@poster.id.to_s, data['background_dataUrl'], "background")
+  	saveImg(@poster.id.to_s, data['poster_dataUrl'], "poster")
+  	saveImg(@poster.id.to_s, data['original_background_dataUrl'], "original_background")
+  	saveImg(@poster.id.to_s, data['original_avatar_dataUrl'], "original_avatar")
 
   	render :json => data
 
