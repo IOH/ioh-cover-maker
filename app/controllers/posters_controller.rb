@@ -1,6 +1,7 @@
 # @editor w2sw2sw2s
 # @date 2016/1/27
 # @info Add PostersController
+require 'base64'
 
 class PostersController < ApplicationController
   
@@ -14,6 +15,10 @@ class PostersController < ApplicationController
 
   def new 
 
+  	unless Dir.exist?(Rails.public_path + 'posters')
+  		Dir.mkdir(Rails.public_path + 'posters')
+  	end
+
   	@poster = Poster.new()
   	@poster.use_avatar = true
   	@poster.location_white = true
@@ -26,6 +31,8 @@ class PostersController < ApplicationController
   	@poster.last_user = current_user.account_name
 
   	@poster.save
+
+  	Dir.mkdir(Rails.public_path + 'posters/' + @poster.id.to_s)
 
   	redirect_to edit_poster_path(@poster)
 
@@ -74,6 +81,8 @@ class PostersController < ApplicationController
 
   	@poster.save
 
+  	#saveImg(@poster.id.to_s, @poster.avatar_dataUrl, "avatar")
+
 
   	render :json => data
 
@@ -89,23 +98,30 @@ class PostersController < ApplicationController
   def search
 
   	selectTerm = "id, name, avatar_dataUrl, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user";
+  	whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
+		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
+		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"
+		whereSearchTerm += "OR info_two LIKE '%#{params[:query]}%'"
+		whereSearchTerm += "OR info_three LIKE '%#{params[:query]}%'"
 
   	if params[:state] == "posters"
 	  	if params[:query] == ""
 	  		@posters = Poster.select(selectTerm).where('updated_at < ?', 7.days.ago).order(updated_at: :desc).limit(params[:limit])
 	  	else
-	  		whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
-	  		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
-	  		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"
-	  		whereSearchTerm += "OR info_two LIKE '%#{params[:query]}%'"
-	  		whereSearchTerm += "OR info_three LIKE '%#{params[:query]}%'"
-
 	  		@posters = Poster.select(selectTerm).where('updated_at < ?', 7.days.ago).where(whereSearchTerm).order(updated_at: :desc).limit(params[:limit])
 	  	end
 	  elsif params[:state] == "latest"
-	  	@posters = Poster.where('updated_at >= ?', 7.days.ago).order(updated_at: :desc)
+	  	if params[:query] == ""
+	  		@posters = Poster.where('updated_at >= ?', 7.days.ago).order(updated_at: :desc)
+	  	else
+	  		@posters = Poster.where('updated_at >= ?', 7.days.ago).where(whereSearchTerm).order(updated_at: :desc)
+	  	end
 	  elsif params[:state] == "my-posters"
-			@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).order(updated_at: :desc).limit(params[:limit])
+	  	if params == ""
+				@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).order(updated_at: :desc).limit(params[:limit])
+	  	else
+	  		@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).where(whereSearchTerm).order(updated_at: :desc).limit(params[:limit])
+	  	end
 	  end
 
   	render :json => @posters
@@ -128,6 +144,17 @@ class PostersController < ApplicationController
   	unless current_user
   		redirect_to login_path
   	end
+  end
+
+  def saveImg(posterId, dataUrl, dataType)
+
+  	dataUrl.gsub(/[^,]+,/, "")
+  	data = Base64.decode64(dataUrl)
+
+  	File.open(Rails.public_path + '/posters/' + posterId + '/' + "#{dataType}.jpg", 'w+') do |file|
+  		file.write(data)
+  	end
+
   end
 
 end

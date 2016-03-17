@@ -74,7 +74,15 @@ $(function(){
 
 	//dynamic change when typing
 	$('#search-text_field').on('keyup', function(){
-		search();
+		if (state == "posters")
+	  {
+	  	search('posters'); 
+	  	search('latest');
+	  }
+  	else if (state == "my-posters")
+  	{
+  		search('my-posters');
+  	}
 	});
 
 	//detect scroll
@@ -84,8 +92,11 @@ $(function(){
 	  if (window.scrollY == $(document).height() - $(window).height())
 	  {
 	  	limit += 10;
-	  	setTimeout(search(state), 100);
-	  	
+
+	  	if (state == "posters")
+	  		setTimeout(function(){search('posters');}, 100);
+	  	else if (state == "my-posters")
+	  		setTimeout(function(){search('my-posters');}, 100);
 	  }
 	});
 
@@ -107,6 +118,7 @@ $(function(){
 			
 			$('.poster-area').html(htmlText);
 			search("my-posters");
+			state = "my-posters"
 		}
 		else
 		{
@@ -118,6 +130,7 @@ $(function(){
 		  $('.poster-area').html(htmlText);
 		  search();
 			search("latest");
+			state = "posters"
 		}
 	});
 
