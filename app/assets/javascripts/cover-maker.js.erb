@@ -19,10 +19,10 @@ $(function(){
       originalPosterImageDataUrl = $('#poster-modal').find('.cropit-image-input').attr('src');
 
 	//get dataURL if exist
-	if ($('.image-editor:eq(0)').attr('origin-image') != "")
-		selfieImageData = $('.image-editor:eq(0)').attr('origin-image');
-	if ($('.image-editor:eq(1)').attr('origin-image') != "")
-		posterImageData = $('.image-editor:eq(1)').attr('origin-image');
+	if ($('#selfie-area').children().attr('src') != "")
+		selfieImageData = $('#selfie-area').children().attr('src');
+	if ($('#poster-area').children().attr('src') != "")
+		posterImageData = $('#poster-area').children().attr('src');
 
 	/**
 	 *  @info start cropit
@@ -537,6 +537,8 @@ $(function(){
   				download.click();
 
 	 				$('#download').attr('disabled', false);
+
+	 				patchToPoster();
 
 	  			stopRepeat();
 	  		}

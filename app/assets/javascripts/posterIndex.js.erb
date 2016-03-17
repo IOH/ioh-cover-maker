@@ -41,7 +41,7 @@ $(function(){
 					htmlText += "<table style='margin-top: 10px; line-height: 1;'>";
 
 					htmlText += "<tr>";
-					htmlText += "<td rowspan='3' id='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='" + posters[i]['avatar_dataUrl'] + "'></a></td>";
+					htmlText += "<td rowspan='3' id='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='/posters/" + posters[i]['id'] + "/avatar.jpg'></a></td>";
 					htmlText += "<td><a id='firstTd' href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a></td>";
 					htmlText += "</tr>";
 
