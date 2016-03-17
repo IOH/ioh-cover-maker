@@ -81,7 +81,7 @@ class PostersController < ApplicationController
 
   	@poster.save
 
-  	#saveImg(@poster.id.to_s, @poster.avatar_dataUrl, "avatar")
+  	saveImg(@poster.id.to_s, @poster.avatar_dataUrl, "avatar")
 
 
   	render :json => data
@@ -151,7 +151,7 @@ class PostersController < ApplicationController
   	dataUrl.gsub(/[^,]+,/, "")
   	data = Base64.decode64(dataUrl)
 
-  	File.open(Rails.public_path + '/posters/' + posterId + '/' + "#{dataType}.jpg", 'w+') do |file|
+  	File.open(Rails.public_path + '/posters/' + posterId + '/' + "#{dataType}.jpg", 'wb') do |file|
   		file.write(data)
   	end
 
