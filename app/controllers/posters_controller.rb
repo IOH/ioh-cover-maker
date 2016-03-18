@@ -3,8 +3,9 @@
 # @info Add PostersController
 
 class PostersController < ApplicationController
-  
-  before_action :checkLogIn
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+  # before_action :checkLogIn
 
   def index
   end
@@ -14,7 +15,7 @@ class PostersController < ApplicationController
 
   def new 
 
-  	@poster = Poster.new()
+  	# @poster = Poster.new()
   	@poster.use_avatar = true
   	@poster.location_white = true
   	@poster.info_one_red = true
@@ -30,7 +31,7 @@ class PostersController < ApplicationController
   end
 
   def edit
-  	@poster = Poster.find(params[:id])
+  	# @poster = Poster.find(params[:id])
   end
 
   def update
@@ -77,7 +78,7 @@ class PostersController < ApplicationController
   end
 
   def destroy
-  	@poster = Poster.find(params[:id])
+  	# @poster = Poster.find(params[:id])
   	@poster.destroy
 
   	redirect_to :root
@@ -107,10 +108,10 @@ class PostersController < ApplicationController
   	end
   end
 
-  def checkLogIn
-  	unless current_user
-  		redirect_to login_path
-  	end
-  end
+  # def checkLogIn
+  # 	unless current_user
+  # 		redirect_to login_path
+  # 	end
+  # end
 
 end

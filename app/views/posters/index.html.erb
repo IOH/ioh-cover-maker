@@ -15,21 +15,27 @@
 	  <!-- Collect the nav links, forms, and other content for toggling -->
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <% if current_user %>
-				<ul class="nav navbar-nav">
-	      	<li class="active"><a href="./">Poster</a><span class="sr-only">(current)</span></a></li>
-
-		    	<li><a href="#">問與答</a></li>
-		   	</ul>
-		    <%= form_tag search_path, class: 'navbar-left navbar-form',id: 'search-form', remote: true do %>
-				<div class="form-group ">
-					<%= text_field_tag 'query', nil, placeholder: 'Search', id: 'search-text_field', autocomplete: 'off', class: 'form-control'%>
-				</div>
-			</form>
-		  <% end %>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><%= link_to current_user.account_name, "#" %></li>
- 			<li><%= link_to "logout", logout_path, method: "delete" %></li>
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="./">Poster</a><span class="sr-only">(current)</span></a></li>
+                     <li><a href="#">問與答</a></li>
 	      </ul>
+
+                   <%= form_tag search_path, class: 'navbar-left navbar-form',id: 'search-form', remote: true do %>
+	        <div class="form-group ">
+	          <%= text_field_tag 'query', nil, placeholder: 'Search', id: 'search-text_field', autocomplete: 'off', class: 'form-control'%>
+	        </div>
+	       </form>
+	     <% end %>
+
+		  <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+	      <!-- <ul class="nav navbar-nav navbar-right"> -->
+	        <!-- <li> -->
+	        	 <!-- link_to current_user.account_name, "#"  -->
+	        <!-- </li> -->
+ 	         <!-- <li> -->
+ 		 <!-- link_to "logout", logout_path, method: "delete"  -->
+ 	        <!-- </li> -->
+	      <!-- </ul> -->
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
