@@ -19,67 +19,71 @@ $(function(){
 			url : "/search",
 			data: {"query": query, "limit": limit, state: state},
 			success: function(posters){
-				var htmlText = "";
-				var secondTdText = "";
-				var jsText = "";
-				jsText += "<script type='text/javascript'> ";
 
-				for (var i = 0; i < posters.length; i ++){
-					secondTdText = ""; 
-					if(posters[i]['info_one_red']) 
-						secondTdText = posters[i]['info_one'];
-					else if(posters[i]['info_two_red']) 
-						secondTdText = posters[i]['info_two'];
-					else if(posters[i]['info_three_red']) 
-						secondTdText = posters[i]['info_three'];
+				if (!jQuery.isEmptyObject(posters))
+				{
+					var htmlText = "";
+					var secondTdText = "";
+					var jsText = "";
+					jsText += "<script type='text/javascript'> ";
 
-					if (posters[i]['name'] == null)
-						posters[i]['name'] = "";
+					for (var i = 0; i < posters.length; i ++){
+						secondTdText = ""; 
+						if(posters[i]['info_one_red']) 
+							secondTdText = posters[i]['info_one'];
+						else if(posters[i]['info_two_red']) 
+							secondTdText = posters[i]['info_two'];
+						else if(posters[i]['info_three_red']) 
+							secondTdText = posters[i]['info_three'];
 
-					if(i % 2 !== 1)
-						htmlText += "<div class='row'>"
+						if (posters[i]['name'] == null)
+							posters[i]['name'] = "";
 
-					htmlText += "<div class='col-xs-6' style='padding-left: 0;'>";
-					htmlText += "<table style='margin-top: 10px; line-height: 1; width: 100%;'>";
+						if(i % 2 !== 1)
+							htmlText += "<div class='row'>"
 
-					htmlText += "<tr>";
-					htmlText += "<td rowspan='3' class='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='" + posters[i]['avatar_dataUrl'] + "'></a></td>";
-					htmlText += "<td>"
-					htmlText += "<a id='firstTd_" + posters[i]['id'] + "' class='firstTd' href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a>";
-					htmlText += "<a class='firstTd_Btn btn-xs ' rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
-					htmlText += "<a class='firstTd_Btn btn-xs ' href='/posters/" + posters[i]['id'] + "/edit'>Edit</a>";
-					
-					htmlText += "</td></tr>";
+						htmlText += "<div class='col-xs-6' style='padding-left: 0;'>";
+						htmlText += "<table style='margin-top: 10px; line-height: 1; width: 100%;'>";
 
-					htmlText += "<tr style='height: 20px;'>";
-					htmlText += "<td><a class='secondTd' href='/posters/" + posters[i]['id'] + "/edit'>" + secondTdText + " </a></td>";
-					htmlText += "</tr>";
+						htmlText += "<tr>";
+						htmlText += "<td rowspan='3' class='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='/posters/" + posters[i]['id'] + "/avatar.jpg'></a></td>";
+						htmlText += "<td>"
+						htmlText += "<a id='firstTd_" + posters[i]['id'] + "' class='firstTd' href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a>";
+						htmlText += "<a class='firstTd_Btn btn-xs ' rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
+						htmlText += "<a class='firstTd_Btn btn-xs ' href='/posters/" + posters[i]['id'] + "/edit'>Edit</a>";
+						
+						htmlText += "</td></tr>";
 
-					htmlText += "<tr>";
-					htmlText += "<td><a class='thirdTd' rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a></td>";
-					htmlText += "</tr>";
+						htmlText += "<tr style='height: 20px;'>";
+						htmlText += "<td><a class='secondTd' href='/posters/" + posters[i]['id'] + "/edit'>" + secondTdText + " </a></td>";
+						htmlText += "</tr>";
 
-					htmlText += "</table>";
-					htmlText += "</div>";
+						htmlText += "<tr>";
+						htmlText += "<td><a class='thirdTd' rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a></td>";
+						htmlText += "</tr>";
 
-					if(i % 2 == 1) {
-						htmlText += "<br />";
+						htmlText += "</table>";
 						htmlText += "</div>";
+
+						if(i % 2 == 1) {
+							htmlText += "<br />";
+							htmlText += "</div>";
+						}
+
+						jsText += "$('#firstTd_" +  posters[i]['id'] + "').parent('td').mouseover(function(){ ";
+						jsText += "$(this).children('.firstTd_Btn').css('opacity', '1'); });";
+						jsText += "$('#firstTd_" +  posters[i]['id'] + "').parent('td').mouseout(function(){ ";
+						jsText += "$(this).children('.firstTd_Btn').css('opacity', '0'); });";
+
 					}
 
-					jsText += "$('#firstTd_" +  posters[i]['id'] + "').parent('td').mouseover(function(){ ";
-					jsText += "$(this).children('.firstTd_Btn').css('opacity', '1'); });";
-					jsText += "$('#firstTd_" +  posters[i]['id'] + "').parent('td').mouseout(function(){ ";
-					jsText += "$(this).children('.firstTd_Btn').css('opacity', '0'); });";
+					
+					jsText += "</script>";
 
+
+					$('.' + state).html(htmlText);
+					$('body').append(jsText);
 				}
-
-				
-				jsText += "</script>";
-
-
-				$('.' + state).html(htmlText);
-				$('body').append(jsText);
 			}
 		});
 	}
