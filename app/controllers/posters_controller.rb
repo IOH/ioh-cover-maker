@@ -130,7 +130,7 @@ class PostersController < ApplicationController
 	  		@posters = Poster.where('updated_at >= ?', 7.days.ago).where(whereSearchTerm).order(updated_at: :desc)
 	  	end
 	  elsif params[:state] == "my-posters"
-	  	if params == ""
+	  	if params[:query] == ""
 				@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).order(updated_at: :desc).limit(params[:limit])
 	  	else
 	  		@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).where(whereSearchTerm).order(updated_at: :desc).limit(params[:limit])

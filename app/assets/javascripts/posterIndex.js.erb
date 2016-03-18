@@ -20,13 +20,14 @@ $(function(){
 			data: {"query": query, "limit": limit, state: state},
 			success: function(posters){
 
+				
+				var htmlText = "";
+				var secondTdText = "";
+				var jsText = "";
+				jsText += "<script type='text/javascript'> ";
+
 				if (!jQuery.isEmptyObject(posters))
 				{
-					var htmlText = "";
-					var secondTdText = "";
-					var jsText = "";
-					jsText += "<script type='text/javascript'> ";
-
 					for (var i = 0; i < posters.length; i ++){
 						secondTdText = ""; 
 						if(posters[i]['info_one_red']) 
@@ -76,14 +77,13 @@ $(function(){
 						jsText += "$(this).children('.firstTd_Btn').css('opacity', '0'); });";
 
 					}
-
-					
-					jsText += "</script>";
-
-
-					$('.' + state).html(htmlText);
-					$('body').append(jsText);
 				}
+					
+				jsText += "</script>";
+
+				$('.' + state).html(htmlText);
+				$('body').append(jsText);
+				
 			}
 		});
 	}
