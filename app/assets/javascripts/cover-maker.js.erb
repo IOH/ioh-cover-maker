@@ -170,15 +170,12 @@ $(function(){
   });
 
   //change if default is false
-  if($('#selfie-toggle').prop('checked') == false) 
-      $('#selfie-all').hide();
+  $('#selfie-options-1').click(function(){
+      $('#selfie-all').show();  
+  });
 
-  //selfie
-  $('#selfie-toggle').change(function() {
-    if($(this).prop('checked') == false) 
+  $('#selfie-options-2').click(function(){
       $('#selfie-all').hide();
-    else 
-      $('#selfie-all').show();
   });
 
   //change to the default
@@ -630,9 +627,13 @@ $(function(){
     $('#save-text').replaceWith("<span id='save-text'><img width='20px' src='<%= asset_path('processing.gif') %>'>儲存中...</span>");
   }
 
-  $('#arrowsPng').click(function(){
-    console.log("GG");
-    //$(this).css("background-image", "url('arrows_hover.png')");
+  $('#save-btn').click(function(){
+    changeSaveText();
+
+    setTimeout(function(){$('#save-text').replaceWith("<span id='save-text'>所有變更已儲存</span>");}, 1500);
+    
+  
   });
+  
 
 });

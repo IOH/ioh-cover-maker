@@ -16,6 +16,11 @@ div.row {
     margin-right: 0;
 }
 
+div.col-xs-2 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 nav {
     margin-top: 30px;
 }
@@ -196,10 +201,6 @@ a:hover{
 	top: 900px;
 	padding: 10px;
 	margin-bottom: 20px;
-}
-
-#download {
-	margin: 0 auto;
 }
 
 /*  poster-other-area  */
@@ -581,4 +582,17 @@ a.firstTd_Btn {
 a.firstTd_Btn:hover {
     color: white;
     background-color: red;
+}
+
+label.btn-primary {
+    width: 80px;
+    min-width: 80px;
+    background-color: white;
+    border: 1px solid black;
+    color: gray;
+}
+
+.btn-group-title {
+    margin: 0;
+    margin-top: 20px;
 }

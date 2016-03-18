@@ -167,6 +167,8 @@ class PostersController < ApplicationController
 
   	data = Base64.decode64(dataUrl.gsub(/[^,]+,/, ""))
 
+    puts posterId
+
   	File.open("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg", 'wb') do |file|
   		file.write(data)
   	end
