@@ -48,6 +48,30 @@
 	<div class="posters">
   </div>
 
+<div class="container" id="lowestContainer">
+
+	<% if current_user %>		
+		<div class="row">
+				<%= link_to 'Create New Poster', new_poster_path, class: 'btn btn-default' %>
+			
+				<a class="btn btn-default" id="my-posters">My Posters</a>
+			
+				<%= form_tag search_path, id: 'search-form', remote: true do %>
+					<%= text_field_tag 'query', nil, placeholder: 'Search...', id: 'search-text_field', autocomplete: 'off', class: 'form-control'%>
+							</form>
+					</div>
+				<% end %>
+
+	<div class="poster-area">
+		<p class="postersCatagoryText"><b>Latest Posters｜最新海報</b></p>
+
+		<div class="latest"></div>
+
+		<p class="postersCatagoryText"><b>All Posters｜全部海報</b></p>
+
+		<div class="posters"></div>
+	</div>
+
 	<% end %>
 </div>
 

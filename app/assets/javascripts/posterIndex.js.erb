@@ -6,42 +6,83 @@
 
 $(function(){
 
-	var limit = 10;
+	var limit = 10,
+			state = "posters";
 
-	var search = function()
-	{
+	var search = function(state = "posters")
+	{ 
 
 		var query = $('#search-text_field').val();
 
 		$.ajax({
 			type: "POST",
 			url : "/search",
-			data: {"query": query, "limit": limit},
+			data: {"query": query, "limit": limit, state: state},
 			success: function(posters){
 				var htmlText = "";
+				var secondTdText = "";
 
 				for (var i = 0; i < posters.length; i ++){
+					secondTdText = ""; 
+					if(posters[i]['info_one_red']) 
+						secondTdText = posters[i]['info_one'];
+					else if(posters[i]['info_two_red']) 
+						secondTdText = posters[i]['info_two'];
+					else if(posters[i]['info_three_red']) 
+						secondTdText = posters[i]['info_three'];
 
 					if (posters[i]['name'] == null)
 						posters[i]['name'] = "";
 
-					htmlText += "<h2><a href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a></h2>";
-					htmlText += "<a href='/posters/" + posters[i]['id'] + "/edit'>Edit </a>";
-					htmlText += "<a rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
-					htmlText += "<hr>"
+					if(i % 2 !== 1)
+						htmlText += "<div class='row'>"
+
+					htmlText += "<div class='col-xs-6' style='padding-left: 0;'>";
+					htmlText += "<table style='margin-top: 10px; line-height: 1;'>";
+
+					htmlText += "<tr>";
+					htmlText += "<td rowspan='3' id='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='/posters/" + posters[i]['id'] + "/avatar.jpg'></a></td>";
+					htmlText += "<td><a id='firstTd' href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a></td>";
+					htmlText += "</tr>";
+
+					htmlText += "<tr style='height: 20px;'>";
+					htmlText += "<td><a id='secondTd' href='/posters/" + posters[i]['id'] + "/edit'>" + secondTdText + " </a></td>";
+					htmlText += "</tr>";
+
+					htmlText += "<tr>";
+					htmlText += "<td><a id='thirdTd' rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a></td>";
+					htmlText += "</tr>";
+
+					htmlText += "</table>";
+					htmlText += "</div>";
+
+					if(i % 2 == 1) {
+						htmlText += "<br />";
+						htmlText += "</div>";
+					}
+
 				}
 
-				$('.posters').html(htmlText);
+				$('.' + state).html(htmlText);
 			}
 		});
 	}
 
 	//init status
 	search();
+	search("latest");
 
 	//dynamic change when typing
 	$('#search-text_field').on('keyup', function(){
-		search();
+		if (state == "posters")
+	  {
+	  	search('posters'); 
+	  	search('latest');
+	  }
+  	else if (state == "my-posters")
+  	{
+  		search('my-posters');
+  	}
 	});
 
 	//detect scroll
@@ -51,12 +92,47 @@ $(function(){
 	  if (window.scrollY == $(document).height() - $(window).height())
 	  {
 	  	limit += 10;
-	  	setTimeout(search, 100);
-	  	
+
+	  	if (state == "posters")
+	  		setTimeout(function(){search('posters');}, 100);
+	  	else if (state == "my-posters")
+	  		setTimeout(function(){search('my-posters');}, 100);
 	  }
 	});
 
+	var myPosterBtnClicked = false;
 
+	$('#my-posters').click(function(){
+
+		myPosterBtnClicked = !myPosterBtnClicked;
+		limit = 10;
+
+		$(this).toggleClass("btn-clicked");
+
+		var htmlText = "";
+
+		if (myPosterBtnClicked)
+		{
+			htmlText += "<p class='postersCatagoryText'><b>My Posters｜我的海報</b></p>";
+			htmlText += "<div class='my-posters'></div>";
+			
+			$('.poster-area').html(htmlText);
+			search("my-posters");
+			state = "my-posters"
+		}
+		else
+		{
+			htmlText += "<p class='postersCatagoryText'><b>Latest Posters｜最新海報</b></p>";
+			htmlText += "<div class='latest'></div>";
+		  htmlText += "<p class='postersCatagoryText'><b>All Posters｜全部海報</b></p>";
+		  htmlText += "<div class='posters'></div>";
+
+		  $('.poster-area').html(htmlText);
+		  search();
+			search("latest");
+			state = "posters"
+		}
+	});
 
 
 });

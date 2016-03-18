@@ -11,6 +11,15 @@ h1 {
 	font-size: 60px;
 }
 
+div.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+nav {
+    margin-top: 30px;
+}
+
 .header-message {
 	width: 100%;
 	height: 300px;
@@ -149,8 +158,8 @@ h1 {
 
 #poster-button-detector {
 	position: absolute;
-  top: 30px;
-  left: 30px;
+    top: 30px;
+    left: 30px;
 	display: block;
 	width: 158px;
 	height: 34px;
@@ -174,7 +183,7 @@ h1 {
 /*  edit-area  */
 
 #poster-form {
-  position: absolute;
+    position: absolute;
 	border: #000000 2px solid;
 	top: 900px;
 	padding: 10px;
@@ -373,8 +382,8 @@ input[type="range"].cropit-image-zoom-input {
 }
 
 .cropit-image-background {
-		margin-left: auto;
-		margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
     opacity: .2;
     cursor: auto;
 }
@@ -401,4 +410,135 @@ input {
 
 #experience-1 {
 	color: red;
+}
+
+nav.navbar.navbar-default {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+}
+
+div.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#lowestContainer {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+ul.nav.navbar-nav.navbar-right {
+    padding-top: 100px;
+}
+
+a.btn.btn-default {
+    float: left;
+    height: 30px;
+    width: 150px;
+    color: red;
+    border: 1px solid red;
+    border-radius: 0px;
+    margin-right: 10px;
+}
+
+a.btn.btn-clicked {
+	color: white;
+  font-weight: bold;
+  background-color: red;
+}
+
+a.btn.btn-default:hover {
+    color: white;
+    font-weight: bold;
+    background-color: red;
+}
+
+form#search-form {
+    float: left;
+    height: 30px;
+    width: 270px;
+}
+
+input#search-text_field.form-control {
+    height: 30px;
+    width: 270px;
+    border: 1px solid red;
+    border-radius: 0px;
+    color: red;
+}
+
+input#search-text_field.form-control::-webkit-input-placeholder {
+    color: red !important;
+    font-style: italic;
+}
+ 
+input#search-text_field.form-control:-moz-placeholder { /* Firefox 18- */
+    color: red !important;  
+    font-style: italic;
+}
+ 
+input#search-text_field.form-control::-moz-placeholder {  /* Firefox 19+ */
+    color: red !important;  
+    font-style: italic;
+}
+ 
+input#search-text_field.form-control:-ms-input-placeholder {  
+    color: red !important; 
+    font-style: italic; 
+}
+
+.postersCatagoryText {
+    margin-top: 40px;
+}
+
+#avatarTd {
+    height: 60px;
+    width: 60px;
+}
+
+#firstTd {
+    color: black;
+    font-size: 22pt;
+    font-weight: bold;
+}
+
+#secondTd {
+    color: black;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+#thirdTd {
+    color: gray;
+    font-size: 10pt;
+}
+
+#arrowsPng {
+    float: right;
+    width: 15px;
+    height: 17px;
+    background-image: url('arrows.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    transition-property: background-image;
+    transition-duration: 0.3s;
+    transition-timing-function: linear;
+}
+
+#arrowsPng:hover {
+    background-image: url('arrows_hover.png');
+}
+
+li.dropdown.open > a.dropdown-toggle > p#arrowsPng {
+    background-image: url('arrows_hover.png');
+}
+
+a.dropdown-toggle {
+    background-color: white !important;
 }

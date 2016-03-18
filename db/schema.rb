@@ -11,29 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20160317064648) do
 
   create_table "posters", force: :cascade do |t|
-    t.integer  "user_id",                     limit: 4
+    t.integer  "user_id",        limit: 4
     t.boolean  "use_avatar"
-    t.string   "name",                        limit: 255
-    t.string   "description",                 limit: 255
-    t.string   "info_one",                    limit: 255
+    t.string   "name",           limit: 255
+    t.string   "description",    limit: 255
+    t.string   "info_one",       limit: 255
     t.boolean  "info_one_red"
-    t.string   "info_two",                    limit: 255
+    t.string   "info_two",       limit: 255
     t.boolean  "info_two_red"
-    t.string   "info_three",                  limit: 255
+    t.string   "info_three",     limit: 255
     t.boolean  "info_three_red"
-    t.string   "location",                    limit: 255
+    t.string   "location",       limit: 255
     t.boolean  "location_white"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.text     "avatar_dataUrl",              limit: 4294967295
-    t.text     "background_dataUrl",          limit: 4294967295
-    t.text     "poster_dataUrl",              limit: 4294967295
-    t.text     "original_avatar_dataUrl",     limit: 4294967295
-    t.text     "original_background_dataUrl", limit: 4294967295
-    t.integer  "last_edit_id",                limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "last_edit_id",   limit: 4
+    t.string   "last_user",      limit: 255
   end
 
   add_index "posters", ["last_edit_id"], name: "index_posters_on_last_edit_id", using: :btree
