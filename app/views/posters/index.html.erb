@@ -52,12 +52,13 @@
 				<% end %>
 				
 				<a class="btn btn-default" id="my-posters">My Posters</a>
+
 			
-				<%= form_tag search_path, id: 'search-form', remote: true do %>
-					<%= text_field_tag 'query', nil, placeholder: 'Search...', id: 'search-text_field', autocomplete: 'off', class: 'form-control'%>
-							</form>
-					</div>
-				<% end %>
+			<%= form_tag search_path, id: 'search-form', remote: true do %>
+				<%= text_field_tag 'query', nil, placeholder: 'Search...', id: 'search-text_field', autocomplete: 'off', class: 'form-control'%>
+			</form>
+		</div>
+	<% end %>
 
 	<div class="poster-area">
 		<p class="postersCatagoryText"><b>Latest Posters｜最新海報</b></p>
