@@ -5,7 +5,7 @@ require 'base64'
 
 class PostersController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  # load_and_authorize_resource
   # before_action :checkLogIn
 
   def index
@@ -20,7 +20,7 @@ class PostersController < ApplicationController
   		Dir.mkdir(Rails.public_path + 'posters')
   	end
 
-  	# @poster = Poster.new()
+  	@poster = Poster.new()
     
   	@poster.use_avatar = true
   	@poster.location_white = true
@@ -42,7 +42,7 @@ class PostersController < ApplicationController
 
   def edit
 
-  	# @poster = Poster.find(params[:id])
+  	@poster = Poster.find(params[:id])
   	# @poster = Poster.find(params[:id])
 
   	avatar_dataUrl = getImg(@poster.id, "avatar")
@@ -102,7 +102,7 @@ class PostersController < ApplicationController
   end
 
   def destroy
-  	# @poster = Poster.find(params[:id])
+  	@poster = Poster.find(params[:id])
   	@poster.destroy
 
   	redirect_to :root
