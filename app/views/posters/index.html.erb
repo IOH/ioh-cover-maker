@@ -47,8 +47,10 @@
 
 	<% if current_user %>		
 		<div class="row">
-				<%= link_to 'Create New Poster', new_poster_path, class: 'btn btn-default' %>
-			
+				<% if can? :create, Poster %>
+				  <%= link_to 'Create New Poster', new_poster_path, class: 'btn btn-default' %>
+				<% end %>
+				
 				<a class="btn btn-default" id="my-posters">My Posters</a>
 			
 				<%= form_tag search_path, id: 'search-form', remote: true do %>
