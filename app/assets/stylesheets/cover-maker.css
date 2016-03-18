@@ -20,6 +20,14 @@ nav {
     margin-top: 30px;
 }
 
+a{
+    text-decoration: none !important;
+}
+
+a:hover{
+    text-decoration: none !important;
+}
+
 .header-message {
 	width: 100%;
 	height: 300px;
@@ -344,11 +352,11 @@ textarea:hover {
 
 
 #poster-cropit-image-preview {
-		background-color: #f8f8f8;
+	background-color: #f8f8f8;
     background-size: cover;
     border: 0px solid #ccc;
     border-radius: 3px;
-		margin: auto;
+	margin: auto;
     width: 480px;
     height: 215px;
     cursor: move;
@@ -437,6 +445,8 @@ ul.nav.navbar-nav.navbar-right {
 }
 
 a.btn.btn-default {
+    padding: 0;
+    line-height: 30px;
     float: left;
     height: 30px;
     width: 150px;
@@ -444,12 +454,15 @@ a.btn.btn-default {
     border: 1px solid red;
     border-radius: 0px;
     margin-right: 10px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
 }
 
 a.btn.btn-clicked {
 	color: white;
-  font-weight: bold;
-  background-color: red;
+    font-weight: bold;
+    background-color: red;
 }
 
 a.btn.btn-default:hover {
@@ -496,24 +509,32 @@ input#search-text_field.form-control:-ms-input-placeholder {
     margin-top: 40px;
 }
 
-#avatarTd {
+.avatarTd {
     height: 60px;
     width: 60px;
 }
 
-#firstTd {
+.firstTd {
     color: black;
     font-size: 22pt;
     font-weight: bold;
 }
 
-#secondTd {
+.firstTd:hover {
+    color: black;
+}
+
+.secondTd {
     color: black;
     font-size: 14pt;
     font-weight: bold;
 }
 
-#thirdTd {
+.secondTd:hover {
+    color: black;
+}
+
+.thirdTd {
     color: gray;
     font-size: 10pt;
 }
@@ -541,4 +562,23 @@ li.dropdown.open > a.dropdown-toggle > p#arrowsPng {
 
 a.dropdown-toggle {
     background-color: white !important;
+}
+
+a.firstTd_Btn {
+    opacity: 0;
+    float: right;
+    border: 1px solid red;
+    color: red;
+    border-radius: 0;
+    margin-right: 5px;
+    width: 50px;
+    text-align: center;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+}
+
+a.firstTd_Btn:hover {
+    color: white;
+    background-color: red;
 }
