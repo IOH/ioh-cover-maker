@@ -41,10 +41,9 @@ class PostersController < ApplicationController
   end
 
   def edit
-<<<<<<< HEAD
+
   	# @poster = Poster.find(params[:id])
-=======
-  	@poster = Poster.find(params[:id])
+  	# @poster = Poster.find(params[:id])
 
   	avatar_dataUrl = getImg(@poster.id, "avatar")
   	background_dataUrl = getImg(@poster.id, "background")
@@ -57,7 +56,6 @@ class PostersController < ApplicationController
   		original_avatar: original_avatar_dataUrl,
   		original_background: original_background_dataUrl 
   	}
->>>>>>> ff35799caa3d8a7f7ee166e9c51dde23af859c1c
   end
 
   def update
