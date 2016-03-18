@@ -4,8 +4,9 @@
 require 'base64'
 
 class PostersController < ApplicationController
-  
-  before_action :checkLogIn
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+  # before_action :checkLogIn
 
   def index
   end
@@ -19,7 +20,8 @@ class PostersController < ApplicationController
   		Dir.mkdir(Rails.public_path + 'posters')
   	end
 
-  	@poster = Poster.new()
+  	# @poster = Poster.new()
+    
   	@poster.use_avatar = true
   	@poster.location_white = true
   	@poster.info_one_red = true
@@ -39,7 +41,21 @@ class PostersController < ApplicationController
   end
 
   def edit
-  	@poster = Poster.find(params[:id])
+
+  	# @poster = Poster.find(params[:id])
+  	# @poster = Poster.find(params[:id])
+
+  	avatar_dataUrl = getImg(@poster.id, "avatar")
+  	background_dataUrl = getImg(@poster.id, "background")
+  	original_avatar_dataUrl = getImg(@poster.id, "original_avatar")
+  	original_background_dataUrl = getImg(@poster.id, "original_background")
+
+  	@posterData = {
+  		avatar: avatar_dataUrl,
+  		background: background_dataUrl,
+  		original_avatar: original_avatar_dataUrl,
+  		original_background: original_background_dataUrl 
+  	}
   end
 
   def update
@@ -69,27 +85,24 @@ class PostersController < ApplicationController
   	@poster.info_three_red = data['info_three_red']
   	@poster.location = data['location']
   	@poster.location_white = data['location_white']
-  	@poster.avatar_dataUrl = data['avatar_dataUrl']
-  	@poster.background_dataUrl = data['background_dataUrl']
-  	@poster.poster_dataUrl = data['poster_dataUrl']
-
-    @poster.original_avatar_dataUrl = data['original_avatar_dataUrl']
-    @poster.original_background_dataUrl = data['original_background_dataUrl']
 
     @poster.last_edit_id = current_user.id
     @poster.last_user = current_user.account_name
 
   	@poster.save
 
-  	#saveImg(@poster.id.to_s, @poster.avatar_dataUrl, "avatar")
-
+  	saveImg(@poster.id.to_s, data['avatar_dataUrl'], "avatar")
+  	saveImg(@poster.id.to_s, data['background_dataUrl'], "background")
+  	saveImg(@poster.id.to_s, data['poster_dataUrl'], "poster")
+  	saveImg(@poster.id.to_s, data['original_background_dataUrl'], "original_background")
+  	saveImg(@poster.id.to_s, data['original_avatar_dataUrl'], "original_avatar")
 
   	render :json => data
 
   end
 
   def destroy
-  	@poster = Poster.find(params[:id])
+  	# @poster = Poster.find(params[:id])
   	@poster.destroy
 
   	redirect_to :root
@@ -97,7 +110,7 @@ class PostersController < ApplicationController
 
   def search
 
-  	selectTerm = "id, name, avatar_dataUrl, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user";
+  	selectTerm = "id, name, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user";
   	whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
 		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
 		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"
@@ -140,20 +153,39 @@ class PostersController < ApplicationController
   	end
   end
 
-  def checkLogIn
-  	unless current_user
-  		redirect_to login_path
-  	end
-  end
+  # def checkLogIn
+  # 	unless current_user
+  # 		redirect_to login_path
+  # 	end
+  # end
 
   def saveImg(posterId, dataUrl, dataType)
 
-  	dataUrl.gsub(/[^,]+,/, "")
-  	data = Base64.decode64(dataUrl)
+  	if dataUrl == nil
+  		dataUrl = ""
+  	end
 
-  	File.open(Rails.public_path + '/posters/' + posterId + '/' + "#{dataType}.jpg", 'w+') do |file|
+  	data = Base64.decode64(dataUrl.gsub(/[^,]+,/, ""))
+
+  	File.open("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg", 'wb') do |file|
   		file.write(data)
   	end
+
+  end
+
+  def getImg(posterId, dataType)
+
+  	dataUrl = ""
+
+	  if File.exist?("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg")
+
+		  data = File.read("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg")
+
+	  	dataUrl = "data:image/jpeg;base64," + Base64.encode64(data)
+
+	  end
+
+  	return dataUrl
 
   end
 

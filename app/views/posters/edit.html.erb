@@ -36,10 +36,10 @@
 			<!-- background picture -->
 	    <div id="poster-content">
 	        <div id="poster-area">
-	        	<% unless @poster.background_dataUrl %>
+	        	<% unless @posterData[:background] %>
 	          	<%= image_tag("place-holder-1920x860.png", id: "poster-image", width: "960", height: "430") %>
 	          <% else %>
-	          	<img src="<%= @poster.background_dataUrl %>" id="poster-image" width="960" height="430">
+	          	<img src="<%= @posterData[:background] %>" id="poster-image" width="960" height="430">
 	          <% end %>
 	        </div>
 	        <%= image_tag("camera3.png", { id: "poster-button-icon", width: "30", height: "30", data: { toggle: "modal" }, data: { target: "#poster-modal" } }) %>
@@ -57,10 +57,10 @@
 			<!-- selfie -->
 	    <div id="selfie-all">
 		    <a id="selfie-area">
-		    	<% unless @poster.avatar_dataUrl %>
+		    	<% unless @posterData[:avatar] %>
 	        	<%= image_tag("place-holder-320x320.png", id: "selfie-image", width: "160", height: "160") %>
 	        <% else %>
-	          <img src="<%= @poster.avatar_dataUrl %>" id="selfie-image" width="160" height="160">
+	          <img src="<%= @posterData[:avatar] %>" id="selfie-image" width="160" height="160">
 	        <% end %>
 		    </a>
 		    <%= image_tag("camera3.png", { id: "selfie-button-icon", width: "30", height: "30", data: { toggle: "modal" }, data: { target: "#selfie-modal" } }) %>
@@ -193,8 +193,8 @@
         	<div class="collapse" id="selfie-error-message">
 				  	<div class="alert alert-danger"></div>
 					</div>
-          <div class="image-editor" origin-image="<%= @poster.original_avatar_dataUrl %>">
-            <input type="file" class="cropit-image-input" src=" <%= @poster.original_avatar_dataUrl %>" >
+          <div class="image-editor" origin-image="<%= @posterData[:original_avatar] %>">
+            <input type="file" class="cropit-image-input" src=" <%= @posterData[:original_avatar] %>" >
             <!-- .cropit-image-preview-container is needed for background image to work -->
             <div class="cropit-image-preview-container">
               <div class="cropit-image-preview" id="selfie-cropit-image-preview"></div>
@@ -238,8 +238,8 @@
 				  	<div class="alert alert-danger"></div>
 					</div>
 
-          <div class="image-editor" id="poster-image-editor" origin-image="<%= @poster.original_background_dataUrl %>">
-            <input type="file" class="cropit-image-input" src=" <%= @poster.original_background_dataUrl %>">
+          <div class="image-editor" id="poster-image-editor" origin-image="<%= @posterData[:original_background] %>">
+            <input type="file" class="cropit-image-input" src=" <%= @posterData[:original_background] %>">
             <!-- .cropit-image-preview-container is needed for background image to work -->
             <div class="cropit-image-preview-container">
               <div class="cropit-image-preview" id="poster-cropit-image-preview"></div>

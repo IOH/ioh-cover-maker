@@ -1,18 +1,24 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+  scope "/admin" do
+    resources :users
+  end
+  
+  resources :roles
   # @editor w2sw2sw2s
   # @date 2016/1/27
   # @info Add sessions, users, and posters routes
 
-  get "signup" => "users#signup", :as => "signup"
+  # get "signup" => "users#signup", :as => "signup"
 
-  resources :users, only: [:create]
+  # resources :users, only: [:create]
 
-  get "login" => "users#login", :as => "login"
+  # get "login" => "users#login", :as => "login"
 
-  post "create_login_session" => "users#create_login_session"
+  # post "create_login_session" => "users#create_login_session"
 
-  delete "logout" => "users#logout", :as => "logout"
+  # delete "logout" => "users#logout", :as => "logout"
 
   # @editor arfullight
   # @date   2016/2/15

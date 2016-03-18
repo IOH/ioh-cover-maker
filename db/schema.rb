@@ -11,44 +11,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316080000) do
+ActiveRecord::Schema.define(version: 20160317092427) do
 
   create_table "posters", force: :cascade do |t|
-    t.integer  "user_id",                     limit: 4
+    t.integer  "user_id",        limit: 4
     t.boolean  "use_avatar"
-    t.string   "name",                        limit: 255
-    t.string   "description",                 limit: 255
-    t.string   "info_one",                    limit: 255
+    t.string   "name",           limit: 255
+    t.string   "description",    limit: 255
+    t.string   "info_one",       limit: 255
     t.boolean  "info_one_red"
-    t.string   "info_two",                    limit: 255
+    t.string   "info_two",       limit: 255
     t.boolean  "info_two_red"
-    t.string   "info_three",                  limit: 255
+    t.string   "info_three",     limit: 255
     t.boolean  "info_three_red"
-    t.string   "location",                    limit: 255
+    t.string   "location",       limit: 255
     t.boolean  "location_white"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.text     "avatar_dataUrl",              limit: 4294967295
-    t.text     "background_dataUrl",          limit: 4294967295
-    t.text     "poster_dataUrl",              limit: 4294967295
-    t.text     "original_avatar_dataUrl",     limit: 4294967295
-    t.text     "original_background_dataUrl", limit: 4294967295
-    t.integer  "last_edit_id",                limit: 4
-    t.string   "last_user",                   limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "last_edit_id",   limit: 4
+    t.string   "last_user",      limit: 255
   end
 
   add_index "posters", ["last_edit_id"], name: "index_posters_on_last_edit_id", using: :btree
   add_index "posters", ["user_id"], name: "index_posters_on_user_id", using: :btree
 
-  create_table "users", force: :cascade do |t|
-    t.string   "account_name",    limit: 255
-    t.string   "password_digest", limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "user_type",       limit: 255
-    t.string   "auth_token",      limit: 255
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "account_name",           limit: 255
+    t.string   "password_digest",        limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "user_type",              limit: 255
+    t.string   "auth_token",             limit: 255
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.integer  "role_id",                limit: 4
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   add_foreign_key "posters", "users"
   add_foreign_key "posters", "users", column: "last_edit_id"
+  add_foreign_key "users", "roles"
 end
