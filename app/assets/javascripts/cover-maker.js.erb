@@ -154,7 +154,7 @@ $(function(){
   //auto save when change
   var typingTimer;                //timer identifier
   
-  $('#selfie-toggle, .location-radio, #experience-toggle-1, #experience-toggle-2, #experience-toggle-3').change(function(){
+  $('.location-radio, .location-radio, #experience-toggle-1, #experience-toggle-2, #experience-toggle-3, .selfie-radio').change(function(){
   	patchToPoster();
   });
 
@@ -169,13 +169,21 @@ $(function(){
     clearTimeout(typingTimer);
   });
 
-  //change if default is false
-  $('#selfie-options-1').click(function(){
+  //change to the default
+  if($('.selfie-radio:checked').val() == "true") {
       $('#selfie-all').show();  
-  });
+  }
+  else {
+    $('#selfie-all').hide();  
+  }
 
-  $('#selfie-options-2').click(function(){
-      $('#selfie-all').hide();
+  $('.selfie-radio').change(function() {
+    if($('.selfie-radio:checked').val() == "true") {
+      $('#selfie-all').show();  
+    }
+    else {
+      $('#selfie-all').hide();  
+    }
   });
 
   //change to the default
@@ -201,6 +209,7 @@ $(function(){
     $('#experience-1').css("color", "red");
   }
   else {
+    console.log("GG");
     $('#experience-1').css("color", "black");
   }
 
@@ -283,7 +292,7 @@ $(function(){
 		{
 			ctx.drawImage(posterBGI, 0, 0, 1920, 860);
 
-			if ($('#selfie-toggle').prop('checked'))
+			if ($('.location-radio').prop('checked'))
 				ctx.drawImage(posterSelfie, 1540, 466, 320, 320);
 
 			ctx.drawImage(posterIOH, 0, 860);
@@ -382,7 +391,7 @@ $(function(){
     }
 
 		//poster selfie
-    if ($('#selfie-toggle').prop('checked') == true) {
+    if ($('.location-radio').prop('checked') == true) {
       
       numOfImg = 3;
       var posterSelfie = new Image();
@@ -447,7 +456,7 @@ $(function(){
   	if (document.getElementById('poster-content-textarea').value == "")
   		errorArray.push("文字框尚未填寫");
 
-  	if ($('#selfie-image').attr('src') == "<%= image_path("place-holder-320x320.png") %>" && $('#selfie-toggle').prop('checked'))
+  	if ($('#selfie-image').attr('src') == "<%= image_path("place-holder-320x320.png") %>" && $('.location-radio').prop('checked'))
   		errorArray.push("大頭貼尚未上傳");
 
   	if ($('#poster-image').attr('src') == "<%= image_path("place-holder-1920x860.png") %>")
@@ -469,7 +478,7 @@ $(function(){
   {
   	var data = {};
 
-  	data['use_avatar']     = $('#selfie-toggle').prop('checked');
+  	data['use_avatar']     = $('.selfie-radio:checked').val();
 		data['name']           = $('#name-textarea').val();
 		data['description']    = $('#poster-content-textarea').val();
 		data['info_one']       = $('#experience-1').val();

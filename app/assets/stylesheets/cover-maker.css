@@ -513,11 +513,12 @@ input#search-text_field.form-control:-ms-input-placeholder {
 .avatarTd {
     height: 60px;
     width: 60px;
+    padding-right: 5px;
 }
 
 .firstTd {
     color: black;
-    font-size: 22pt;
+    font-size: 20pt;
     font-weight: bold;
 }
 
@@ -527,7 +528,7 @@ input#search-text_field.form-control:-ms-input-placeholder {
 
 .secondTd {
     color: black;
-    font-size: 14pt;
+    font-size: 12pt;
     font-weight: bold;
 }
 
@@ -537,7 +538,7 @@ input#search-text_field.form-control:-ms-input-placeholder {
 
 .thirdTd {
     color: gray;
-    font-size: 10pt;
+    font-size: 8pt;
 }
 
 #arrowsPng {
@@ -595,4 +596,10 @@ label.btn-primary {
 .btn-group-title {
     margin: 0;
     margin-top: 20px;
+}
+
+.postersTable {
+    margin-top: 10px; 
+    line-height: 1; 
+    width: 100%;
 }

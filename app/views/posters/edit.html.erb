@@ -18,24 +18,48 @@
 
 			<p class="btn-group-title">大頭貼</p>
 			<div class="btn-group" data-toggle="buttons">
-				<label class="btn btn-primary active" id="selfie-options-1">
-		    	<input type="radio" name="options"  autocomplete="off" checked>使用
-		  	</label>
-		  	<label class="btn btn-primary" id="selfie-options-2">
-		    	<input type="radio" name="options"  autocomplete="off">不使用
-		  	</label>
+				<label class="btn btn-primary
+				<% if @poster.use_avatar %>
+			    	<%= "active" %>
+			    <% end %>
+				">
+			    	<input type="radio" name="options" class="selfie-radio" value ="true"  
+			    		<% if @poster.use_avatar %>
+			    			<%= "checked" %>
+			    		<% end %>
+			    	>使用
+			  	</label>
+			  	<label class="btn btn-primary
+			  	<% unless @poster.use_avatar %>
+			    	<%= "active" %>
+			    <% end %>
+			  	">
+			    	<input type="radio" name="options" class="selfie-radio" value ="false" 
+			    		<% unless @poster.use_avatar %>
+			    			<%= "checked" %>
+			    		<% end %>
+			    	>不使用
+			  	</label>
 			</div>
 
 			<p class="btn-group-title">地點文字顏色</p>
 			<div class="btn-group" data-toggle="buttons">
-			  	<label class="btn btn-primary active">
+			  	<label class="btn btn-primary 
+			  	<% if @poster.location_white %>
+					<%= "active" %>
+				<% end %>
+			  	">
 					<input type="radio" name="location-color" class="location-radio" value="白色" 
 						<% if @poster.location_white %>
 							<%= "checked" %>
 						<% end %>
 					> 白色
 				</label >
-				<label class="btn btn-primary">
+				<label class="btn btn-primary
+				<% unless @poster.location_white%>
+					<%= "active" %>
+				<% end %>
+				">
 					<input type="radio" name="location-color" class="location-radio" value="黑色"
 						<% unless @poster.location_white %>
 							<%= "checked" %>
@@ -45,22 +69,34 @@
 			</div>
 
 			<p class="btn-group-title">分享的學/經歷（可複選）</p>
-			<div class="btn-group" data-toggle="buttons">
-			  	<label class="btn btn-primary">
-					<input id="experience-toggle-1" type="checkbox" 
-						<% if @poster.info_one_red %>
-							<%= "checked" %>
-						<% end %>
+			<div class="btn-group experience-checkbox" data-toggle="buttons">
+			  	<label class="btn btn-primary 
+			  	<% if @poster.info_one_red %>
+			  		<%= "active" %>
+			  	<% end %>"
+			  	>
+					<input id="experience-toggle-1" type="checkbox"
+					<% if @poster.info_one_red %>
+						<%= "checked" %>
+					<% end %>
 					>學經歷一
 				</label>
-				<label class="btn btn-primary">
+				<label class="btn btn-primary 
+				<% if @poster.info_two_red %>
+					<%= "active" %>
+				<% end %>
+				">
 					<input id="experience-toggle-2" type="checkbox"
-					   	<% if @poster.info_two_red %>
-							<%= "checked" %>
-						<% end %>
+					<% if @poster.info_two_red %>
+						<%= "checked" %>
+					<% end %>
 					>學經歷二
 				</label>
-				<label class="btn btn-primary">
+				<label class="btn btn-primary
+				<% if @poster.info_three_red %>
+					<%= "active" %>
+				<% end %>
+				">
 					<input id="experience-toggle-3" type="checkbox"
 					    <% if @poster.info_three_red %>
 							<%= "checked" %>
