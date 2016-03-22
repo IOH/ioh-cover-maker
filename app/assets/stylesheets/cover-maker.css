@@ -430,6 +430,21 @@ nav.navbar.navbar-default {
     border-radius: 0px;
 }
 
+/*
+  @date  2016 / 03 /22
+  @editor  w2sw2sw2s
+  @info  Add .content-no-bottom-line css style to make it all line up
+*/
+
+.content-no-bottom-line {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    /*border-bottom: 1px solid black;*/
+    border-radius: 0px;
+}
+
 div.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
