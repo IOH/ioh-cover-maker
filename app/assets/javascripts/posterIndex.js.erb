@@ -47,7 +47,16 @@ $(function(){
 						htmlText += "<table class='postersTable'>";
 
 						htmlText += "<tr>";
-						htmlText += "<td rowspan='3' class='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='/posters/" + posters[i]['id'] + "/avatar.jpg'></a></td>";
+
+						if (posters[i]['avatar_upload'])
+							htmlText += "<td rowspan='3' class='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='/posters/" + posters[i]['id'] + "/avatar.jpg'></a></td>";
+						else
+						{
+							htmlText += "<td rowspan='3' class='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'>";
+							htmlText += '<%= image_tag('place-holder-320x320.png', width: '60', height: '60') %>';
+							htmlText += "</a></td>";
+						}
+
 						htmlText += "<td>"
 						htmlText += "<a id='firstTd_" + posters[i]['id'] + "' class='firstTd' href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a>";
 						htmlText += "<a class='firstTd_Btn btn-xs ' rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='/posters/" + posters[i]['id'] + "'>Delete</a>";
