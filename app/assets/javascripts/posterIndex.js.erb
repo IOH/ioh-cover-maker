@@ -63,7 +63,7 @@ $(function(){
 						htmlText += "</td></tr>";
 
 						htmlText += "<tr style='height: 20px;'>";
-						htmlText += "<td><a class='secondTd' href='/posters/" + posters[i]['id'] + "/edit'>" + secondTdText + " </a></td>";
+						htmlText += "<td style='padding-top: 5px;'><a class='secondTd' href='/posters/" + posters[i]['id'] + "/edit'>" + secondTdText + " </a></td>";
 						htmlText += "</tr>";
 
 						htmlText += "<tr>";
@@ -84,11 +84,35 @@ $(function(){
 				$('.' + state).html(htmlText);
 
 				$('.postersTable').mouseover(function(){
-					$(this).find('.firstTd_Btn').css('opacity', '1'); 
+					$(this).find('.firstTd_Btn').css('opacity', '1');
 				});
 
 				$('.postersTable').mouseout(function(){
 					$(this).find('.firstTd_Btn').css('opacity', '0'); 
+				});
+
+				$('.firstTd').each(function(index){
+
+					$(this).on('mouseover', function(){
+						$('.secondTd:eq(' + index + ')').toggleClass('td-hovered');
+					});
+
+					$(this).on('mouseout', function(){
+						$('.secondTd:eq(' + index + ')').toggleClass('td-hovered');
+					});
+					
+				});
+
+				$('.secondTd').each(function(index){
+
+					$(this).on('mouseover', function(){
+						$('.firstTd:eq(' + index + ')').toggleClass('td-hovered');
+					});
+
+					$(this).on('mouseout', function(){
+						$('.firstTd:eq(' + index + ')').toggleClass('td-hovered');
+					});
+					
 				});
 
 				$('.poster-delete').off();

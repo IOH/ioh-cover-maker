@@ -537,27 +537,31 @@ input#search-text_field.form-control:-ms-input-placeholder {
 
 .firstTd {
     color: black;
-    font-size: 20pt;
-    font-weight: bold;
+    font-size: 19pt;
 }
 
 .firstTd:hover {
-    color: black;
+    color: red;
 }
 
 .secondTd {
     color: black;
-    font-size: 12pt;
-    font-weight: bold;
+    font-size: 11pt;
+    padding-top: 1px;
 }
 
 .secondTd:hover {
-    color: black;
+    color: red;
+}
+
+.td-hovered {
+	color: red;
 }
 
 .thirdTd {
     color: gray;
     font-size: 8pt;
+    font-style: italic;
 }
 
 #arrowsPng {
