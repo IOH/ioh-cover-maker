@@ -21,6 +21,9 @@ class PostersController < ApplicationController
   	end
 
   	@poster = Poster.new()
+
+  	@poster.name = "名字"
+  	@poster.info_one = "經驗一"
     
   	@poster.use_avatar = true
   	@poster.location_white = true
@@ -31,6 +34,8 @@ class PostersController < ApplicationController
   	@poster.user_id = current_user.id
   	@poster.last_edit_id = current_user.id
   	@poster.last_user = current_user.account_name
+
+  	@poster.avatar_upload = false
 
   	@poster.save
 
@@ -60,6 +65,10 @@ class PostersController < ApplicationController
 
   def update
 
+  	unless Dir.exist?(Rails.public_path + 'posters')
+  		Dir.mkdir(Rails.public_path + 'posters')
+  	end
+
   	data = params['data']
   	
   	data.each do |key, item|
@@ -74,6 +83,11 @@ class PostersController < ApplicationController
   	
   	
   	@poster = Poster.find(params[:id])
+
+  	unless Dir.exist?(Rails.public_path + 'posters/' + @poster.id.to_s)
+  		Dir.mkdir(Rails.public_path + 'posters/' + @poster.id.to_s)
+  	end
+
   	@poster.use_avatar = data['use_avatar']
   	@poster.name = data['name']
   	@poster.description = data['description'] 	
@@ -89,13 +103,19 @@ class PostersController < ApplicationController
     @poster.last_edit_id = current_user.id
     @poster.last_user = current_user.account_name
 
-  	@poster.save
-
   	saveImg(@poster.id.to_s, data['avatar_dataUrl'], "avatar")
   	saveImg(@poster.id.to_s, data['background_dataUrl'], "background")
   	saveImg(@poster.id.to_s, data['poster_dataUrl'], "poster")
   	saveImg(@poster.id.to_s, data['original_background_dataUrl'], "original_background")
   	saveImg(@poster.id.to_s, data['original_avatar_dataUrl'], "original_avatar")
+
+  	if File.exist?("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/' + "avatar.jpg")
+  		@poster.avatar_upload = true
+  	else
+  		@poster.avatar_upload = false
+  	end
+
+  	@poster.save
 
   	render :json => data
 
@@ -110,7 +130,7 @@ class PostersController < ApplicationController
 
   def search
 
-  	selectTerm = "id, name, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user";
+  	selectTerm = "id, name, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user, avatar_upload";
   	whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
 		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
 		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"
@@ -153,24 +173,16 @@ class PostersController < ApplicationController
   	end
   end
 
-  # def checkLogIn
-  # 	unless current_user
-  # 		redirect_to login_path
-  # 	end
-  # end
-
   def saveImg(posterId, dataUrl, dataType)
 
-  	if dataUrl == nil
-  		dataUrl = ""
-  	end
+  	if dataUrl
 
-  	data = Base64.decode64(dataUrl.gsub(/[^,]+,/, ""))
+  		data = Base64.decode64(dataUrl.gsub(/[^,]+,/, ""))    
 
-    puts posterId
+	  	File.open("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg", 'wb') do |file|
+	  		file.write(data)
+	  	end
 
-  	File.open("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg", 'wb') do |file|
-  		file.write(data)
   	end
 
   end

@@ -39,6 +39,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Bootstrap
 gem 'bootstrap-sass'
 
+# Better_errors
+gem 'better_errors', '~> 2.1', '>= 2.1.1'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
