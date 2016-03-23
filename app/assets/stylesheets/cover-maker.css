@@ -244,7 +244,7 @@ textarea:hover {
     font-weight: 700;
     line-height: 17px;
     resize: none;
-    font-family: "微軟正黑體";
+    font-family: "Microsoft YaHei";
 }
 
 #location-area {
@@ -422,8 +422,6 @@ input {
 }
 
 nav.navbar.navbar-default {
-    margin-left: 10%;
-    margin-right: 10%;
     background-color: rgba(0, 0, 0, 0);
     border: 0px;
     border-bottom: 1px solid black;
@@ -450,11 +448,13 @@ div.container-fluid {
     padding-right: 0px;
 }
 
+/*
 #lowestContainer {
     width: 100%;
     padding-left: 10%;
     padding-right: 10%;
 }
+*/
 
 ul.nav.navbar-nav.navbar-right {
     padding-top: 100px;
@@ -521,8 +521,12 @@ input#search-text_field.form-control:-ms-input-placeholder {
     font-style: italic; 
 }
 
-.postersCatagoryText {
-    margin-top: 40px;
+.posters-catagory {
+	margin-top: 40px;
+}
+
+.posters-catagory-text {
+    border-bottom: 1px solid #C0C0C0;
 }
 
 .avatarTd {
@@ -593,6 +597,8 @@ a.firstTd_Btn {
     transition-property: background-color;
     transition-duration: 0.2s;
     transition-timing-function: linear;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 a.firstTd_Btn:hover {
@@ -617,4 +623,60 @@ label.btn-primary {
     margin-top: 10px; 
     line-height: 1; 
     width: 100%;
+}
+
+.last-edit {
+	margin-left: 20px;
+}
+
+.modal-footer.modal-footer-rewrite {
+	border-top: 0px none;
+	padding-top: 7.5px;
+}
+
+.modal-body.modal-body-rewrite {
+	padding-bottom: 7.5px;
+}
+
+#delete-modal .modal-content {
+	font-size: 18pt;
+	text-align: center;
+	color: red;
+}
+
+.btn.btn-default.modal-btn {
+	line-height: 20px;
+	width: 120px;
+	height: 20px;
+}
+
+.btn.btn-default.modal-btn.modal-btn-left {
+	float: left;
+}
+
+.btn.btn-default.modal-btn.modal-btn-right {
+	float: right;
+}
+
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#user-name {
+	font-size: 18pt;
 }
