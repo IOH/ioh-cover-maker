@@ -130,7 +130,7 @@ class PostersController < ApplicationController
 
   def search
 
-  	selectTerm = "id, name, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user, avatar_upload";
+  	selectTerm = "id, name, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user, avatar_upload, updated_at";
   	whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
 		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
 		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"

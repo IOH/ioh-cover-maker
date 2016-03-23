@@ -20,7 +20,7 @@ $(function(){
 			data: {"query": query, "limit": limit, state: state},
 			success: function(posters){
 
-				
+				console.log(posters);				
 				var htmlText = "";
 				var secondTdText = "";
 				var jsText = "";
@@ -69,7 +69,8 @@ $(function(){
 						htmlText += "</tr>";
 
 						htmlText += "<tr>";
-						htmlText += "<td><span class='thirdTd'>Last editted by " + posters[i]['last_user'] + "</span></td>";
+						htmlText += "<td><span class='thirdTd'>Last editted: " + posters[i]['updated_at'] + "</span></td>"
+						htmlText += "<td><span class='thirdTd'>by " + posters[i]['last_user'] + "</span></td>";
 						htmlText += "</tr>";
 
 						htmlText += "</table>";
