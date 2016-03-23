@@ -175,14 +175,14 @@ class PostersController < ApplicationController
 
   def saveImg(posterId, dataUrl, dataType)
 
-  	if dataUrl
+  	if dataUrl && dataUrl != "" && dataUrl != " "
+  		if /data:/.match(dataUrl)
+	  		data = Base64.decode64(dataUrl.gsub(/[^,]+,/, ""))    
 
-  		data = Base64.decode64(dataUrl.gsub(/[^,]+,/, ""))    
-
-	  	File.open("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg", 'wb') do |file|
-	  		file.write(data)
-	  	end
-
+		  	File.open("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg", 'wb') do |file|
+		  		file.write(data)
+		  	end
+		  end
   	end
 
   end
