@@ -31,7 +31,7 @@
 		        <a href="#" class="dropdown-toggle" id="special-for-gravtar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0 0;"><span id="user-name"><%= current_user.account_name%></span><p id="arrowsPng"></p></a>
 		        <ul class="dropdown-menu">
 		          <li><a href="#">My Profile</a></li>
-		          <li><a href="#">Settings</a></li>
+		          <li><a href="/users/edit">Settings</a></li>
 		          <li role="separator" class="divider"></li>
 		         	<li> <%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
 		        </ul>
