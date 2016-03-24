@@ -3,20 +3,21 @@
 
 	<% if current_user %>		
 		<div class="row">
-				<% if can? :create, Poster %>
+			<% if can? :create, Poster %>
 				  <%= link_to 'Create New Poster', new_poster_path, class: 'btn btn-default' %>
-				<% end %>
+				
 				
 				<a class="btn btn-default" id="my-posters">My Posters</a>
 
 			
-			<%= form_tag search_path, id: 'search-form', remote: true do %>
+			  <%= form_tag search_path, id: 'search-form', remote: true do %>
 				<%= text_field_tag 'query', nil, placeholder: 'Search...', id: 'search-text_field', autocomplete: 'off', class: 'form-control'%>
-			</form>
+			  <% end %>
+			<% end %>
 		</div>
-	<% end %>
 
 	<div class="poster-area">
+	  <% if can? :create, Poster %>
 		<p class="posters-catagory"><b class="posters-catagory-text">Latest Posters｜最新海報</b></p>
 
 		<div class="latest">
@@ -46,10 +47,13 @@
 			</div>
 
 		</div>
+	  <% end %>
 
-		<p class="posters-catagory"><b class="posters-catagory-text">All Posters｜全部海報</b></p>
+		<% if can? :create, Poster %>
+		  <p class="posters-catagory"><b class="posters-catagory-text">All Posters｜全部海報</b></p>
 
-		<div class="posters"></div>
+		  <div class="posters"></div>
+		<% end %>
 	</div>
 
 	<% end %>
