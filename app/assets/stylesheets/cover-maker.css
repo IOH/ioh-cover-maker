@@ -554,10 +554,6 @@ input#search-text_field.form-control:-ms-input-placeholder {
     color: red;
 }
 
-.td-hovered {
-	color: red;
-}
-
 .thirdTd {
     color: gray;
     font-size: 8pt;

@@ -94,23 +94,30 @@ $(function(){
 				$('.firstTd').each(function(index){
 
 					$(this).on('mouseover', function(){
-						$('.secondTd:eq(' + index + ')').toggleClass('td-hovered');
+						$('.secondTd:eq(' + index + ')').css('color', 'red');
+						$(this).css('color', 'red');
 					});
 
 					$(this).on('mouseout', function(){
-						$('.secondTd:eq(' + index + ')').toggleClass('td-hovered');
+						$('.secondTd:eq(' + index + ')').css('color', 'black');
+						$(this).css('color', 'black');
 					});
 					
 				});
 
+
+
 				$('.secondTd').each(function(index){
 
 					$(this).on('mouseover', function(){
-						$('.firstTd:eq(' + index + ')').toggleClass('td-hovered');
+
+						$('.firstTd:eq(' + index + ')').css('color', 'red');
+						$(this).css('color', 'red');
 					});
 
 					$(this).on('mouseout', function(){
-						$('.firstTd:eq(' + index + ')').toggleClass('td-hovered');
+						$('.firstTd:eq(' + index + ')').css('color', 'black');
+						$(this).css('color', 'black');
 					});
 					
 				});
@@ -131,7 +138,7 @@ $(function(){
 	}
 
 	//init status
-	search();
+	search("posters");
 	search("latest");
 
 	//dynamic change when typing
@@ -160,30 +167,6 @@ $(function(){
 	  	else if (state == "my-posters")
 	  		setTimeout(function(){search('my-posters');}, 100);
 	  }
-	});
-
-	$('.firstTd').each(function(index){
-
-		$(this).on('mouseover', function(){
-			$('.secondTd:eq(' + index + ')').toggleClass('td-hovered');
-		});
-
-		$(this).on('mouseout', function(){
-			$('.secondTd:eq(' + index + ')').toggleClass('td-hovered');
-		});
-		
-	});
-
-	$('.secondTd').each(function(index){
-
-		$(this).on('mouseover', function(){
-			$('.firstTd:eq(' + index + ')').toggleClass('td-hovered');
-		});
-
-		$(this).on('mouseout', function(){
-			$('.firstTd:eq(' + index + ')').toggleClass('td-hovered');
-		});
-		
 	});
 
 	var myPosterBtnClicked = false;
@@ -215,7 +198,7 @@ $(function(){
 		  	htmlText += "<div class='posters'></div>";
 
 		  $('.poster-area').html(htmlText);
-		  search();
+		  search("posters");
 			search("latest");
 			state = "posters"
 		}
