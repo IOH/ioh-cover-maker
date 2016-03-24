@@ -16,7 +16,7 @@ $(function(){
 
 		$.ajax({
 			type: "POST",
-			url : "/search",
+			url : "posters/search",
 			data: {"query": query, "limit": limit, state: state},
 			success: function(posters){
 

@@ -474,7 +474,7 @@ $(function(){
   /**
    *  post data to /posters/index to create new poster
    */
-  function patchToPoster()
+  function patchToPoster(isDownload = false)
   {
   	var data = {};
 
@@ -507,6 +507,11 @@ $(function(){
 			success: function(resp){ 
         console.log(resp); 
         $('#save-text').replaceWith("<span id='save-text'>所有變更已儲存</span>");
+
+        if (isDownload)
+        {
+        	$('#download-start')[0].click();
+        }
       }
 		});
 
@@ -528,23 +533,9 @@ $(function(){
 	  	var appendCanvas = function(){
 	  		if (typeof(canvasFinish) != 'undefined'){
 
-	  			/*
-	  			var self = $('#download')[0];
-	  			posterFinishData = canvasFinish.toDataURL("image/jpeg");
-	  			self.href = posterFinishData;
-	  			self.download = fileName;
-	  			*/
-
-	  			var download = document.createElement("a");
   				posterFinishData = canvasFinish.toDataURL("image/jpeg");
-  				download.href = posterFinishData;
-  				download.download = fileName;
 
-  				download.click();
-
-	 				$('#download').attr('disabled', false);
-
-	 				patchToPoster();
+	 				patchToPoster(true);
 
 	  			stopRepeat();
 	  		}

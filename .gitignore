@@ -12,6 +12,7 @@
 !/log/.keep
 /tmp
 /public/posters/*
+/public/zips/*
 
 #files
 database.yml
