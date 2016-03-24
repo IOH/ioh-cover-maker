@@ -205,6 +205,10 @@ a:hover{
 
 /*  poster-other-area  */
 
+textarea {
+	white-space: nowrap;
+}
+
 textarea:hover {
 	background-color: #CCFF66;
 }
