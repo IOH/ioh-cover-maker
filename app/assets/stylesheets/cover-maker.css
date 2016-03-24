@@ -435,8 +435,8 @@ nav.navbar.navbar-default {
 */
 
 .content-no-bottom-line {
-    margin-left: 10%;
-    margin-right: 10%;
+    /*margin-left: 10%;*/
+    /*margin-right: 10%;*/
     background-color: rgba(0, 0, 0, 0);
     border: 0px;
     /*border-bottom: 1px solid black;*/
