@@ -28,12 +28,18 @@
 		  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		     <ul class="nav navbar-nav navbar-right">
 		     	<li class="dropdown">
-		     	
 		        <a href="#" class="dropdown-toggle" id="special-for-gravtar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0 0;"><span id="user-name"><%= current_user.account_name%></span><p id="arrowsPng"></p></a>
 		        <ul class="dropdown-menu">
-		          <li><a href="/users/edit">Settings</a></li>
-		          <li role="separator" class="divider"></li>
-		         	<li> <%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
+		          <% if can? :manage, :all %>
+		            <li><a href="/admin/users">All Users</a></li>
+		            <li><a href="/users/edit">Settings</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li> <%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
+		          <% else %>
+		            <li><a href="/users/edit">Settings</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li> <%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
+		          <% end %>    
 		        </ul>
 		      </li>	
 		    </ul>
