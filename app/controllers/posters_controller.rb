@@ -2,6 +2,7 @@
 # @date 2016/1/27
 # @info Add PostersController
 require 'base64'
+require 'fileutils'
 
 class PostersController < ApplicationController
   before_filter :authenticate_user!
@@ -123,7 +124,14 @@ class PostersController < ApplicationController
 
   def destroy
   	@poster = Poster.find(params[:id])
-  	@poster.destroy
+
+  	if File.exist?("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/')
+
+		  FileUtils.rm_r ("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/')
+
+	  end
+
+	  @poster.destroy
 
   	redirect_to :root
   end

@@ -162,9 +162,31 @@ $(function(){
 	  }
 	});
 
+	$('.firstTd').each(function(index){
+
+		$(this).on('mouseover', function(){
+			$('.secondTd:eq(' + index + ')').toggleClass('td-hovered');
+		});
+
+		$(this).on('mouseout', function(){
+			$('.secondTd:eq(' + index + ')').toggleClass('td-hovered');
+		});
+		
+	});
+
+	$('.secondTd').each(function(index){
+
+		$(this).on('mouseover', function(){
+			$('.firstTd:eq(' + index + ')').toggleClass('td-hovered');
+		});
+
+		$(this).on('mouseout', function(){
+			$('.firstTd:eq(' + index + ')').toggleClass('td-hovered');
+		});
+		
+	});
+
 	var myPosterBtnClicked = false;
-
-
 
 
 	$('#my-posters').click(function(){
