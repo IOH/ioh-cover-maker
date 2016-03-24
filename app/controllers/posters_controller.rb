@@ -4,8 +4,16 @@
 require 'base64'
 require 'fileutils'
 
+# if can? :create, Poster 
+
 class PostersController < ApplicationController
   before_filter :authenticate_user!
+
+  # @date  2016 / 03/ 24
+  # @author  w2sw2sw2s
+  # @info Add :checkUser this before_action to ignore regular user to view posters this controller
+
+  before_action :checkUser
   # load_and_authorize_resource
   # before_action :checkLogIn
 
@@ -211,4 +219,11 @@ class PostersController < ApplicationController
 
   end
 
+  def checkUser
+    unless can? :create, Poster
+      redirect_to tutorial_path
+    end
+  end
+
 end
+

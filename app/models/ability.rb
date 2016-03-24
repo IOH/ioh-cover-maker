@@ -15,6 +15,7 @@ class Ability
       end
     elsif user.regular?
       can :read, Poster
+      # redirect_to tutorial_path
     end
   end
 end
