@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   resources :posters
 
-  post "/search" => "posters#search", :as => "search"
+  post "posters/search" => "posters#search", :as => "search"
+
+  post "posters/download/:id" => "posters#download"
 
 end

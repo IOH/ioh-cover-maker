@@ -7,7 +7,7 @@
 		<div class="row">
 			<a class="btn btn-default" id="save-btn"> Save</a>
 			<a class="btn btn-default" id="download"> Download</a>
-			<a class='btn btn-default' rel='nofollow' data-confirm='確定要刪除嗎？' data-method='DELETE' href='./'>Delete</a>
+			<a class='btn btn-default' data-toggle="modal" data-target="#delete-modal">Delete</a>
 			<span id="save-text">所有變更已儲存</span>
 
 		</div>
@@ -278,6 +278,22 @@
 	  </div>
 	</div>
 </div>
+
+<!-- delete modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body modal-body-rewrite">確定要刪除此講者海報？</div>
+      <div class="modal-footer modal-footer-rewrite">
+        <a class="btn btn-default modal-btn modal-btn-left" rel="nofollow" data-method="DELETE" href="/posters/<%= @poster.id %>">YES</a>
+        <a class="btn btn-default modal-btn modal-btn-right" data-dismiss="modal">NO</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- This is use to download -->
+<a id="download-start" href="/posters/download/<%= @poster.id %>" data-method="POST" style="display: none;"></a>
 
 <!-- footer -->
 <div class="container-fluid footer"></div>

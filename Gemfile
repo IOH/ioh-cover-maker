@@ -42,6 +42,9 @@ gem 'bootstrap-sass'
 # Better_errors
 gem 'better_errors', '~> 2.1', '>= 2.1.1'
 
+# ruby gem
+gem 'rubyzip'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

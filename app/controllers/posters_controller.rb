@@ -139,6 +139,10 @@ class PostersController < ApplicationController
 
 	  end
 
+	  if File.exist?("#{Rails.root}/public" + "/zips/poster" + @poster.id.to_s + ".zip")
+	  	FileUtils.rm_r ("#{Rails.root}/public" + "/zips/poster" + @poster.id.to_s + ".zip")
+	  end
+
 	  @poster.destroy
 
   	redirect_to :root
@@ -175,6 +179,23 @@ class PostersController < ApplicationController
 
   	render :json => @posters
 
+  end
+
+  def download
+  	require 'zip_file_generator'
+
+  	unless Dir.exist?(Rails.public_path + 'zips')
+  		Dir.mkdir(Rails.public_path + 'zips')
+  	end
+
+  	tagetFile = "#{Rails.root}/public" + "/posters/" + params[:id].to_s + "/"
+  	tagetZip  = "#{Rails.root}/public" + "/zips/poster" + params[:id].to_s + ".zip"
+
+  	zip = ZipFileGenerator.new(tagetFile, tagetZip)
+
+		zip.write();
+
+  	send_file tagetZip
   end
 
   private

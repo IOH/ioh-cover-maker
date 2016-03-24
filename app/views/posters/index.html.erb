@@ -18,36 +18,11 @@
 
 	<div class="poster-area">
 	  <% if can? :create, Poster %>
-		<p class="posters-catagory"><b class="posters-catagory-text">Latest Posters｜最新海報</b></p>
+			<p class="posters-catagory"><b class="posters-catagory-text">Latest Posters｜最新海報</b></p>
 
-		<div class="latest">
-			
-			<div class="row">
-				<div class="col-xs-6" style="padding-left: 0;">
-					<table class="postersTable">
-						<tbody>
-							<tr>
-								<td rowspan="3" class="avatarTd"><a href="/posters/1/edit"><img width="60" height="60" src="/assets/place-holder-320x320-f49f6358aba930ea007e31a8ca327db1685075e49a214e2f63d72b8b1c89fbf2.png" alt="Place holder 320x320 f49f6358aba930ea007e31a8ca327db1685075e49a214e2f63d72b8b1c89fbf2"></a></td>
-								<td>
-									<a class="firstTd poster-name" href="/posters/1/edit">名字</a>
-									<a class="firstTd_Btn btn-xs " rel="nofollow" data-confirm="確定要刪除嗎？" data-method="DELETE" href="/posters/1" style="opacity: 0;">Delete</a>
-									<a class="firstTd_Btn btn-xs " href="/posters/1/edit" style="opacity: 0;">Edit</a>
-								</td>
-							</tr>
-							<tr style="height: 20px;">
-								<td><a class="secondTd" href="/posters/1/edit">經驗一 </a></td>
-							</tr>
-							<tr>
-								<td><span class="thirdTd">Last edited: 2016-03-23 05:15:09</span></td>
-								<td><span class="thirdTd">by root</span></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-		</div>
+			<div class="latest"></div>
 	  <% end %>
+
 
 		<% if can? :create, Poster %>
 		  <p class="posters-catagory"><b class="posters-catagory-text">All Posters｜全部海報</b></p>
