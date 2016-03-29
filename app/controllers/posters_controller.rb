@@ -31,8 +31,8 @@ class PostersController < ApplicationController
 
   	@poster = Poster.new()
 
-  	@poster.name = "名字"
-  	@poster.info_one = "經驗一"
+  	@poster.name = "莊智超 Chih Chao Chuang"
+  	@poster.info_one = "學經歷 1"
     
   	@poster.use_avatar = true
   	@poster.location_white = true

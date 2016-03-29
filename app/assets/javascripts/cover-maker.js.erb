@@ -555,7 +555,7 @@ $(function(){
   	else{
 
   		//validation
-  		var htmlText = "<ul>";
+  		var htmlText = "<div class='container'><ul class='validation'>";
 
   		for (var i = 0; i < errorArray.length; i ++){
   			htmlText += "<li>";
@@ -563,7 +563,7 @@ $(function(){
   			htmlText += "</li>";
   		}
 
-  		htmlText += "</ul>";
+  		htmlText += "</ul></div>";
   		$('#error-message').html(htmlText);
 
   		$('.error-modal').modal();

@@ -80,7 +80,7 @@ a:hover{
 
 #selfie-button-area {
     position: absolute;
-    top: 365px;
+    top: 238px;
     left: 775px;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
@@ -99,12 +99,13 @@ a:hover{
 #selfie-button-word {
     color: white;
     opacity: 0;
+    margin-left: 35px;
 }
 
 #selfie-button-icon {
     position: absolute;
-    top: 365px;
-    left: 885px;
+    top: 240px;
+    left: 780px;
     cursor: pointer;
     z-index: 99;
 }
@@ -138,8 +139,8 @@ a:hover{
 
 #poster-button-area {
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: 0px;
+    left: 0px;
     z-index:98;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
@@ -158,8 +159,8 @@ a:hover{
 
 #poster-button-icon {
     position: absolute;
-    top: 32px;
-    left: 140px;
+    top: 2px;
+    left: 10px;
     cursor: pointer;
     z-index: 99;
 }
@@ -168,12 +169,13 @@ a:hover{
 #poster-button-word {
     color: white;
     opacity: 0;
+    margin-left: 35px;
 }
 
 #poster-button-detector {
 	position: absolute;
-    top: 30px;
-    left: 30px;
+	top: 0px;
+  left: 0px;
 	display: block;
 	width: 158px;
 	height: 34px;
@@ -206,12 +208,33 @@ a:hover{
 
 /*  poster-other-area  */
 
+textarea:focus {
+	outline: none !important;
+  border:1px solid red;
+}
+
+#location-textarea:focus {
+	outline: none !important;
+  border:1px solid red;
+}
+
+#poster-content-textarea:focus {
+	outline: none !important;
+  border:1px solid red;
+}
+
+#name-textarea:focus {
+	outline: none !important;
+  border:1px solid red;
+}
+
+/*
 textarea {
 	white-space: nowrap;
 }
 
 textarea:hover {
-	background-color: #CCFF66;
+	background-color: #FFFFCC;
 }
 
 #location-textarea:hover {
@@ -225,6 +248,7 @@ textarea:hover {
 #name-textarea:hover {
 	background-color: #CCFF66;
 }
+*/
 
 #poster-content-area {
     position: absolute;
@@ -639,6 +663,11 @@ label.btn-primary {
 	padding-top: 7.5px;
 }
 
+.modal-footer-btn-center {
+	width: 150px;
+	margin: auto;
+}
+
 .modal-body.modal-body-rewrite {
 	padding-bottom: 7.5px;
 }
@@ -685,4 +714,26 @@ label.btn-primary {
 
 #user-name {
 	font-size: 18pt;
+}
+
+.btn.btn-default.modal-btn.modal-btn-middle {
+	display: block;
+	position: relative;
+	margin: auto;
+	width: 120px;
+}
+
+.validation {
+	margin-bottom: 0px;
+}
+
+.validation li {
+	font-size: 12pt;
+	color: red;
+}
+
+#save-text {
+	width: 150px;
+	height: 30px;
+	line-height: 30px;	
 }

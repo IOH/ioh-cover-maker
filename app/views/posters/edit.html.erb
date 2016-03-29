@@ -121,7 +121,7 @@
 			        </div>
 			        <%= image_tag("camera3.png", { id: "poster-button-icon", width: "30", height: "30", data: { toggle: "modal" }, data: { target: "#poster-modal" } }) %>
 			        <a id="poster-button-area">
-			            <div class="col-md-8" id="poster-button-word">更換背景圖</div>
+			            <div class="col-md-8" id="poster-button-word">學校背景照片</div>
 			        </a>
 			        <a id="poster-button-detector" data-toggle="modal" data-target="#poster-modal"></a>
 			    </div>
@@ -149,7 +149,7 @@
 
 			     <!-- description -->
 			    <div id="poster-content-area">
-			        <textarea id="poster-content-textarea" placeholder="（簡介）"><%= @poster.description %></textarea>
+			        <textarea id="poster-content-textarea" placeholder="講座簡介"><%= @poster.description %></textarea>
 			    </div>
 					
 					<!-- location -->
@@ -159,10 +159,10 @@
 					
 					<!-- experience -->
 			    <div id="name-experience-area">
-			        <textarea id="name-textarea" placeholder="（姓名）"><%= @poster.name %></textarea>
-			        <textarea class="experience-textarea" id="experience-1" placeholder="（經歷1）"><%= @poster.info_one %></textarea>
-			        <textarea class="experience-textarea" id="experience-2" placeholder="（經歷2）"><%= @poster.info_two %></textarea>
-			        <textarea class="experience-textarea" id="experience-3" placeholder="（經歷3）"><%= @poster.info_three %></textarea>
+			        <textarea id="name-textarea" placeholder="講者姓名（中文＋英文）"><%= @poster.name %></textarea>
+			        <textarea class="experience-textarea" id="experience-1" placeholder="學經歷 1"><%= @poster.info_one %></textarea>
+			        <textarea class="experience-textarea" id="experience-2" placeholder="學經歷 2"><%= @poster.info_two %></textarea>
+			        <textarea class="experience-textarea" id="experience-3" placeholder="學經歷 3"><%= @poster.info_three %></textarea>
 			    </div>
 			</div>
 		</div>
@@ -258,20 +258,14 @@
 	  <div class="modal-dialog modal-sm">
 	    <div class="modal-content">
 
-	      <!-- header -->
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">錯誤</h4>
-	      </div>
-
 	      <!-- body -->
-	      <div class="modal-body">
+	      <div class="modal-body modal-body-rewrite">
 	        <span id="error-message">Error Massage</span>
 	      </div>
 
 	      <!-- footer -->
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	      <div class="modal-footer modal-footer-rewrite modal-footer-btn-center">
+	        <a class="btn btn-default modal-btn modal-btn-middle" data-dismiss="modal">Close</a>
 	      </div>
 
 	    </div>
