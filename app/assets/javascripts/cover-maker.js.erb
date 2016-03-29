@@ -5,6 +5,8 @@
  */
 $(function(){
 
+	//disable scroll event
+	$(window).off('scroll');
 	
 	//----var definition----
 
@@ -209,7 +211,6 @@ $(function(){
     $('#experience-1').css("color", "red");
   }
   else {
-    console.log("GG");
     $('#experience-1').css("color", "black");
   }
 
