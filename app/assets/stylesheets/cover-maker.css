@@ -470,6 +470,15 @@ nav.navbar.navbar-default {
     border: 0px;
     /*border-bottom: 1px solid black;*/
     border-radius: 0px;
+    width: 250px;
+    /*display: inline;*/
+    position: relative;
+}
+
+.content-no-bottom-line-with-new-user-button {
+    position: absolute;
+    top: 190px;
+    left: 300px;
 }
 
 div.container-fluid {
