@@ -145,6 +145,9 @@ $(function(){
   });
 
   //----textarea----
+
+  $('#poster-content-textarea')[0].style.height = $('#poster-content-textarea')[0].scrollHeight + 'px';
+
   //textarea自動長高高
   document.getElementById('poster-content-textarea').addEventListener('keyup', function () {
     this.style.height = 0;
