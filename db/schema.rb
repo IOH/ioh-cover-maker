@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322075304) do
+ActiveRecord::Schema.define(version: 20160330052818) do
 
   create_table "posters", force: :cascade do |t|
     t.integer  "user_id",        limit: 4
     t.boolean  "use_avatar"
     t.string   "name",           limit: 255
-    t.string   "description",    limit: 255
+    t.text     "description",    limit: 65535
     t.string   "info_one",       limit: 255
     t.boolean  "info_one_red"
     t.string   "info_two",       limit: 255
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20160322075304) do
     t.boolean  "info_three_red"
     t.string   "location",       limit: 255
     t.boolean  "location_white"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "last_edit_id",   limit: 4
     t.string   "last_user",      limit: 255
     t.boolean  "avatar_upload"
