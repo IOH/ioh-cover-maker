@@ -25,12 +25,10 @@ class PostersController < ApplicationController
 
   def new 
 
-  	unless Dir.exist?(Rails.public_path + 'posters')
-  		Dir.mkdir(Rails.public_path + 'posters')
-  	end
-
   	@poster = Poster.new()
-
+    
+    # default settings
+    # these can be simplified be model default settings
   	@poster.name = "莊智超 Chih Chao Chuang"
   	@poster.info_one = "學經歷 1"
     
@@ -48,8 +46,6 @@ class PostersController < ApplicationController
 
   	@poster.save
 
-  	Dir.mkdir(Rails.public_path + 'posters/' + @poster.id.to_s)
-
   	redirect_to edit_poster_path(@poster)
 
   end
@@ -57,7 +53,6 @@ class PostersController < ApplicationController
   def edit
 
   	@poster = Poster.find(params[:id])
-  	# @poster = Poster.find(params[:id])
 
   	avatar_dataUrl = getImg(@poster.id, "avatar")
   	background_dataUrl = getImg(@poster.id, "background")
@@ -70,13 +65,10 @@ class PostersController < ApplicationController
   		original_avatar: original_avatar_dataUrl,
   		original_background: original_background_dataUrl 
   	}
+
   end
 
   def update
-
-  	unless Dir.exist?(Rails.public_path + 'posters')
-  		Dir.mkdir(Rails.public_path + 'posters')
-  	end
 
   	data = params['data']
   	
@@ -92,10 +84,6 @@ class PostersController < ApplicationController
   	
   	
   	@poster = Poster.find(params[:id])
-
-  	unless Dir.exist?(Rails.public_path + 'posters/' + @poster.id.to_s)
-  		Dir.mkdir(Rails.public_path + 'posters/' + @poster.id.to_s)
-  	end
 
   	@poster.use_avatar = data['use_avatar']
   	@poster.name = data['name']
@@ -200,6 +188,7 @@ class PostersController < ApplicationController
 
   private
 
+  # to boolean
   def to_b str
   	if str == "true"
   		return true

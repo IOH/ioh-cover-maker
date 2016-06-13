@@ -45,6 +45,9 @@ gem 'better_errors', '~> 2.1', '>= 2.1.1'
 # ruby gem
 gem 'rubyzip'
 
+# add carrierwave to update pictures
+gem 'carrierwave'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
