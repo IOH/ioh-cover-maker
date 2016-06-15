@@ -7,4 +7,5 @@ class Poster < ActiveRecord::Base
 	mount_uploader :background, ImageUploader
 	mount_uploader :original_avatar, ImageUploader
 	mount_uploader :original_background, ImageUploader
+	mount_uploader :poster, ImageUploader
 end

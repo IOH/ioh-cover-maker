@@ -110,6 +110,7 @@ class PostersController < ApplicationController
   	@poster.background = decode_dateUri_to_file(data['background_dataUrl'], "background.jpg")
   	@poster.original_avatar = decode_dateUri_to_file(data['original_avatar_dataUrl'], "original_avatar.jpg")
   	@poster.original_background = decode_dateUri_to_file(data['original_background_dataUrl'], "original_background.jpg")
+  	@poster.poster = decode_dateUri_to_file(data['poster_dataUrl'], "poster.jpg")
 
   	@poster.save!
 
@@ -165,7 +166,7 @@ class PostersController < ApplicationController
   		Dir.mkdir(Rails.public_path + 'zips')
   	end
 
-  	tagetFile = "#{Rails.root}/public" + "/posters/" + params[:id].to_s + "/"
+  	tagetFile = "#{Rails.root}/public/uploads/poster/" + params[:id].to_s + "/"
   	tagetZip  = "#{Rails.root}/public" + "/zips/poster" + params[:id].to_s + ".zip"
 
   	zip = ZipFileGenerator.new(tagetFile, tagetZip)

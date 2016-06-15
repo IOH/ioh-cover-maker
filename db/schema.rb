@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613134406) do
+ActiveRecord::Schema.define(version: 20160615062018) do
 
   create_table "posters", force: :cascade do |t|
     t.integer  "user_id",             limit: 4
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160613134406) do
     t.string   "background",          limit: 255
     t.string   "original_avatar",     limit: 255
     t.string   "original_background", limit: 255
+    t.string   "poster",              limit: 255
   end
 
   add_index "posters", ["last_edit_id"], name: "index_posters_on_last_edit_id", using: :btree
