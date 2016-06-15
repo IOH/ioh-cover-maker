@@ -18,6 +18,7 @@ class PostersController < ApplicationController
   # before_action :checkLogIn
 
   # manually add original_filename to stringIO
+  # CarrierWave
   class ImageIO < StringIO
   	attr_accessor :original_filename
 	end 
@@ -30,24 +31,11 @@ class PostersController < ApplicationController
 
   def new 
 
-  	@poster = Poster.new()
-    
-    # default settings
-    # these can be simplified be model default settings
-  	@poster.name = "莊智超 Chih Chao Chuang"
-  	@poster.info_one = "學經歷 1"
-    
-  	@poster.use_avatar = true
-  	@poster.location_white = true
-  	@poster.info_one_red = true
-  	@poster.info_two_red = false
-  	@poster.info_three_red = false
+  	@poster = Poster.new
 
   	@poster.user_id = current_user.id
   	@poster.last_edit_id = current_user.id
   	@poster.last_user = current_user.account_name
-
-  	@poster.avatar_upload = false
 
   	@poster.save
 
