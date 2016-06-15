@@ -17,6 +17,11 @@ class PostersController < ApplicationController
   # load_and_authorize_resource
   # before_action :checkLogIn
 
+  # manually add original_filename to stringIO
+  class ImageIO < StringIO
+  	attr_accessor :original_filename
+	end 
+
   def index
   end
 
@@ -53,17 +58,13 @@ class PostersController < ApplicationController
   def edit
 
   	@poster = Poster.find(params[:id])
-
-  	avatar_dataUrl = getImg(@poster.id, "avatar")
-  	background_dataUrl = getImg(@poster.id, "background")
-  	original_avatar_dataUrl = getImg(@poster.id, "original_avatar")
-  	original_background_dataUrl = getImg(@poster.id, "original_background")
+  	posterId = params[:id]
 
   	@posterData = {
-  		avatar: avatar_dataUrl,
-  		background: background_dataUrl,
-  		original_avatar: original_avatar_dataUrl,
-  		original_background: original_background_dataUrl 
+  		avatar: get_image_dataUri(posterId, "avatar"),
+  		background: get_image_dataUri(posterId, "background"),
+  		original_avatar: get_image_dataUri(posterId, "original_avatar"),
+  		original_background: get_image_dataUri(posterId, "original_background")
   	}
 
   end
@@ -100,19 +101,17 @@ class PostersController < ApplicationController
     @poster.last_edit_id = current_user.id
     @poster.last_user = current_user.account_name
 
-  	saveImg(@poster.id.to_s, data['avatar_dataUrl'], "avatar")
-  	saveImg(@poster.id.to_s, data['background_dataUrl'], "background")
-  	saveImg(@poster.id.to_s, data['poster_dataUrl'], "poster")
-  	saveImg(@poster.id.to_s, data['original_background_dataUrl'], "original_background")
-  	saveImg(@poster.id.to_s, data['original_avatar_dataUrl'], "original_avatar")
-
-  	if File.exist?("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/' + "avatar.jpg")
+    # image upload
+    avatarIO = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar.jpg")
+    if avatarIO
+  		@poster.avatar = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar.jpg")
   		@poster.avatar_upload = true
-  	else
-  		@poster.avatar_upload = false
   	end
+  	@poster.background = decode_dateUri_to_file(data['background_dataUrl'], "background.jpg")
+  	@poster.original_avatar = decode_dateUri_to_file(data['original_avatar_dataUrl'], "original_avatar.jpg")
+  	@poster.original_background = decode_dateUri_to_file(data['original_background_dataUrl'], "original_background.jpg")
 
-  	@poster.save
+  	@poster.save!
 
   	render :json => data
 
@@ -120,16 +119,6 @@ class PostersController < ApplicationController
 
   def destroy
   	@poster = Poster.find(params[:id])
-
-  	if File.exist?("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/')
-
-		  FileUtils.rm_r ("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/')
-
-	  end
-
-	  if File.exist?("#{Rails.root}/public" + "/zips/poster" + @poster.id.to_s + ".zip")
-	  	FileUtils.rm_r ("#{Rails.root}/public" + "/zips/poster" + @poster.id.to_s + ".zip")
-	  end
 
 	  @poster.destroy
 
@@ -199,34 +188,36 @@ class PostersController < ApplicationController
   	end
   end
 
-  def saveImg(posterId, dataUrl, dataType)
+  def get_image_dataUri(posterId, dataType)
 
-  	if dataUrl && dataUrl != "" && dataUrl != " "
-  		if /data:/.match(dataUrl)
-	  		data = Base64.decode64(dataUrl.gsub(/[^,]+,/, ""))    
+  	dataUri = ""
+  	imgUrl  = "#{Rails.root}/public/uploads/poster/" + posterId.to_s + '/' + "#{dataType}.jpg"
 
-		  	File.open("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg", 'wb') do |file|
-		  		file.write(data)
-		  	end
-		  end
-  	end
+	  if File.exist?(imgUrl)
 
-  end
+		  data = File.read(imgUrl)
 
-  def getImg(posterId, dataType)
-
-  	dataUrl = ""
-
-	  if File.exist?("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg")
-
-		  data = File.read("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg")
-
-	  	dataUrl = "data:image/jpeg;base64," + Base64.encode64(data)
+	  	dataUri = "data:image/jpeg;base64," + Base64.encode64(data)
 
 	  end
 
-  	return dataUrl
+  	return dataUri
 
+  end
+
+  # @param { string } dataUri
+  # @param { string } fileName
+  # @return { object } ImgaeIO
+  def decode_dateUri_to_file(dataUri, fileName)
+  	if /data:/.match(dataUri)
+  		fileString = Base64.decode64(dataUri.gsub(/[^,]+,/, ""))
+  		io = ImageIO.new fileString
+  		io.original_filename = fileName
+
+  		return io
+  	else
+  		return nil
+  	end
   end
 
   def checkUser

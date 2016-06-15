@@ -11,8 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
-/public/posters/*
-/public/zips/*
 
 #files
 database.yml
@@ -26,3 +24,9 @@ database.yml
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# byebug
+.byebug_history
+
+# image upload
+public/uploads/*

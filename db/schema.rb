@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160613134406) do
     t.integer  "last_edit_id",        limit: 4
     t.string   "last_user",           limit: 255
     t.boolean  "avatar_upload"
-    t.string   "avator",              limit: 255
+    t.string   "avatar",              limit: 255
     t.string   "background",          limit: 255
     t.string   "original_avatar",     limit: 255
     t.string   "original_background", limit: 255
