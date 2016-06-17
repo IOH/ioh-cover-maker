@@ -51,7 +51,7 @@ a:hover{
 	width: 960px;
 	height: 430px;
 	margin: 0 auto;
-             margin-left: -25px;
+    /*margin-left: -25px;*/
 }
 
 
@@ -645,8 +645,8 @@ a.firstTd_Btn:hover {
 }
 
 label.btn-primary {
-    width: 80px;
-    min-width: 80px;
+    width: 65px;
+    min-width: 65px;
     background-color: white;
     border: 1px solid black;
     color: gray;
@@ -746,3 +746,4 @@ label.btn-primary {
 	height: 30px;
 	line-height: 30px;	
 }
+

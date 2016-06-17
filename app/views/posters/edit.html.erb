@@ -18,7 +18,7 @@
 
 			<p class="btn-group-title">大頭貼</p>
 			<div class="btn-group" data-toggle="buttons">
-				<label class="btn btn-primary 
+				<label class="btn btn-primary
 				<% if @poster.use_avatar %>
 			    	<%= "active" %>
 			    <% end %>
@@ -29,7 +29,7 @@
 			    		<% end %>
 			    	>使用
 			  	</label>
-			  	<br>
+			  	
 			  	<label class="btn btn-primary 
 			  	<% unless @poster.use_avatar %>
 			    	<%= "active" %>
@@ -56,7 +56,7 @@
 						<% end %>
 					> 白色
 				</label >
-				<br>
+				
 				<label class="btn btn-primary 
 				<% unless @poster.location_white%>
 					<%= "active" %>
@@ -83,7 +83,7 @@
 					<% end %>
 					>學經歷一
 				</label>
-				<br>
+				
 				<label class="btn btn-primary 
 				<% if @poster.info_two_red %>
 					<%= "active" %>
@@ -95,7 +95,7 @@
 					<% end %>
 					>學經歷二
 				</label>
-				<br>
+				
 				<label class="btn btn-primary 
 				<% if @poster.info_three_red %>
 					<%= "active" %>

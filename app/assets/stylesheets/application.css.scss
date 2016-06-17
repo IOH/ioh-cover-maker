@@ -20,6 +20,13 @@
 /*basic reset*/
 * {margin: 0; padding: 0; box-sizing: border-box;}
 
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .avatar_icon {
   margin-right: 4px;
   width: 32px;
@@ -40,6 +47,8 @@
  #no-border-radius-6,
  #no-border-radius-7 {
    border-radius: 0px;
+   font-size: 11px;
+   padding: 6px 11px;
  }
 
 
