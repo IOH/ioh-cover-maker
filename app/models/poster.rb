@@ -11,6 +11,41 @@ class Poster < ActiveRecord::Base
 
 	before_save :default_setting
 
+	#scopes
+	def self.this_week
+		where('updated_at >= ?', 7.days.ago)
+	end
+
+	def self.a_week_more
+		where('updated_at < ?', 7.days.ago)
+	end
+
+	def self.like(query)
+  	whereSearchTerm  = "name LIKE ?"
+		whereSearchTerm += "OR description LIKE ?"
+		whereSearchTerm += "OR info_one LIKE ?"
+		whereSearchTerm += "OR info_two LIKE ?"
+		whereSearchTerm += "OR info_three LIKE ?"
+
+		where(whereSearchTerm, query, query, query, query, query)
+	end
+
+	def self.order_and_limit(limit)
+		order(updated_at: :desc).limit(limit)
+	end
+
+	def self.search(query, limit)
+		selectTerm = "id, name, info_one, info_one_red, 
+								  info_two, info_two_red, info_three, info_three_red, 
+								  updated_at, last_user, avatar_upload, updated_at"
+
+		select(selectTerm).like(query).order_and_limit(limit)
+	end
+
+	def self.belongs_to(user_id)
+		where('user_id = ?', user_id)
+	end
+
 	private
 	def default_setting
 		self.name ||= "莊智超 Chih Chao Chuang"

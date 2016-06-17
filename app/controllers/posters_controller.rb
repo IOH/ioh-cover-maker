@@ -116,12 +116,9 @@ class PostersController < ApplicationController
 
   def search
 
-  	selectTerm = "id, name, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user, avatar_upload, updated_at";
-  	whereSearchTerm  = "name LIKE ?"
-		whereSearchTerm += "OR description LIKE ?"
-		whereSearchTerm += "OR info_one LIKE ?"
-		whereSearchTerm += "OR info_two LIKE ?"
-		whereSearchTerm += "OR info_three LIKE ?"
+  	selectTerm = "id, name, info_one, info_one_red, 
+  								info_two, info_two_red, info_three, info_three_red, 
+  								updated_at, last_user, avatar_upload, updated_at"
 
 		unless params[:query].empty?
 			params[:query] = '%' + params[:query] + '%'
@@ -129,21 +126,21 @@ class PostersController < ApplicationController
 
   	if params[:state] == "posters"
 	  	if params[:query] == ""
-	  		@posters = Poster.select(selectTerm).where('updated_at < ?', 7.days.ago).order(updated_at: :desc).limit(params[:limit])
+	  		@posters = Poster.select(selectTerm).a_week_more.order_and_limit(params[:limit])
 	  	else
-	  		@posters = Poster.select(selectTerm).where('updated_at < ?', 7.days.ago).where(whereSearchTerm, params[:query], params[:query], params[:query], params[:query], params[:query]).order(updated_at: :desc).limit(params[:limit])
+	  		@posters = Poster.a_week_more.search(params[:query], params[:limit])
 	  	end
 	  elsif params[:state] == "latest"
 	  	if params[:query] == ""
-	  		@posters = Poster.where('updated_at >= ?', 7.days.ago).order(updated_at: :desc)
+	  		@posters = Poster.select(selectTerm).this_week.order(updated_at: :desc)
 	  	else
-	  		@posters = Poster.where('updated_at >= ?', 7.days.ago).where(whereSearchTerm, params[:query], params[:query], params[:query], params[:query], params[:query]).order(updated_at: :desc)
+	  		@posters = Poster.this_week.search(params[:query], 100)
 	  	end
 	  elsif params[:state] == "my-posters"
 	  	if params[:query] == ""
-				@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).order(updated_at: :desc).limit(params[:limit])
+				@posters = Poster.select(selectTerm).belongs_to(current_user.id).order_and_limit(params[:limit])
 	  	else
-	  		@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).where(whereSearchTerm, params[:query], params[:query], params[:query], params[:query], params[:query]).order(updated_at: :desc).limit(params[:limit])
+	  		@posters = Poster.belongs_to(current_user.id).search(params[:query], params[:limit])
 	  	end
 	  end
 
