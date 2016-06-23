@@ -90,15 +90,15 @@ class PostersController < ApplicationController
     @poster.last_user = current_user.account_name
 
     # image upload
-    avatarIO = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar.jpg")
+    avatarIO = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
     if avatarIO
-  		@poster.avatar = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar.jpg")
+  		@poster.avatar = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
   		@poster.avatar_upload = true
   	end
-  	@poster.background = decode_dateUri_to_file(data['background_dataUrl'], "background.jpg")
-  	@poster.original_avatar = decode_dateUri_to_file(data['original_avatar_dataUrl'], "original_avatar.jpg")
-  	@poster.original_background = decode_dateUri_to_file(data['original_background_dataUrl'], "original_background.jpg")
-  	@poster.poster = decode_dateUri_to_file(data['poster_dataUrl'], "poster.jpg")
+  	@poster.background = decode_dateUri_to_file(data['background_dataUrl'], "background")
+  	@poster.original_avatar = decode_dateUri_to_file(data['original_avatar_dataUrl'], "original_avatar")
+  	@poster.original_background = decode_dateUri_to_file(data['original_background_dataUrl'], "original_background")
+  	@poster.poster = decode_dateUri_to_file(data['poster_dataUrl'], "poster")
 
   	@poster.save!
 
@@ -202,7 +202,9 @@ class PostersController < ApplicationController
   	if /data:/.match(dataUri)
   		fileString = Base64.decode64(dataUri.gsub(/[^,]+,/, ""))
   		io = ImageIO.new fileString
-  		io.original_filename = fileName
+
+  		fileType = /\/([^\;]+)/.match(dataUri)[1]
+  		io.original_filename = "#{fileName}.#{fileType}"
 
   		return io
   	else
