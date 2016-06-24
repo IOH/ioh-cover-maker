@@ -46,7 +46,8 @@ gem 'better_errors', '~> 2.1', '>= 2.1.1'
 gem 'rubyzip'
 
 # add carrierwave to update pictures
-gem 'carrierwave'
+gem 'fog-aws'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -66,4 +67,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
