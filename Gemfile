@@ -46,7 +46,6 @@ gem 'better_errors', '~> 2.1', '>= 2.1.1'
 gem 'rubyzip'
 
 # add carrierwave to update pictures
-gem 'fog-aws'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
 # Use Unicorn as the app server
