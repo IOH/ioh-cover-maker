@@ -54,7 +54,7 @@ class PostersController < ApplicationController
   		original_avatar: get_image_dataUri(posterId, "original_avatar"),
   		original_background: get_image_dataUri(posterId, "original_background")
   	}
-
+  	
   end
 
   def update
@@ -181,7 +181,7 @@ class PostersController < ApplicationController
   def get_image_dataUri(posterId, dataType)
 
   	dataUri = ""
-  	imgUrl  = "#{Rails.root}/public/uploads/poster/" + posterId.to_s + '/' + "#{dataType}.jpg"
+  	imgUrl  = "#{Rails.root}/public/uploads/poster/" + posterId.to_s + '/' + "#{dataType}.jpeg"
 
 	  if File.exist?(imgUrl)
 

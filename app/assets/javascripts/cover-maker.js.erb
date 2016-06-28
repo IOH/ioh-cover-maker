@@ -78,7 +78,7 @@ $(function(){
     
     $('#selfie-modal').modal('hide');
 
-    patchToPoster();
+    patchToPoster(false);
 
   });
   
@@ -93,7 +93,7 @@ $(function(){
     
     $('#poster-modal').modal('hide');
 
-    patchToPoster();
+    patchToPoster(false);
 
   });
 
@@ -160,13 +160,13 @@ $(function(){
   var typingTimer;                //timer identifier
   
   $('.location-radio, .location-radio, #experience-toggle-1, #experience-toggle-2, #experience-toggle-3, .selfie-radio').change(function(){
-  	patchToPoster();
+  	patchToPoster(false);
   });
 
   $('#poster-content-textarea, #location-textarea, #name-textarea, .experience-textarea').on('keyup', function(){
   	changeSaveText();
     clearTimeout(typingTimer);
-    typingTimer = setTimeout(patchToPoster, 1500);
+    typingTimer = setTimeout(patchToPoster(false), 1500);
     //patchToPoster();
   });
 
@@ -478,7 +478,7 @@ $(function(){
   /**
    *  post data to /posters/index to create new poster
    */
-  function patchToPoster(isDownload = false)
+  function patchToPoster(isDownload)
   {
   	var data = {};
 
