@@ -90,16 +90,20 @@ class PostersController < ApplicationController
     @poster.last_user = current_user.account_name
 
     if data['update_picture']
-	    # image upload
-	    avatarIO = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
-	    if avatarIO
-	  		@poster.avatar = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
-	  		@poster.avatar_upload = true
+    	if data['changeItem'] == "selfie"
+		    # image upload
+		    avatarIO = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
+		    if avatarIO
+		  		@poster.avatar = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
+		  		@poster.avatar_upload = true
+		  	end
+		  	@poster.original_avatar = decode_dateUri_to_file(data['original_avatar_dataUrl'], "original_avatar")
+	  	elsif data['changeItem'] == "background"
+		  	@poster.background = decode_dateUri_to_file(data['background_dataUrl'], "background")
+		  	@poster.original_background = decode_dateUri_to_file(data['original_background_dataUrl'], "original_background")
+	  	elsif data['changeItem'] == "poster"
+	  		@poster.poster = decode_dateUri_to_file(data['poster_dataUrl'], "poster")
 	  	end
-	  	@poster.background = decode_dateUri_to_file(data['background_dataUrl'], "background")
-	  	@poster.original_avatar = decode_dateUri_to_file(data['original_avatar_dataUrl'], "original_avatar")
-	  	@poster.original_background = decode_dateUri_to_file(data['original_background_dataUrl'], "original_background")
-	  	@poster.poster = decode_dateUri_to_file(data['poster_dataUrl'], "poster")
 	  end
 
   	@poster.save!
