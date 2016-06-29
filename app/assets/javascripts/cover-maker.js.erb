@@ -93,7 +93,7 @@ $(function(){
 
 	$('#poster-modal').modal('hide');
 
-	patchToPosterPic(false, "poster");
+	patchToPosterPic(false, "background");
 
   });
 
@@ -535,47 +535,13 @@ $(function(){
 			data['avatar_dataUrl'] = selfieImageData;
 			data['original_avatar_dataUrl'] = originalSelfieImageDataUrl;
 		}
-		else if(changeItem == "poster") {
+		else if(changeItem == "background") {
 			data['background_dataUrl'] = posterImageData;
 			data['original_background_dataUrl'] = originalPosterImageDataUrl;
 		}
-
-		mydata = {};
-
-		mydata['data'] = data;
-
-		$.ajax({
-			type: "PATCH",
-			url : "/posters/" + posterId,
-			data: mydata,
-			success: function(resp){
-				console.log(mydata);
-				$('#save-text').replaceWith("<span id='save-text'>所有變更已儲存</span>");
-
-				if (isDownload)
-				{
-					$('#download-start')[0].click();
-				}
-		  	}
-		});
-  }
-
-  function patchToPosterDownload(isDownload)
-  {
-	  var data = {};
-	  data['update_picture'] = true;
-	  data['use_avatar']	 = $('.selfie-radio:checked').val();
-	  data['name']		   = $('#name-textarea').val();
-		data['description']	= $('#poster-content-textarea').val();
-		data['info_one']	   = $('#experience-1').val();
-		data['info_one_red']   = $('#experience-toggle-1').prop('checked');
-		data['info_two']	   = $('#experience-2').val();
-		data['info_two_red']   = $('#experience-toggle-2').prop('checked');
-		data['info_three']	 = $('#experience-3').val();
-		data['info_three_red'] = $('#experience-toggle-3').prop('checked');
-		data['location']	   = $('#location-textarea').val();
-		data['location_white'] = $('.location-radio:checked').val();
-		data['poster_dataUrl'] = posterFinishData;
+		else if(changeItem == "poster") {
+			data['poster_dataUrl'] = posterFinishData;
+		}
 
 		mydata = {};
 
@@ -614,7 +580,7 @@ $(function(){
 	  		if (typeof(canvasFinish) != 'undefined'){
 
   				posterFinishData = canvasFinish.toDataURL("image/jpeg");
-				patchToPosterDownload(true);
+				patchToPosterPic(true, "poster");
 				stopRepeat();
 	  		}
 	  		else
