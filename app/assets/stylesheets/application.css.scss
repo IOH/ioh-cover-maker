@@ -51,6 +51,23 @@
    padding: 6px 11px;
  }
 
+nav.navbar {
+    margin-bottom: 0;
+}
+
+#flash_notice {
+    margin-top: 20px;
+    visibility: hidden;
+}
+
+#flash_alert {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    background-color: rgb(255, 213, 213);
+    color: red;
+    animation: addHeight 2s;
+    overflow: hidden;
 /*
   @info Design Log in Page
   @author WeiChiaChang
@@ -87,7 +104,7 @@ a.forgot-your-pwd {
   background-color: #fff;
 }*/
 
-.form-control-email, 
+.form-control-email,
 .form-control-email:visited,
 .form-control-email:focus,
 .form-control-email:active,
@@ -109,6 +126,14 @@ input[type="checkbox"].check-box-remember-me {
 }
 
 /* Remove yelow background */
+
+@keyframes addHeight {
+  from {
+      max-height: 0;
+  }
+  to {
+      max-height: 100px;
+  }
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
@@ -143,8 +168,8 @@ input:-webkit-autofill {
   font-weight: 600;
 }
 
-.speech-bubble span:before { 
-  content:"\0263A"; 
+.speech-bubble span:before {
+  content:"\0263A";
   font-size: 20px;
   position: absolute;
   top: -2px;
