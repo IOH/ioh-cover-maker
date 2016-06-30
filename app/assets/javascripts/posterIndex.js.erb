@@ -11,9 +11,6 @@ $(function(){
 
 	var search = function(state)
 	{
-
-		console.log('test');
-
 		var query = $('#search-text_field').val();
 
 		$.ajax({
@@ -21,20 +18,18 @@ $(function(){
 			url : "posters/search",
 			data: {"query": query, "limit": limit, state: state},
 			success: function(posters){
-
-				console.log(posters);				
 				var htmlText = "";
 				var secondTdText = "";
 
 				if (!jQuery.isEmptyObject(posters))
 				{
 					for (var i = 0; i < posters.length; i ++){
-						secondTdText = ""; 
-						if(posters[i]['info_one_red']) 
+						secondTdText = "";
+						if(posters[i]['info_one_red'])
 							secondTdText = posters[i]['info_one'];
-						else if(posters[i]['info_two_red']) 
+						else if(posters[i]['info_two_red'])
 							secondTdText = posters[i]['info_two'];
-						else if(posters[i]['info_three_red']) 
+						else if(posters[i]['info_three_red'])
 							secondTdText = posters[i]['info_three'];
 
 						if (posters[i]['name'] == null)
@@ -49,7 +44,7 @@ $(function(){
 						htmlText += "<tr>";
 
 						if (posters[i]['avatar_upload'])
-							htmlText += "<td rowspan='3' class='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='/uploads/poster/" + posters[i]['id'] + "/avatar.jpg'></a></td>";
+							htmlText += "<td rowspan='3' class='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'><img height='60' width='60'  src='/uploads/poster/" + posters[i]['id'] + "/avatar.jpeg'></a></td>";
 						else
 						{
 							htmlText += "<td rowspan='3' class='avatarTd'><a href='/posters/" + posters[i]['id'] + "/edit'>";
@@ -61,7 +56,7 @@ $(function(){
 						htmlText += "<a class='firstTd' href='/posters/" + posters[i]['id'] + "/edit'>" + posters[i]['name'] + "</a>";
 						htmlText += "<a class='firstTd_Btn btn-xs poster-delete' data-toggle='modal' data-target='#delete-modal' target-poster='" + posters[i]['id'] + "'>Delete</a>";
 						htmlText += "<a class='firstTd_Btn btn-xs' href='/posters/" + posters[i]['id'] + "/edit'>Edit</a>";
-						
+
 						htmlText += "</td></tr>";
 
 						htmlText += "<tr style='height: 20px;'>";
@@ -90,7 +85,7 @@ $(function(){
 				});
 
 				$('.postersTable').mouseout(function(){
-					$(this).find('.firstTd_Btn').css('opacity', '0'); 
+					$(this).find('.firstTd_Btn').css('opacity', '0');
 				});
 
 				$('.firstTd').each(function(index){
@@ -104,10 +99,13 @@ $(function(){
 						$('.secondTd:eq(' + index + ')').css('color', 'black');
 						$(this).css('color', 'black');
 					});
-					
+
+					$(this).click(loading);
 				});
 
-
+				$('.firstTd_Btn').each(function(index){
+					$(this).click(loading);
+				});
 
 				$('.secondTd').each(function(index){
 
@@ -121,7 +119,8 @@ $(function(){
 						$('.firstTd:eq(' + index + ')').css('color', 'black');
 						$(this).css('color', 'black');
 					});
-					
+
+					$(this).click(loading);
 				});
 
 				$('.poster-delete').off();
@@ -132,9 +131,9 @@ $(function(){
 					$('.modal-btn-left').off();
 
 					$('.modal-btn-left').attr('href', '/posters/' + targetPosterId);
-						
+
 				});
-				
+
 			}
 		});
 	}
@@ -147,7 +146,7 @@ $(function(){
 	$('#search-text_field').on('keyup', function(){
 		if (state == "posters")
 	  {
-	  	search('posters'); 
+	  	search('posters');
 	  	search('latest');
 	  }
   	else if (state == "my-posters")
@@ -187,7 +186,7 @@ $(function(){
 		{
 			htmlText += "<p class='posters-catagory'><b class='posters-catagory-text'>My Posters｜我的海報</b></p>";
 			htmlText += "<div class='my-posters'></div>";
-			
+
 			$('.poster-area').html(htmlText);
 			search("my-posters");
 			state = "my-posters"
@@ -199,12 +198,24 @@ $(function(){
 		  	htmlText += "<p class='posters-catagory'><b class='posters-catagory-text'>All Posters｜全部海報</b></p>";
 		  	htmlText += "<div class='posters'></div>";
 
-		  $('.poster-area').html(htmlText);
-		  search("posters");
+		 	$('.poster-area').html(htmlText);
+		 	search("posters");
 			search("latest");
 			state = "posters"
 		}
 	});
-	
+
+	var loading = function() {
+        // add the overlay with loading image to the page
+        var over = '<div class="spinner">' +
+        		'<div class="rect1"></div>' +
+				'<div class="rect2"></div>' +
+				'<div class="rect3"></div>' +
+				'<div class="rect4"></div>' +
+				'<div class="rect5"></div>' +
+            '</div>';
+
+        $(over).appendTo('body');
+    };
 
 });

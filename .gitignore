@@ -33,3 +33,6 @@ Thumbs.db
 # image upload
 public/uploads/*
 public/zips/*
+
+# asset compile
+public/assets

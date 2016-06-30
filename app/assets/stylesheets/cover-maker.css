@@ -1,59 +1,48 @@
 html {
     height: 100%;
 }
-
 body {
-	background-color: #EEEEEE;
+    background-color: #EEEEEE;
     height: 100%;
 }
-
 h1 {
-	font-size: 60px;
+    font-size: 60px;
 }
-
 div.row {
     margin-left: 0;
     margin-right: 0;
 }
-
 div.col-xs-2 {
     padding-left: 0;
     padding-right: 0;
 }
-
 nav {
     margin-top: 30px;
 }
-
-a{
+a {
     text-decoration: none !important;
 }
-
-a:hover{
+a:hover {
     text-decoration: none !important;
 }
-
 .header-message {
-	width: 100%;
-	height: 300px;
-	padding: 60px 60px 0px 60px;
-	background-color: black;
-	color: red;
-	margin-bottom: 40px;
+    width: 100%;
+    height: 300px;
+    padding: 60px 60px 0px 60px;
+    background-color: black;
+    color: red;
+    margin-bottom: 40px;
 }
-
 .header-message li {
-	color: white;
+    color: white;
 }
-
 #preview {
-	position: relative;
-	width: 960px;
-	height: 430px;
-	margin: 0 auto;
+    position: relative;
+    width: 960px;
+    height: 430px;
+    margin: 0 auto;
     /*margin-left: -25px;*/
 }
-
 
 /*  selfie-area  */
 
@@ -62,22 +51,19 @@ a:hover{
     top: 233px;
     left: 770px;
     background-color: white;
-    text-align: center;	
+    text-align: center;
     text-decoration: none;
     display: inline-block;
-    border: #FFFFFF 5px solid; 
+    border: #FFFFFF 5px solid;
 }
-
 #selfie-area:hover {
     background-color: white;
     cursor: pointer;
 }
-
 #selfie {
     width: 160px;
     height: 160px;
 }
-
 #selfie-button-area {
     position: absolute;
     top: 238px;
@@ -87,21 +73,18 @@ a:hover{
     overflow: hidden;
     height: 34px;
     width: 160px;
-    text-align: center;	
+    text-align: center;
     line-height: 32px;
     text-decoration: none;
 }
-
 #selfie-button-area:hover {
     cursor: pointer;
 }
-
 #selfie-button-word {
     color: white;
     opacity: 0;
     margin-left: 35px;
 }
-
 #selfie-button-icon {
     position: absolute;
     top: 240px;
@@ -109,54 +92,48 @@ a:hover{
     cursor: pointer;
     z-index: 99;
 }
-
 #selfie-detector {
-	position: absolute;
-  top: 238px;
-  left: 775px;
-	display: block;
-	width: 160px;
-	height: 160px;
-	background-color: black;
-	opacity: 0;
-	z-index: 100;
-	text-decoration: none;
+    position: absolute;
+    top: 238px;
+    left: 775px;
+    display: block;
+    width: 160px;
+    height: 160px;
+    background-color: black;
+    opacity: 0;
+    z-index: 100;
+    text-decoration: none;
 }
-
 #selfie-detector:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 /*  poster-area  */
 
 #poster-content {
-	position: absolute;
+    position: absolute;
 }
-
 #poster-area {
     z-index: -1;
 }
-
 #poster-button-area {
     position: absolute;
     top: 0px;
     left: 0px;
-    z-index:98;
+    z-index: 98;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     overflow: hidden;
     height: 34px;
     width: 158px;
-    text-align: center;	
+    text-align: center;
     line-height: 32px;
     text-decoration: none;
     cursor: pointer;
 }
-
 #poster-button-area:hover {
     cursor: pointer;
 }
-
 #poster-button-icon {
     position: absolute;
     top: 2px;
@@ -164,68 +141,61 @@ a:hover{
     cursor: pointer;
     z-index: 99;
 }
-
-
 #poster-button-word {
     color: white;
     opacity: 0;
     margin-left: 35px;
 }
-
 #poster-button-detector {
-	position: absolute;
-	top: 0px;
-  left: 0px;
-	display: block;
-	width: 158px;
-	height: 34px;
-	background-color: black;
-	opacity: 0;
-	z-index: 100;
-	text-decoration: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+    width: 158px;
+    height: 34px;
+    background-color: black;
+    opacity: 0;
+    z-index: 100;
+    text-decoration: none;
 }
-
 #poster-button-detector:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 /*  banner  */
 
 #ioh-banner {
-	position: absolute;
-	top: 430px;
+    position: absolute;
+    top: 430px;
 }
 
 /*  edit-area  */
 
 #poster-form {
     position: absolute;
-	border: #000000 2px solid;
-	top: 900px;
-	padding: 10px;
-	margin-bottom: 20px;
+    border: #000000 2px solid;
+    top: 900px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 /*  poster-other-area  */
 
 textarea:focus {
-	outline: none !important;
-  border:1px solid red;
+    outline: none !important;
+    border: 1px solid red;
 }
-
 #location-textarea:focus {
-	outline: none !important;
-  border:1px solid red;
+    outline: none !important;
+    border: 1px solid red;
 }
-
 #poster-content-textarea:focus {
-	outline: none !important;
-  border:1px solid red;
+    outline: none !important;
+    border: 1px solid red;
 }
-
 #name-textarea:focus {
-	outline: none !important;
-  border:1px solid red;
+    outline: none !important;
+    border: 1px solid red;
 }
 
 /*
@@ -257,13 +227,12 @@ textarea:hover {
     width: 290px;
     height: 300px;
 }
-
 #poster-content-textarea {
     position: absolute;
     bottom: 0px;
     width: 290px;
     max-width: 290px;
-    max-height: 300px; 
+    max-height: 300px;
     border: none;
     background-color: rgba(255, 255, 255, 0.56);
     padding: 10px;
@@ -275,7 +244,6 @@ textarea:hover {
     resize: none;
     font-family: "Microsoft YaHei";
 }
-
 #location-area {
     position: absolute;
     bottom: 5px;
@@ -284,13 +252,12 @@ textarea:hover {
     width: 505px;
     height: 17px;
 }
-
 #location-textarea {
     position: absolute;
     bottom: 0px;
     width: 485px;
     max-width: 485px;
-    max-height: 17px; 
+    max-height: 17px;
     border: none;
     background-color: rgba(255, 255, 255, 0.05);
     box-sizing: border-box;
@@ -302,7 +269,6 @@ textarea:hover {
     color: white;
     font-family: "微軟正黑體";
 }
-
 #name-experience-area {
     position: absolute;
     bottom: -100px;
@@ -311,12 +277,11 @@ textarea:hover {
     width: 605px;
     height: 90px;
 }
-
 #name-textarea {
     position: absolute;
     width: 585px;
     max-width: 585px;
-    max-height: 18px; 
+    max-height: 18px;
     border: none;
     background-color: rgba(255, 255, 255, 0.05);
     overflow: hidden;
@@ -327,13 +292,12 @@ textarea:hover {
     color: black;
     font-family: "微軟正黑體";
 }
-
 .experience-textarea {
     position: relative;
     top: 20px;
     width: 585px;
     max-width: 585px;
-    max-height: 18px; 
+    max-height: 18px;
     border: none;
     background-color: rgba(255, 255, 255, 0.05);
     overflow: hidden;
@@ -350,106 +314,84 @@ textarea:hover {
 #add-icon {
     padding-left: 5px;
 }
-
 #range-bar {
     padding-top: 12px;
 }
-
 .range-bar-container {
     padding-top: 30px;
 }
-
 .cropit-image-input {
     padding-bottom: 50px;
 }
-
 .icon-size {
     font-size: 24px;
     font-weight: bold;
 }
-
-
 #selfie-cropit-image-preview {
-		background-color: #f8f8f8;
+    background-color: #f8f8f8;
     background-size: cover;
     border: 0px solid #ccc;
     border-radius: 3px;
-		margin: auto;
+    margin: auto;
     width: 320px;
     height: 320px;
     cursor: move;
 }
-
-
 #poster-cropit-image-preview {
-	background-color: #f8f8f8;
+    background-color: #f8f8f8;
     background-size: cover;
     border: 0px solid #ccc;
     border-radius: 3px;
-	margin: auto;
+    margin: auto;
     width: 480px;
     height: 215px;
     cursor: move;
 }
-
-
 #poster-modal-dialog {
     width: 900px;
 }
-
-
 #poster-range-bar-container {
     margin-left: 250px;
 }
-
 #range-bar {
-	width: 150px;
-	margin-left: auto;
-	margin-right: auto;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 input[type="range"].cropit-image-zoom-input {
-		display: inline;
+    display: inline;
     width: 110px;
-		margin: 0px;
-		position: relative;
+    margin: 0px;
+    position: relative;
 }
-
 .modal-body {
     margin: 0 auto;
 }
-
 .cropit-image-background {
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
     opacity: .2;
     cursor: auto;
 }
-
 .image-size-label {
     margin-top: 10px;
 }
-
 input {
     /* Use relative position to prevent from being covered by image background */
     position: relative;
     z-index: 10;
 }
-
 .content {
-	height: 600px;
-	margin-bottom: -50px;
+    height: 600px;
+    margin-bottom: -50px;
 }
-
 .footer {
-	height: 50px;
-	width: 100%;
+    height: 50px;
+    width: 100%;
 }
-
 #experience-1 {
-	color: red;
+    color: red;
 }
-
 nav.navbar.navbar-default {
     background-color: rgba(0, 0, 0, 0);
     border: 0px;
@@ -474,13 +416,11 @@ nav.navbar.navbar-default {
     /*display: inline;*/
     position: relative;
 }
-
 .content-no-bottom-line-with-new-user-button {
     position: absolute;
     top: 190px;
     left: 300px;
 }
-
 div.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
@@ -497,7 +437,6 @@ div.container-fluid {
 ul.nav.navbar-nav.navbar-right {
     padding-top: 100px;
 }
-
 a.btn.btn-default {
     padding: 0;
     line-height: 30px;
@@ -512,25 +451,21 @@ a.btn.btn-default {
     transition-duration: 0.2s;
     transition-timing-function: linear;
 }
-
 a.btn.btn-clicked {
-	color: white;
+    color: white;
     font-weight: bold;
     background-color: red;
 }
-
 a.btn.btn-default:hover {
     color: white;
     font-weight: bold;
     background-color: red;
 }
-
 form#search-form {
     float: left;
     height: 30px;
     width: 270px;
 }
-
 input#search-text_field.form-control {
     height: 30px;
     width: 270px;
@@ -538,66 +473,55 @@ input#search-text_field.form-control {
     border-radius: 0px;
     color: red;
 }
-
 input#search-text_field.form-control::-webkit-input-placeholder {
     color: red !important;
     font-style: italic;
 }
- 
-input#search-text_field.form-control:-moz-placeholder { /* Firefox 18- */
-    color: red !important;  
+input#search-text_field.form-control:-moz-placeholder {
+    /* Firefox 18- */
+    color: red !important;
     font-style: italic;
 }
- 
-input#search-text_field.form-control::-moz-placeholder {  /* Firefox 19+ */
-    color: red !important;  
+input#search-text_field.form-control::-moz-placeholder {
+    /* Firefox 19+ */
+    color: red !important;
     font-style: italic;
 }
- 
-input#search-text_field.form-control:-ms-input-placeholder {  
-    color: red !important; 
-    font-style: italic; 
+input#search-text_field.form-control:-ms-input-placeholder {
+    color: red !important;
+    font-style: italic;
 }
-
 .posters-catagory {
-	margin-top: 40px;
+    margin-top: 40px;
 }
-
 .posters-catagory-text {
     border-bottom: 1px solid #C0C0C0;
 }
-
 .avatarTd {
     height: 60px;
     width: 60px;
     padding-right: 5px;
 }
-
 .firstTd {
     color: black;
     font-size: 19pt;
 }
-
 .firstTd:hover {
     color: red;
 }
-
 .secondTd {
     color: black;
     font-size: 11pt;
     padding-top: 1px;
 }
-
 .secondTd:hover {
     color: red;
 }
-
 .thirdTd {
     color: gray;
     font-size: 8pt;
     font-style: italic;
 }
-
 #arrowsPng {
     float: right;
     width: 15px;
@@ -610,19 +534,15 @@ input#search-text_field.form-control:-ms-input-placeholder {
     transition-duration: 0.3s;
     transition-timing-function: linear;
 }
-
 #arrowsPng:hover {
     background-image: url('arrows_hover.png');
 }
-
-li.dropdown.open > a.dropdown-toggle > p#arrowsPng {
+li.dropdown.open> a.dropdown-toggle> p#arrowsPng {
     background-image: url('arrows_hover.png');
 }
-
 a.dropdown-toggle {
     background-color: white !important;
 }
-
 a.firstTd_Btn {
     opacity: 0;
     float: right;
@@ -638,12 +558,10 @@ a.firstTd_Btn {
     font-weight: bold;
     cursor: pointer;
 }
-
 a.firstTd_Btn:hover {
     color: white;
     background-color: red;
 }
-
 label.btn-primary {
     width: 65px;
     min-width: 65px;
@@ -651,99 +569,137 @@ label.btn-primary {
     border: 1px solid black;
     color: gray;
 }
-
 .btn-group-title {
     margin: 0;
     margin-top: 20px;
 }
-
 .postersTable {
-    margin-top: 10px; 
-    line-height: 1; 
+    margin-top: 10px;
+    line-height: 1;
     width: 100%;
 }
-
 .last-edit {
-	margin-left: 20px;
+    margin-left: 20px;
 }
-
 .modal-footer.modal-footer-rewrite {
-	border-top: 0px none;
-	padding-top: 7.5px;
+    border-top: 0px none;
+    padding-top: 7.5px;
 }
-
 .modal-footer-btn-center {
-	width: 150px;
-	margin: auto;
+    width: 150px;
+    margin: auto;
 }
-
 .modal-body.modal-body-rewrite {
-	padding-bottom: 7.5px;
+    padding-bottom: 7.5px;
 }
-
 #delete-modal .modal-content {
-	font-size: 18pt;
-	text-align: center;
-	color: red;
+    font-size: 18pt;
+    text-align: center;
+    color: red;
 }
-
 .btn.btn-default.modal-btn {
-	line-height: 20px;
-	width: 120px;
-	height: 20px;
+    line-height: 20px;
+    width: 120px;
+    height: 20px;
 }
-
 .btn.btn-default.modal-btn.modal-btn-left {
-	float: left;
+    float: left;
 }
-
 .btn.btn-default.modal-btn.modal-btn-right {
-	float: right;
+    float: right;
 }
-
 .modal {
-  text-align: center;
+    text-align: center;
 }
-
-@media screen and (min-width: 768px) { 
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
 }
-
 .modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
 }
-
-
 #user-name {
-	font-size: 18pt;
+    font-size: 18pt;
 }
-
 .btn.btn-default.modal-btn.modal-btn-middle {
-	display: block;
-	position: relative;
-	margin: auto;
-	width: 120px;
+    display: block;
+    position: relative;
+    margin: auto;
+    width: 120px;
 }
-
 .validation {
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
-
 .validation li {
-	font-size: 12pt;
-	color: red;
+    font-size: 12pt;
+    color: red;
 }
-
 #save-text {
-	width: 150px;
-	height: 30px;
-	line-height: 30px;	
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
 }
 
+.spinner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    font-size: 10px;
+    z-index: 999;
+}
+.spinner> div {
+    background-color: #FFF;
+    margin-right: 5px;
+    margin-top: 20%;
+    padding: 5px;
+    height: 15%;
+    width: 10px;
+    display: inline-block;
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    z-index: 998;
+}
+.spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+.spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+.spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+.spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+@-webkit-keyframes sk-stretchdelay {
+    0%, 40%, 100% {
+        -webkit-transform: scaleY(0.4)
+    }
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+@keyframes sk-stretchdelay {
+    0%, 40%, 100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}
