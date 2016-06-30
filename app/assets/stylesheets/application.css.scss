@@ -51,6 +51,32 @@
    padding: 6px 11px;
  }
 
+nav.navbar {
+    margin-bottom: 0;
+}
+
+#flash_notice {
+    margin-top: 20px;
+    visibility: hidden;
+}
+
+#flash_alert {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    background-color: rgb(255, 213, 213);
+    color: red;
+    animation: addHeight 2s;
+    overflow: hidden;
+}
 
 
 
+@keyframes addHeight {
+  from {
+      max-height: 0;
+  }
+  to {
+      max-height: 100px;
+  }
+}
