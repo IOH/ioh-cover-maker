@@ -655,5 +655,15 @@ $(function(){
 
   });
 
+  if (typeof history.pushState === "function") {
+  	history.pushState("", null, null);
+  	window.onpopstate = function () {
+  		history.pushState('', null, null);
+		console.log("obj");
+  		// Handle the back (or forward) buttons here
+  		// Will NOT handle refresh, use onbeforeunload for this.
+		$('.navbar-header > a img').trigger('click');
+  	};
+  }
 
 });

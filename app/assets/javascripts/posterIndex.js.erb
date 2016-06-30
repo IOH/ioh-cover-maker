@@ -18,8 +18,6 @@ $(function(){
 			url : "posters/search",
 			data: {"query": query, "limit": limit, state: state},
 			success: function(posters){
-
-				console.log(posters);
 				var htmlText = "";
 				var secondTdText = "";
 
@@ -103,7 +101,10 @@ $(function(){
 					});
 
 					$(this).click(loading);
+				});
 
+				$('.firstTd_Btn').each(function(index){
+					$(this).click(loading);
 				});
 
 				$('.secondTd').each(function(index){
@@ -119,6 +120,7 @@ $(function(){
 						$(this).css('color', 'black');
 					});
 
+					$(this).click(loading);
 				});
 
 				$('.poster-delete').off();
@@ -215,4 +217,5 @@ $(function(){
 
         $(over).appendTo('body');
     };
+
 });
