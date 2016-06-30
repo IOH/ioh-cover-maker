@@ -634,12 +634,36 @@ $(function(){
 
   var originalSelfieInput = $('#selfie-modal').find('.cropit-image-input');
   originalSelfieInput.change(function(){
-	readURL(this, 1);
+	if(this.files[0].size / 1024 > 3000){
+		alert('檔案大小大於3MB！');
+		$('.selfie-export').attr("disabled", true);
+		$('#selfie-modal .cropit-image-preview-container').css('visibility', 'hidden');
+		$('#selfie-modal .cropit-image-zoom-input').attr('max', '0');
+	}
+	else {
+		readURL(this, 1);
+		$('.selfie-export').attr("disabled", false);
+		$('#selfie-modal .cropit-image-preview-container').css('visibility', '');
+		$('#selfie-modal .cropit-image-zoom-input').attr('max', '1');
+	}
+
   });
 
   var originalPosterInput = $('#poster-modal').find('.cropit-image-input');
   originalPosterInput.change(function(){
-	readURL(this, 2);
+	if(this.files[0].size / 1024 > 3000){
+  		alert('檔案大小大於3MB！');
+		$('.poster-export').attr("disabled", true);
+		$('#poster-modal .cropit-image-preview-container').css('visibility', 'hidden');
+		$('#poster-modal .cropit-image-zoom-input').attr('max', '0');
+  	}
+	else {
+		readURL(this, 2);
+		$('.poster-export').attr("disabled", false);
+		$('#poster-modal .cropit-image-preview-container').css('visibility', '');
+		$('#poster-modal .cropit-image-zoom-input').attr('max', '1');
+	}
+
   });
 
 

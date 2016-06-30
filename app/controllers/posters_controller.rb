@@ -4,7 +4,7 @@
 require 'base64'
 require 'fileutils'
 
-# if can? :create, Poster 
+# if can? :create, Poster
 
 class PostersController < ApplicationController
   before_filter :authenticate_user!
@@ -21,7 +21,7 @@ class PostersController < ApplicationController
   # CarrierWave
   class ImageIO < StringIO
   	attr_accessor :original_filename
-	end 
+	end
 
   def index
   end
@@ -29,7 +29,7 @@ class PostersController < ApplicationController
   def show
   end
 
-  def new 
+  def new
 
   	@poster = Poster.new
 
@@ -54,13 +54,13 @@ class PostersController < ApplicationController
   		original_avatar: get_image_dataUri(posterId, "original_avatar"),
   		original_background: get_image_dataUri(posterId, "original_background")
   	}
-  	
+
   end
 
   def update
 
   	data = params['data']
-  	
+
   	data.each do |key, item|
   		data[key] = to_b(item)
   	end
@@ -70,15 +70,15 @@ class PostersController < ApplicationController
   	else
   		data['location_white'] = false
   	end
-  	
-  	
+
+
   	@poster = Poster.find(params[:id])
 
   	@poster.use_avatar = data['use_avatar']
   	@poster.name = data['name']
-  	@poster.description = data['description'] 	
+  	@poster.description = data['description']
   	@poster.info_one = data['info_one']
-  	@poster.info_one_red = data['info_one_red']	
+  	@poster.info_one_red = data['info_one_red']
   	@poster.info_two = data['info_two']
   	@poster.info_two_red = data['info_two_red']
   	@poster.info_three = data['info_three']
@@ -97,8 +97,9 @@ class PostersController < ApplicationController
 		  		@poster.avatar = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
 		  		@poster.avatar_upload = true
 		  	end
+
 		  	@poster.original_avatar = decode_dateUri_to_file(data['original_avatar_dataUrl'], "original_avatar")
-	  	elsif data['changeItem'] == "background"
+        elsif data['changeItem'] == "background"
 		  	@poster.background = decode_dateUri_to_file(data['background_dataUrl'], "background")
 		  	@poster.original_background = decode_dateUri_to_file(data['original_background_dataUrl'], "original_background")
 	  	elsif data['changeItem'] == "poster"
@@ -122,8 +123,8 @@ class PostersController < ApplicationController
 
   def search
 
-  	selectTerm = "id, name, info_one, info_one_red, 
-  								info_two, info_two_red, info_three, info_three_red, 
+  	selectTerm = "id, name, info_one, info_one_red,
+  								info_two, info_two_red, info_three, info_three_red,
   								updated_at, last_user, avatar_upload, updated_at"
 
 		unless params[:query].empty?
@@ -225,4 +226,3 @@ class PostersController < ApplicationController
   end
 
 end
-
