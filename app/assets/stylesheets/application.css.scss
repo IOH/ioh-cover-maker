@@ -51,6 +51,122 @@
    padding: 6px 11px;
  }
 
+/*
+  @info Design Log in Page
+  @author WeiChiaChang
+  @date 2016 / 06 / 30
+*/
 
+/*input:-webkit-autofill {
+  background-color: #fff;
+}*/
 
+a.forgot-your-pwd {
+  color: #000;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}
 
+.actions .button-log-in,
+.actions .button-log-in:active {
+  background-color: #6d6e70;
+  border-color: #6d6e70;
+  border-radius: 0px;
+}
+
+.actions input[type="submit"] {
+  font-size: 15.5px;
+  font-weight: 600;
+}
+
+#user_email {
+  background-color: #fff;
+}
+
+/*input[type="email"], input[type="password"] {
+  background-color: #fff;
+}*/
+
+.form-control-email, 
+.form-control-email:visited,
+.form-control-email:focus,
+.form-control-email:active,
+.form-control-password,
+.form-control-password:visited,
+.form-control-password:focus,
+.form-control-password:active {
+  border-color: #000;
+  border-radius: 0px;
+}
+
+::-webkit-input-placeholder { /* Chrome */
+  font-style: italic;
+  letter-spacing: 0.8px;
+}
+
+input[type="checkbox"].check-box-remember-me {
+  border-radius: 4px;
+}
+
+/* Remove yelow background */
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+.field {
+  margin: 10px 0 0 0;
+}
+
+.actions {
+  margin: 25px 0 0 0;
+}
+
+#new_user {
+  margin: 0 0 10px 0;
+}
+
+.speech-bubble {
+  background: #000;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 2.5em;
+  margin-bottom: 1em;
+  padding: 0 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: top;
+  min-width: 7em;
+  width: 250px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.speech-bubble span:before { 
+  content:"\0263A"; 
+  font-size: 20px;
+  position: absolute;
+  top: -2px;
+}
+
+.speech-bubble:after {
+  border: 1em solid transparent;
+  border-top-color: #000;
+  content: '';
+  margin-left: -1em;
+  position: absolute;
+  top: 100%;
+  left: 15%;
+ /* width: 0;
+  height: 0;*/
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 0;
+  border-color: transparent #000 transparent transparent;
+}
+
+.speech-bubble.rounded {
+  border-radius: .4em;
+}
