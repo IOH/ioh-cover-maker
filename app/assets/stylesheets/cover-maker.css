@@ -405,36 +405,30 @@ nav.navbar.navbar-default {
   @info  Add .content-no-bottom-line css style to make it all line up
 */
 
-.content-no-bottom-line {
-    /*margin-left: 10%;*/
-    /*margin-right: 10%;*/
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px;
-    /*border-bottom: 1px solid black;*/
-    border-radius: 0px;
-    width: 250px;
-    /*display: inline;*/
-    position: relative;
+#new-user-btn {
+    width: 100px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 0;
+    color: red;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    cursor: pointer;
 }
-.content-no-bottom-line-with-new-user-button {
-    position: absolute;
-    top: 190px;
-    left: 300px;
+#new-user-btn:hover {
+    background-color: red;
+    color: white;
+    font-weight: bold;
 }
 div.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
     margin-top: 20px;
 }
-
-/*
-#lowestContainer {
-    width: 100%;
-    padding-left: 10%;
-    padding-right: 10%;
-}
-*/
-
 ul.nav.navbar-nav.navbar-right {
     padding-top: 100px;
 }
@@ -646,7 +640,6 @@ label.btn-primary {
     height: 30px;
     line-height: 30px;
 }
-
 .spinner {
     position: absolute;
     left: 0;
