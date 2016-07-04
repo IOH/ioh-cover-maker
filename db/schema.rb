@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615062018) do
+ActiveRecord::Schema.define(version: 20160704120456) do
+
+  create_table "lives", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "time"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "posters", force: :cascade do |t|
     t.integer  "user_id",             limit: 4
@@ -36,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160615062018) do
     t.string   "original_avatar",     limit: 255
     t.string   "original_background", limit: 255
     t.string   "poster",              limit: 255
+    t.string   "zip",                 limit: 255
   end
 
   add_index "posters", ["last_edit_id"], name: "index_posters_on_last_edit_id", using: :btree
