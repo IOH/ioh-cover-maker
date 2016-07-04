@@ -11,14 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704120456) do
+ActiveRecord::Schema.define(version: 20160704141113) do
 
-  create_table "lives", force: :cascade do |t|
+  create_table "live_departments", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.datetime "time"
+    t.integer  "group",      limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "live_schools", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "lives", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.datetime "time"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "live_school_id",     limit: 4
+    t.integer  "live_department_id", limit: 4
+  end
+
+  add_index "lives", ["live_department_id"], name: "index_lives_on_live_department_id", using: :btree
+  add_index "lives", ["live_school_id"], name: "index_lives_on_live_school_id", using: :btree
 
   create_table "posters", force: :cascade do |t|
     t.integer  "user_id",             limit: 4
@@ -43,7 +61,6 @@ ActiveRecord::Schema.define(version: 20160704120456) do
     t.string   "original_avatar",     limit: 255
     t.string   "original_background", limit: 255
     t.string   "poster",              limit: 255
-    t.string   "zip",                 limit: 255
   end
 
   add_index "posters", ["last_edit_id"], name: "index_posters_on_last_edit_id", using: :btree
@@ -77,6 +94,8 @@ ActiveRecord::Schema.define(version: 20160704120456) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
+  add_foreign_key "lives", "live_departments"
+  add_foreign_key "lives", "live_schools"
   add_foreign_key "posters", "users"
   add_foreign_key "posters", "users", column: "last_edit_id"
   add_foreign_key "users", "roles"
