@@ -1,3 +1,3 @@
 class LiveTime < ActiveRecord::Base
-	belongs_to :live
+	has_and_belongs_to_many :lives
 end

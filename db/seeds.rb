@@ -14,11 +14,6 @@ r2 = Role.create({name: "Editor", description: "Can read and create items. Can u
 r3 = Role.create({name: "Admin", description: "Can perform any CRUD operation on any resource"})
 
 
-lives = Live.create([
-	{ name: "張維家" },
-	{ name: "宋思育"}
-])
-
 schools = LiveSchool.create([
 	{ name: "台灣科技大學" },
 	{ name: "東吳大學" }
@@ -27,6 +22,11 @@ schools = LiveSchool.create([
 departments = LiveDepartment.create([
 	{ name: "企管系" },
 	{ name: "工業管理系" }
+])
+
+lives = Live.create([
+	{ name: "張維家", live_school_id: 1, live_department_id: 2 },
+	{ name: "宋思育", live_school_id: 2, live_department_id: 1 }
 ])
 
 times = LiveTime.create([

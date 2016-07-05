@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705062011) do
+ActiveRecord::Schema.define(version: 20160705070310) do
 
   create_table "live_departments", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -29,12 +29,17 @@ ActiveRecord::Schema.define(version: 20160705062011) do
   create_table "live_times", force: :cascade do |t|
     t.datetime "start"
     t.datetime "end"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "live_id",    limit: 4
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "live_times", ["live_id"], name: "index_live_times_on_live_id", using: :btree
+  create_table "live_times_lives", force: :cascade do |t|
+    t.integer "live_id",      limit: 4
+    t.integer "live_time_id", limit: 4
+  end
+
+  add_index "live_times_lives", ["live_id"], name: "index_live_times_lives_on_live_id", using: :btree
+  add_index "live_times_lives", ["live_time_id"], name: "index_live_times_lives_on_live_time_id", using: :btree
 
   create_table "lives", force: :cascade do |t|
     t.string   "name",               limit: 255
@@ -105,7 +110,6 @@ ActiveRecord::Schema.define(version: 20160705062011) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
-  add_foreign_key "live_times", "lives", column: "live_id"
   add_foreign_key "lives", "live_departments"
   add_foreign_key "lives", "live_schools"
   add_foreign_key "posters", "users"
