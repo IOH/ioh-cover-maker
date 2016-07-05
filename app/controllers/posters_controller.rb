@@ -4,7 +4,7 @@
 require 'base64'
 require 'fileutils'
 
-# if can? :create, Poster 
+# if can? :create, Poster
 
 class PostersController < ApplicationController
   before_filter :authenticate_user!
@@ -17,38 +17,27 @@ class PostersController < ApplicationController
   # load_and_authorize_resource
   # before_action :checkLogIn
 
+  # manually add original_filename to stringIO
+  # CarrierWave
+  class ImageIO < StringIO
+  	attr_accessor :original_filename
+	end
+
   def index
   end
 
   def show
   end
 
-  def new 
+  def new
 
-  	unless Dir.exist?(Rails.public_path + 'posters')
-  		Dir.mkdir(Rails.public_path + 'posters')
-  	end
-
-  	@poster = Poster.new()
-
-  	@poster.name = "莊智超 Chih Chao Chuang"
-  	@poster.info_one = "學經歷 1"
-    
-  	@poster.use_avatar = true
-  	@poster.location_white = true
-  	@poster.info_one_red = true
-  	@poster.info_two_red = false
-  	@poster.info_three_red = false
+  	@poster = Poster.new
 
   	@poster.user_id = current_user.id
   	@poster.last_edit_id = current_user.id
   	@poster.last_user = current_user.account_name
 
-  	@poster.avatar_upload = false
-
   	@poster.save
-
-  	Dir.mkdir(Rails.public_path + 'posters/' + @poster.id.to_s)
 
   	redirect_to edit_poster_path(@poster)
 
@@ -57,29 +46,21 @@ class PostersController < ApplicationController
   def edit
 
   	@poster = Poster.find(params[:id])
-  	# @poster = Poster.find(params[:id])
-
-  	avatar_dataUrl = getImg(@poster.id, "avatar")
-  	background_dataUrl = getImg(@poster.id, "background")
-  	original_avatar_dataUrl = getImg(@poster.id, "original_avatar")
-  	original_background_dataUrl = getImg(@poster.id, "original_background")
+  	posterId = params[:id]
 
   	@posterData = {
-  		avatar: avatar_dataUrl,
-  		background: background_dataUrl,
-  		original_avatar: original_avatar_dataUrl,
-  		original_background: original_background_dataUrl 
+  		avatar: get_image_dataUri(posterId, "avatar"),
+  		background: get_image_dataUri(posterId, "background"),
+  		original_avatar: get_image_dataUri(posterId, "original_avatar"),
+  		original_background: get_image_dataUri(posterId, "original_background")
   	}
+
   end
 
   def update
 
-  	unless Dir.exist?(Rails.public_path + 'posters')
-  		Dir.mkdir(Rails.public_path + 'posters')
-  	end
-
   	data = params['data']
-  	
+
   	data.each do |key, item|
   		data[key] = to_b(item)
   	end
@@ -89,19 +70,15 @@ class PostersController < ApplicationController
   	else
   		data['location_white'] = false
   	end
-  	
-  	
-  	@poster = Poster.find(params[:id])
 
-  	unless Dir.exist?(Rails.public_path + 'posters/' + @poster.id.to_s)
-  		Dir.mkdir(Rails.public_path + 'posters/' + @poster.id.to_s)
-  	end
+
+  	@poster = Poster.find(params[:id])
 
   	@poster.use_avatar = data['use_avatar']
   	@poster.name = data['name']
-  	@poster.description = data['description'] 	
+  	@poster.description = data['description']
   	@poster.info_one = data['info_one']
-  	@poster.info_one_red = data['info_one_red']	
+  	@poster.info_one_red = data['info_one_red']
   	@poster.info_two = data['info_two']
   	@poster.info_two_red = data['info_two_red']
   	@poster.info_three = data['info_three']
@@ -112,19 +89,25 @@ class PostersController < ApplicationController
     @poster.last_edit_id = current_user.id
     @poster.last_user = current_user.account_name
 
-  	saveImg(@poster.id.to_s, data['avatar_dataUrl'], "avatar")
-  	saveImg(@poster.id.to_s, data['background_dataUrl'], "background")
-  	saveImg(@poster.id.to_s, data['poster_dataUrl'], "poster")
-  	saveImg(@poster.id.to_s, data['original_background_dataUrl'], "original_background")
-  	saveImg(@poster.id.to_s, data['original_avatar_dataUrl'], "original_avatar")
+    if data['update_picture']
+    	if data['changeItem'] == "selfie"
+		    # image upload
+		    avatarIO = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
+		    if avatarIO
+		  		@poster.avatar = decode_dateUri_to_file(data['avatar_dataUrl'], "avatar")
+		  		@poster.avatar_upload = true
+		  	end
 
-  	if File.exist?("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/' + "avatar.jpg")
-  		@poster.avatar_upload = true
-  	else
-  		@poster.avatar_upload = false
-  	end
+		  	@poster.original_avatar = decode_dateUri_to_file(data['original_avatar_dataUrl'], "original_avatar")
+        elsif data['changeItem'] == "background"
+		  	@poster.background = decode_dateUri_to_file(data['background_dataUrl'], "background")
+		  	@poster.original_background = decode_dateUri_to_file(data['original_background_dataUrl'], "original_background")
+	  	elsif data['changeItem'] == "poster"
+	  		@poster.poster = decode_dateUri_to_file(data['poster_dataUrl'], "poster")
+	  	end
+	  end
 
-  	@poster.save
+  	@poster.save!
 
   	render :json => data
 
@@ -133,16 +116,6 @@ class PostersController < ApplicationController
   def destroy
   	@poster = Poster.find(params[:id])
 
-  	if File.exist?("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/')
-
-		  FileUtils.rm_r ("#{Rails.root}/public" + '/posters/' + @poster.id.to_s + '/')
-
-	  end
-
-	  if File.exist?("#{Rails.root}/public" + "/zips/poster" + @poster.id.to_s + ".zip")
-	  	FileUtils.rm_r ("#{Rails.root}/public" + "/zips/poster" + @poster.id.to_s + ".zip")
-	  end
-
 	  @poster.destroy
 
   	redirect_to :root
@@ -150,30 +123,31 @@ class PostersController < ApplicationController
 
   def search
 
-  	selectTerm = "id, name, info_one, info_one_red, info_two, info_two_red, info_three, info_three_red, updated_at, last_user, avatar_upload, updated_at";
-  	whereSearchTerm  = "name LIKE '%#{params[:query]}%'"
-		whereSearchTerm += "OR description LIKE '%#{params[:query]}%'"
-		whereSearchTerm += "OR info_one LIKE '%#{params[:query]}%'"
-		whereSearchTerm += "OR info_two LIKE '%#{params[:query]}%'"
-		whereSearchTerm += "OR info_three LIKE '%#{params[:query]}%'"
+  	selectTerm = "id, name, info_one, info_one_red,
+  								info_two, info_two_red, info_three, info_three_red,
+  								updated_at, last_user, avatar_upload, updated_at"
+
+		unless params[:query].empty?
+			params[:query] = '%' + params[:query] + '%'
+		end
 
   	if params[:state] == "posters"
 	  	if params[:query] == ""
-	  		@posters = Poster.select(selectTerm).where('updated_at < ?', 7.days.ago).order(updated_at: :desc).limit(params[:limit])
+	  		@posters = Poster.select(selectTerm).a_week_more.order_and_limit(params[:limit])
 	  	else
-	  		@posters = Poster.select(selectTerm).where('updated_at < ?', 7.days.ago).where(whereSearchTerm).order(updated_at: :desc).limit(params[:limit])
+	  		@posters = Poster.a_week_more.search(params[:query], params[:limit])
 	  	end
 	  elsif params[:state] == "latest"
 	  	if params[:query] == ""
-	  		@posters = Poster.where('updated_at >= ?', 7.days.ago).order(updated_at: :desc)
+	  		@posters = Poster.select(selectTerm).this_week.order(updated_at: :desc)
 	  	else
-	  		@posters = Poster.where('updated_at >= ?', 7.days.ago).where(whereSearchTerm).order(updated_at: :desc)
+	  		@posters = Poster.this_week.search(params[:query], 100)
 	  	end
 	  elsif params[:state] == "my-posters"
 	  	if params[:query] == ""
-				@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).order(updated_at: :desc).limit(params[:limit])
+				@posters = Poster.select(selectTerm).belongs_to(current_user.id).order_and_limit(params[:limit])
 	  	else
-	  		@posters = Poster.select(selectTerm).where('user_id = ?', current_user.id).where(whereSearchTerm).order(updated_at: :desc).limit(params[:limit])
+	  		@posters = Poster.belongs_to(current_user.id).search(params[:query], params[:limit])
 	  	end
 	  end
 
@@ -188,7 +162,7 @@ class PostersController < ApplicationController
   		Dir.mkdir(Rails.public_path + 'zips')
   	end
 
-  	tagetFile = "#{Rails.root}/public" + "/posters/" + params[:id].to_s + "/"
+  	tagetFile = "#{Rails.root}/public/uploads/poster/" + params[:id].to_s + "/"
   	tagetZip  = "#{Rails.root}/public" + "/zips/poster" + params[:id].to_s + ".zip"
 
   	zip = ZipFileGenerator.new(tagetFile, tagetZip)
@@ -200,6 +174,7 @@ class PostersController < ApplicationController
 
   private
 
+  # to boolean
   def to_b str
   	if str == "true"
   		return true
@@ -210,34 +185,38 @@ class PostersController < ApplicationController
   	end
   end
 
-  def saveImg(posterId, dataUrl, dataType)
+  def get_image_dataUri(posterId, dataType)
 
-  	if dataUrl && dataUrl != "" && dataUrl != " "
-  		if /data:/.match(dataUrl)
-	  		data = Base64.decode64(dataUrl.gsub(/[^,]+,/, ""))    
+  	dataUri = ""
+  	imgUrl  = "#{Rails.root}/public/uploads/poster/" + posterId.to_s + '/' + "#{dataType}.jpeg"
 
-		  	File.open("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg", 'wb') do |file|
-		  		file.write(data)
-		  	end
-		  end
-  	end
+	  if File.exist?(imgUrl)
 
-  end
+		  data = File.read(imgUrl)
 
-  def getImg(posterId, dataType)
-
-  	dataUrl = ""
-
-	  if File.exist?("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg")
-
-		  data = File.read("#{Rails.root}/public" + '/posters/' + posterId.to_s + '/' + "#{dataType}.jpg")
-
-	  	dataUrl = "data:image/jpeg;base64," + Base64.encode64(data)
+	  	dataUri = "data:image/jpeg;base64," + Base64.encode64(data)
 
 	  end
 
-  	return dataUrl
+  	return dataUri
 
+  end
+
+  # @param { string } dataUri
+  # @param { string } fileName
+  # @return { object } ImgaeIO
+  def decode_dateUri_to_file(dataUri, fileName)
+  	if /data:/.match(dataUri)
+  		fileString = Base64.decode64(dataUri.gsub(/[^,]+,/, ""))
+  		io = ImageIO.new fileString
+
+  		fileType = /\/([^\;]+)/.match(dataUri)[1]
+  		io.original_filename = "#{fileName}.#{fileType}"
+
+  		return io
+  	else
+  		return nil
+  	end
   end
 
   def checkUser
@@ -247,4 +226,3 @@ class PostersController < ApplicationController
   end
 
 end
-

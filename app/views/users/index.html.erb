@@ -1,11 +1,12 @@
-<div class="content-no-bottom-line">
-  <h1>Listing Users</h1>
+<div class="row">
+  <h1 style="float: left;">Listing Users</h1>
+  <%= link_to 'New User', new_user_path, class: "btn btn-primary", id: "new-user-btn" %>
 </div>
-<%= link_to 'New User', new_user_path, class: "btn btn-primary content-no-bottom-line-with-new-user-button" %>
 
 <table class="table ">
   <thead>
     <tr>
+      <!-- <th>Avatar</th> -->
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
@@ -16,7 +17,8 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.account_name %></td>
+        <!-- <td></td> -->
+        <td><%= image_tag gravatar_url(current_user.email, 32), alt: "", class: "avatar_icon" %> <%= user.account_name %></td>
         <td><%= user.email %></td>
         <td><%= user.role.name %></td>
         <td><%= link_to 'Show', user %></td>

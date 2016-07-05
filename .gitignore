@@ -11,11 +11,11 @@
 /log/*
 !/log/.keep
 /tmp
-/public/posters/*
-/public/zips/*
 
 #files
 database.yml
+carrierwave.rb
+
 
 # OS generated files #
 ######################
@@ -26,3 +26,13 @@ database.yml
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# byebug
+.byebug_history
+
+# image upload
+public/uploads/*
+public/zips/*
+
+# asset compile
+public/assets

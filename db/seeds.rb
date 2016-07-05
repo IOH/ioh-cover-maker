@@ -13,6 +13,27 @@ r1 = Role.create({name: "Regular", description: "Can read items"})
 r2 = Role.create({name: "Editor", description: "Can read and create items. Can update and destroy own items"})
 r3 = Role.create({name: "Admin", description: "Can perform any CRUD operation on any resource"})
 
+
+schools = LiveSchool.create([
+	{ name: "台灣科技大學" },
+	{ name: "東吳大學" }
+])
+
+departments = LiveDepartment.create([
+	{ name: "企管系" },
+	{ name: "工業管理系" }
+])
+
+lives = Live.create([
+	{ name: "張維家", live_school_id: 1, live_department_id: 2 },
+	{ name: "宋思育", live_school_id: 2, live_department_id: 1 }
+])
+
+times = LiveTime.create([
+	{ start: "2016-02-22 11:30:00", end: "2016-02-22 12:00:00" },
+	{ start: "2016-02-22 11:00:00", end: "2016-02-22 11:30:00" }
+])
+
 =begin
 u1 = User.create({account_name: "Sally", email: "sally@example.com", password: "aaaaaaaa", password_confirmation: "aaaaaaaa", role_id: r1.id})
 u2 = User.create({account_name: "Sue", email: "sue@example.com", password: "aaaaaaaa", password_confirmation: "aaaaaaaa", role_id: r2.id})

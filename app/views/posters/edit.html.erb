@@ -1,9 +1,8 @@
-
 <% if can? :create, Poster %>
 
 <!-- 上頭的按鈕 -->
 <div class="container-fluid">
-	<% if current_user %>		
+	<% if current_user %>
 		<div class="row">
 			<a class="btn btn-default" id="save-btn"> Save</a>
 			<a class="btn btn-default" id="download"> Download</a>
@@ -19,24 +18,24 @@
 
 			<p class="btn-group-title">大頭貼</p>
 			<div class="btn-group" data-toggle="buttons">
-				<label class="btn btn-primary 
+				<label class="btn btn-primary
 				<% if @poster.use_avatar %>
 			    	<%= "active" %>
 			    <% end %>
 				" id="no-border-radius-1">
-			    	<input type="radio" name="options" class="selfie-radio" value ="true"  
+			    	<input type="radio" name="options" class="selfie-radio" value ="true"
 			    		<% if @poster.use_avatar %>
 			    			<%= "checked" %>
 			    		<% end %>
 			    	>使用
 			  	</label>
-			  	<br>
-			  	<label class="btn btn-primary 
+
+			  	<label class="btn btn-primary
 			  	<% unless @poster.use_avatar %>
 			    	<%= "active" %>
 			    <% end %>
 			  	"  id="no-border-radius-2">
-			    	<input type="radio" name="options" class="selfie-radio" value ="false" 
+			    	<input type="radio" name="options" class="selfie-radio" value ="false"
 			    		<% unless @poster.use_avatar %>
 			    			<%= "checked" %>
 			    		<% end %>
@@ -46,19 +45,19 @@
 
 			<p class="btn-group-title">地點文字顏色</p>
 			<div class="btn-group" data-toggle="buttons">
-			  	<label class="btn btn-primary 
+			  	<label class="btn btn-primary
 			  	<% if @poster.location_white %>
 					<%= "active" %>
 				<% end %>
 			  	"  id="no-border-radius-3">
-					<input type="radio" name="location-color" class="location-radio" value="白色" 
+					<input type="radio" name="location-color" class="location-radio" value="白色"
 						<% if @poster.location_white %>
 							<%= "checked" %>
 						<% end %>
 					> 白色
 				</label >
-				<br>
-				<label class="btn btn-primary 
+
+				<label class="btn btn-primary
 				<% unless @poster.location_white%>
 					<%= "active" %>
 				<% end %>
@@ -73,7 +72,7 @@
 
 			<p class="btn-group-title">分享的學/經歷（可複選）</p>
 			<div class="btn-group experience-checkbox" data-toggle="buttons">
-			  	<label class="btn btn-primary 
+			  	<label class="btn btn-primary
 			  	<% if @poster.info_one_red %>
 			  		<%= "active" %>
 			  	<% end %>"  id="no-border-radius-5"
@@ -84,8 +83,8 @@
 					<% end %>
 					>學經歷一
 				</label>
-				<br>
-				<label class="btn btn-primary 
+
+				<label class="btn btn-primary
 				<% if @poster.info_two_red %>
 					<%= "active" %>
 				<% end %>
@@ -96,8 +95,8 @@
 					<% end %>
 					>學經歷二
 				</label>
-				<br>
-				<label class="btn btn-primary 
+
+				<label class="btn btn-primary
 				<% if @poster.info_three_red %>
 					<%= "active" %>
 				<% end %>
@@ -134,7 +133,7 @@
 			    <div id="ioh-banner">
 			        <%= image_tag("IOH-banner.png", width: "960", height: "110") %>
 			    </div>
-					
+
 					<!-- selfie -->
 			    <div id="selfie-all">
 				    <a id="selfie-area">
@@ -155,12 +154,12 @@
 			    <div id="poster-content-area">
 			        <textarea id="poster-content-textarea" placeholder="講座簡介"><%= @poster.description %></textarea>
 			    </div>
-					
+
 					<!-- location -->
 			    <div id="location-area">
 			        <textarea id="location-textarea"><% if @poster.location %><%= @poster.location %><% else %><%= "地點：" %><% end %></textarea>
 			    </div>
-					
+
 					<!-- experience -->
 			    <div id="name-experience-area">
 			        <textarea id="name-textarea" placeholder="講者姓名（中文＋英文）"><%= @poster.name %></textarea>
@@ -176,13 +175,13 @@
 	<div class="modal fade" id="selfie-modal" tabindex="-1" role="dialog" aria-labelledby="mySelfieModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 		    <div class="modal-content">
-						
+
 				<!-- header -->
 		        <div class="modal-header">
 		          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		          <h4 class="modal-title" id="mySelfieModalLabel">大頭貼裁切</h4>
 		        </div>
-						
+
 				<!-- body -->
 		        <div class="modal-body">
 		        	<div class="collapse" id="selfie-error-message">
@@ -194,15 +193,15 @@
 		            <div class="cropit-image-preview-container">
 		              <div class="cropit-image-preview" id="selfie-cropit-image-preview"></div>
 		            </div>
-		            
+
 		            <div id="range-bar">
 						<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
 						<input type="range" class="cropit-image-zoom-input" >
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					</div>		              
+					</div>
 		          </div>
 		        </div>
-		
+
 				<!-- footer -->
 		        <div class="modal-footer">
 		            <button type="button" class="btn btn-default" id="selfie-export-exit-button" data-dismiss="modal">關閉</button>
@@ -219,13 +218,13 @@
   <div class="modal fade" id="poster-modal" tabindex="-1" role="dialog" aria-labelledby="myPosterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" id="poster-modal-dialog">
       <div class="modal-content">
-        
+
         <!-- header -->
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myPosterModalLabel">背景圖裁切</h4>
         </div>
-        
+
         <!-- body -->
         <div class="modal-body">
         	<div class="collapse" id="poster-error-message">
@@ -238,16 +237,16 @@
             <div class="cropit-image-preview-container">
               <div class="cropit-image-preview" id="poster-cropit-image-preview"></div>
             </div>
-						
+
 			<div id="range-bar">
 				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
 					<input type="range" class="cropit-image-zoom-input">
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 				</div>
-              
+
           </div>
         </div>
-        
+
         <!-- footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-default" id="poster-export-exit-button"  data-dismiss="modal">關閉</button>
@@ -300,6 +299,3 @@
 <%= javascript_include_tag 'cover-maker', 'data-turbolinks-track' => true %>
 
 <% end %>
-
-
-

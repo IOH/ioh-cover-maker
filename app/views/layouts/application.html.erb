@@ -1,57 +1,71 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>IOHCoverMaker</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <link rel="shortcut icon" href="<%= image_path "ioh-favicon.ico" %>"/>
-</head>
-<body>
+    <head>
+        <title>IOHCoverMaker</title>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+        <link rel="shortcut icon" href="<%= image_path " ioh-favicon.ico" %>"/>
 
-	<div class="container">
-	<!-- navbar  -->
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-		  <!-- Brand and toggle get grouped for better mobile display -->
-		  <div class="navbar-header">
-		  
-		    <% flash.each do |name, msg| %>
-  		      <%= content_tag :div, msg, id: "flash_#{name}" %>
-		    <% end %>
+    </head>
+    <body >
 
-		    <%= link_to image_tag("logo.png", width: "160", height: "120"), root_path  %>
-		  </div>
+        <div class="container">
 
-		  <!-- Collect the nav links, forms, and other content for toggling -->
-		  <% if current_user %>
-		  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		     <ul class="nav navbar-nav navbar-right">
-		     	<li class="dropdown">
-		        <a href="#" class="dropdown-toggle" id="special-for-gravtar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0 0;"><span id="user-name"><%= current_user.account_name%></span><p id="arrowsPng"></p></a>
-		        <ul class="dropdown-menu">
-		          <% if can? :manage, :all %>
-		            <li><a href="/admin/users">All Users</a></li>
-		            <li><a href="/users/edit">Settings</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li> <%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
-		          <% else %>
-		            <li><a href="/users/edit">Settings</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li> <%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
-		          <% end %>    
-		        </ul>
-		      </li>	
-		    </ul>
-		    <ul class="nav navbar-nav navbar-right">
-		       <%= image_tag gravatar_url(current_user.email, 32), alt: "", class: "avatar_icon" %>
-		     </ul>
-		  </div><!-- /.navbar-collapse -->
-		  <% end %>	
-		</div><!-- /.container-fluid -->
-	</nav>
-	<%= yield %>
-	</div>
+            <!-- navbar  -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
 
-</body>
+                        <%= link_to image_tag("logo.png", width: "160", height: "120"), root_path  %>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <% if current_user %>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" id="special-for-gravtar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0 0;">
+                                    <span id="user-name"><%= current_user.account_name%></span>
+                                    <p id="arrowsPng"></p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <% if can? :manage, :all %>
+                                    <li>
+                                        <a href="/admin/users">All Users</a>
+                                    </li>
+                                    <li>
+                                        <a href="/users/edit">Settings</a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
+                                <% else %>
+                                    <li>
+                                        <a href="/users/edit">Settings</a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <%= link_to "logout", destroy_user_session_path, method: "delete" %></li>
+                                    <% end %>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <%= image_tag gravatar_url(current_user.email, 32), alt: "", class: "avatar_icon" %>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                    <% end %>
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, id: "flash_#{name}" %>
+            <% end %>
+            <%= yield %>
+        </div>
+
+    </body>
 </html>

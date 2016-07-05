@@ -33,4 +33,12 @@ Rails.application.routes.draw do
 
   post "posters/download/:id" => "posters#download"
 
+  namespace :admin do
+  	get "/live" => "live#index"
+  end
+
+  namespace :api do
+  	get "/live" => "live#index"
+  end
+
 end
